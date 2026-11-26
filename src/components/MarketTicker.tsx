@@ -34,17 +34,17 @@ export const MarketTicker: React.FC = () => {
   if (!data) return null;
 
   return (
-    <div className="w-full bg-slate-900/95 backdrop-blur-md text-white border-b border-white/10 px-3 py-1.5 overflow-hidden text-[11px] shadow-xs">
+    <div className="w-full bg-[#001D39]/95 backdrop-blur-xl text-white border-b border-[#49769F]/30 px-3 py-1.5 overflow-hidden text-[11px] shadow-xs">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         
         {/* Left Indicator Label */}
         <div className="flex items-center gap-2 shrink-0">
-          <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">
-            <Coins className="h-3 w-3 text-amber-400" />
+          <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#0A4174]/70 text-[#BDD8E9] font-bold border border-[#49769F]/50">
+            <Coins className="h-3 w-3 text-[#7BBDE8]" />
             <span className="hidden xs:inline">Live MCX & Indices</span>
             <span className="xs:hidden">Live</span>
           </div>
-          <span className="text-[10px] text-slate-400 hidden md:inline">
+          <span className="text-[10px] text-[#7BBDE8]/70 hidden md:inline">
             Updated {data.lastUpdated}
           </span>
         </div>

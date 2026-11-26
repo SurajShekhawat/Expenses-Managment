@@ -87,7 +87,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [showAddMenu, setShowAddMenu] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-white/60 bg-white/75 backdrop-blur-xl shadow-xs">
+    <header className="sticky top-0 z-40 w-full border-b border-[#BDD8E9]/70 bg-white/80 backdrop-blur-2xl shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Row 1: Brand, Metrics & Action Suite (Clean Laptop View) */}
@@ -98,25 +98,25 @@ export const Navbar: React.FC<NavbarProps> = ({
             <FinGrowwLogo size={40} />
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 font-sans">
-                  Fin<span className="text-emerald-600">Groww</span>
+                <span className="font-extrabold text-lg sm:text-xl tracking-tight text-[#001D39] font-sans">
+                  Fin<span className="text-[#0A4174]">Groww</span>
                 </span>
-                <span className="hidden xs:inline-flex text-[10px] font-extrabold tracking-wider uppercase px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200/80 shadow-xs">
+                <span className="hidden xs:inline-flex text-[10px] font-extrabold tracking-wider uppercase px-2 py-0.5 rounded-md bg-[#BDD8E9]/40 text-[#001D39] border border-[#7BBDE8]/60 shadow-xs">
                   DhanVridhi
                 </span>
                 {dbSource === 'mysql' ? (
-                  <span className="hidden sm:inline-flex text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-50/80 backdrop-blur-md text-emerald-700 border border-emerald-200/80 shadow-xs items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="hidden sm:inline-flex text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#BDD8E9]/40 backdrop-blur-md text-[#0A4174] border border-[#7BBDE8]/60 shadow-xs items-center gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#0A4174] animate-pulse" />
                     <span>Hostinger MySQL</span>
                   </span>
                 ) : (
-                  <span className="hidden sm:inline-flex text-[10px] font-bold px-2 py-0.5 rounded-md bg-white/60 backdrop-blur-md text-slate-600 border border-white/80 shadow-xs items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
+                  <span className="hidden sm:inline-flex text-[10px] font-bold px-2 py-0.5 rounded-md bg-white/60 backdrop-blur-md text-[#49769F] border border-[#BDD8E9]/60 shadow-xs items-center gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#6EA2B3]" />
                     <span>Local Cache</span>
                   </span>
                 )}
               </div>
-              <p className="text-[11px] text-slate-400 font-medium hidden xl:block">
+              <p className="text-[11px] text-[#49769F] font-medium hidden xl:block">
                 Wealth, Balances & Protection Hub
               </p>
             </div>
@@ -221,9 +221,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="relative group">
               <button
                 onClick={() => setShowAddMenu(!showAddMenu)}
-                className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-xs transition active:scale-95"
+                className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-2 rounded-xl bg-[#0A4174] hover:bg-[#001D39] text-white font-bold text-xs sm:text-sm shadow-xs transition active:scale-95"
               >
-                <PlusCircle className="h-4 w-4 shrink-0" />
+                <PlusCircle className="h-4 w-4 shrink-0 text-[#BDD8E9]" />
                 <span className="hidden sm:inline">+ Add Entry</span>
                 <span className="sm:hidden">Add</span>
               </button>
@@ -334,11 +334,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setActiveTab('overview')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-all ${
                 activeTab === 'overview'
-                  ? 'bg-slate-900 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
+                  ? 'bg-[#0A4174] text-white shadow-xs'
+                  : 'text-[#49769F] hover:text-[#001D39] hover:bg-[#BDD8E9]/35'
               }`}
             >
-              <Wallet className={`h-3.5 w-3.5 ${activeTab === 'overview' ? 'text-emerald-400' : ''}`} />
+              <Wallet className={`h-3.5 w-3.5 ${activeTab === 'overview' ? 'text-[#7BBDE8]' : ''}`} />
               <span>Dashboard</span>
             </button>
 
@@ -346,11 +346,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setActiveTab('accounts')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-all ${
                 activeTab === 'accounts'
-                  ? 'bg-slate-900 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
+                  ? 'bg-[#0A4174] text-white shadow-xs'
+                  : 'text-[#49769F] hover:text-[#001D39] hover:bg-[#BDD8E9]/35'
               }`}
             >
-              <Landmark className={`h-3.5 w-3.5 ${activeTab === 'accounts' ? 'text-blue-400' : ''}`} />
+              <Landmark className={`h-3.5 w-3.5 ${activeTab === 'accounts' ? 'text-[#7BBDE8]' : ''}`} />
               <span>Bank Accounts</span>
             </button>
 
@@ -358,11 +358,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setActiveTab('expenses')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-all ${
                 activeTab === 'expenses'
-                  ? 'bg-slate-900 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
+                  ? 'bg-[#0A4174] text-white shadow-xs'
+                  : 'text-[#49769F] hover:text-[#001D39] hover:bg-[#BDD8E9]/35'
               }`}
             >
-              <Receipt className={`h-3.5 w-3.5 ${activeTab === 'expenses' ? 'text-amber-400' : ''}`} />
+              <Receipt className={`h-3.5 w-3.5 ${activeTab === 'expenses' ? 'text-[#7BBDE8]' : ''}`} />
               <span>Kharcha & Budget</span>
             </button>
 
@@ -370,11 +370,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setActiveTab('investments')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-all ${
                 activeTab === 'investments'
-                  ? 'bg-slate-900 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
+                  ? 'bg-[#0A4174] text-white shadow-xs'
+                  : 'text-[#49769F] hover:text-[#001D39] hover:bg-[#BDD8E9]/35'
               }`}
             >
-              <TrendingUp className={`h-3.5 w-3.5 ${activeTab === 'investments' ? 'text-teal-400' : ''}`} />
+              <TrendingUp className={`h-3.5 w-3.5 ${activeTab === 'investments' ? 'text-[#7BBDE8]' : ''}`} />
               <span>Groww Investments</span>
             </button>
 
@@ -382,11 +382,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setActiveTab('loans')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-all ${
                 activeTab === 'loans'
-                  ? 'bg-slate-900 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
+                  ? 'bg-[#0A4174] text-white shadow-xs'
+                  : 'text-[#49769F] hover:text-[#001D39] hover:bg-[#BDD8E9]/35'
               }`}
             >
-              <Building2 className={`h-3.5 w-3.5 ${activeTab === 'loans' ? 'text-rose-400' : ''}`} />
+              <Building2 className={`h-3.5 w-3.5 ${activeTab === 'loans' ? 'text-[#7BBDE8]' : ''}`} />
               <span>Loans & Karz</span>
             </button>
 
@@ -394,11 +394,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setActiveTab('subscriptions')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-all ${
                 activeTab === 'subscriptions'
-                  ? 'bg-slate-900 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
+                  ? 'bg-[#0A4174] text-white shadow-xs'
+                  : 'text-[#49769F] hover:text-[#001D39] hover:bg-[#BDD8E9]/35'
               }`}
             >
-              <Calendar className={`h-3.5 w-3.5 ${activeTab === 'subscriptions' ? 'text-purple-400' : ''}`} />
+              <Calendar className={`h-3.5 w-3.5 ${activeTab === 'subscriptions' ? 'text-[#7BBDE8]' : ''}`} />
               <span>Subscriptions</span>
             </button>
 
@@ -406,11 +406,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setActiveTab('insurance_tax')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-all ${
                 activeTab === 'insurance_tax'
-                  ? 'bg-slate-900 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
+                  ? 'bg-[#0A4174] text-white shadow-xs'
+                  : 'text-[#49769F] hover:text-[#001D39] hover:bg-[#BDD8E9]/35'
               }`}
             >
-              <ShieldCheck className={`h-3.5 w-3.5 ${activeTab === 'insurance_tax' ? 'text-emerald-400' : ''}`} />
+              <ShieldCheck className={`h-3.5 w-3.5 ${activeTab === 'insurance_tax' ? 'text-[#7BBDE8]' : ''}`} />
               <span>Insurance & Tax</span>
             </button>
 
@@ -418,11 +418,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setActiveTab('fire_goals')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-all ${
                 activeTab === 'fire_goals'
-                  ? 'bg-slate-900 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
+                  ? 'bg-[#0A4174] text-white shadow-xs'
+                  : 'text-[#49769F] hover:text-[#001D39] hover:bg-[#BDD8E9]/35'
               }`}
             >
-              <Target className={`h-3.5 w-3.5 ${activeTab === 'fire_goals' ? 'text-amber-400' : ''}`} />
+              <Target className={`h-3.5 w-3.5 ${activeTab === 'fire_goals' ? 'text-[#7BBDE8]' : ''}`} />
               <span>FIRE & Goals</span>
             </button>
           </div>

@@ -112,20 +112,20 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
                   window.dispatchEvent(new CustomEvent('open_finguru'));
                 }
               }}
-              className="w-full p-3 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 text-white flex items-center justify-between shadow-lg cursor-pointer hover:opacity-95 transition"
+              className="w-full p-3 rounded-2xl bg-[#001D39] border border-[#49769F]/40 text-white flex items-center justify-between shadow-lg cursor-pointer hover:bg-[#0A4174] transition"
             >
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-emerald-500 text-slate-900 shadow-md">
+                <div className="p-2 rounded-xl bg-[#0A4174] text-[#BDD8E9] shadow-xs">
                   <Bot className="h-5 w-5" />
                 </div>
                 <div className="text-left">
                   <span className="text-xs font-black block flex items-center gap-1">
-                    FinGuru AI CA Advisor <Sparkles className="h-3 w-3 text-emerald-400 fill-emerald-400" />
+                    FinGuru AI CA Advisor <Sparkles className="h-3 w-3 text-[#7BBDE8] fill-[#7BBDE8]" />
                   </span>
-                  <span className="text-[10px] text-emerald-400">Ask any question on Tax, SIP & Loans</span>
+                  <span className="text-[10px] text-[#BDD8E9]">Ask any question on Tax, SIP & Loans</span>
                 </div>
               </div>
-              <span className="text-[11px] font-bold px-2 py-1 rounded-lg bg-white/10 text-emerald-300">
+              <span className="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-[#0A4174] text-[#BDD8E9]">
                 Open ↗
               </span>
             </button>
@@ -159,7 +159,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
       )}
 
       {/* Main Bottom Bar */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/75 backdrop-blur-xl border-t border-white/80 shadow-lg px-2 py-1.5">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/85 backdrop-blur-2xl border-t border-[#BDD8E9]/70 shadow-lg px-2 py-1.5">
         <div className="flex items-center justify-around">
           {mainNavItems.map((item) => {
             const Icon = item.icon;
@@ -171,12 +171,12 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
                 onClick={() => setActiveTab(item.id)}
                 className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all duration-200 ${
                   isActive
-                    ? 'text-emerald-700 font-bold scale-105'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'text-[#0A4174] font-bold scale-105'
+                    : 'text-[#49769F] hover:text-[#001D39]'
                 }`}
               >
-                <div className={`p-1 rounded-lg ${isActive ? 'bg-emerald-50' : ''}`}>
-                  <Icon className={`h-5 w-5 ${isActive ? 'text-emerald-600 stroke-[2.5]' : ''}`} />
+                <div className={`p-1 rounded-lg ${isActive ? 'bg-[#BDD8E9]/50 shadow-xs' : ''}`}>
+                  <Icon className={`h-5 w-5 ${isActive ? 'text-[#0A4174] stroke-[2.5]' : ''}`} />
                 </div>
                 <span className="text-[10px] mt-0.5 tracking-tight font-medium">
                   {item.label}
@@ -190,12 +190,12 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
             onClick={() => setShowMoreMenu(true)}
             className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all duration-200 ${
               isMoreActive
-                ? 'text-amber-700 font-bold scale-105'
-                : 'text-slate-500 hover:text-slate-800'
+                ? 'text-[#0A4174] font-bold scale-105'
+                : 'text-[#49769F] hover:text-[#001D39]'
             }`}
           >
-            <div className={`p-1 rounded-lg ${isMoreActive ? 'bg-amber-50' : ''}`}>
-              <MoreHorizontal className={`h-5 w-5 ${isMoreActive ? 'text-amber-600 stroke-[2.5]' : ''}`} />
+            <div className={`p-1 rounded-lg ${isMoreActive ? 'bg-[#BDD8E9]/50 shadow-xs' : ''}`}>
+              <MoreHorizontal className={`h-5 w-5 ${isMoreActive ? 'text-[#0A4174] stroke-[2.5]' : ''}`} />
             </div>
             <span className="text-[10px] mt-0.5 tracking-tight font-medium">
               More

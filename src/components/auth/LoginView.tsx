@@ -137,32 +137,28 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 relative overflow-hidden bg-slate-50/70">
+    <div className="min-h-screen w-full flex items-center justify-center p-4 relative overflow-hidden bg-[#f4f8fa]">
       
-      {/* Background Ambient Glow Circles */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-200/40 rounded-full blur-3xl pointer-events-none animate-pulse duration-1000" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-teal-200/40 rounded-full blur-3xl pointer-events-none" />
-      
-      {/* Auth Card */}
-      <div className="w-full max-w-md bg-white/80 backdrop-blur-2xl rounded-3xl p-5 sm:p-8 border border-white/80 shadow-2xl relative z-10 space-y-6">
+      {/* Auth Card (Clean Solid Matte Frost) */}
+      <div className="w-full max-w-md bg-white/90 backdrop-blur-2xl rounded-3xl p-5 sm:p-8 border border-[#BDD8E9] shadow-xl shadow-[#001D39]/8 relative z-10 space-y-6">
         
         {/* Brand Header */}
         <div className="text-center space-y-2">
-          <div className="inline-flex p-3 rounded-2xl bg-white shadow-md border border-slate-100 mb-1">
+          <div className="inline-flex p-3 rounded-2xl bg-white shadow-xs border border-[#BDD8E9]/70 mb-1">
             <FinGrowwLogo size={48} />
           </div>
           <div>
-            <h1 className="text-2xl font-black text-slate-900 tracking-tight">
-              Fin<span className="text-emerald-600">Groww</span>
+            <h1 className="text-2xl font-black text-[#001D39] tracking-tight">
+              Fin<span className="text-[#0A4174]">Groww</span>
             </h1>
-            <p className="text-xs text-slate-500 font-medium mt-0.5">
+            <p className="text-xs text-[#49769F] font-medium mt-0.5">
               Personal Wealth, Expenses & Groww Portfolio Hub
             </p>
           </div>
         </div>
 
         {/* Tab Switcher: Login vs Register */}
-        <div className="flex p-1 rounded-2xl bg-slate-100 border border-slate-200/80 text-xs font-bold">
+        <div className="flex p-1 rounded-2xl bg-[#BDD8E9]/40 border border-[#BDD8E9] text-xs font-bold">
           <button
             type="button"
             onClick={() => {
@@ -171,8 +167,8 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
             }}
             className={`flex-1 py-2.5 rounded-xl transition flex items-center justify-center gap-1.5 ${
               mode === 'login'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-500 hover:text-slate-800'
+                ? 'bg-[#0A4174] text-white shadow-xs'
+                : 'text-[#49769F] hover:text-[#001D39]'
             }`}
           >
             <KeyRound className="h-3.5 w-3.5" />
@@ -186,8 +182,8 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
             }}
             className={`flex-1 py-2.5 rounded-xl transition flex items-center justify-center gap-1.5 ${
               mode === 'register'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-500 hover:text-slate-800'
+                ? 'bg-[#0A4174] text-white shadow-xs'
+                : 'text-[#49769F] hover:text-[#001D39]'
             }`}
           >
             <UserPlus className="h-3.5 w-3.5" />
@@ -267,7 +263,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full mt-2 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-98 text-white font-bold text-sm shadow-lg shadow-emerald-600/25 transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              className="w-full mt-2 py-3 rounded-xl bg-[#0A4174] hover:bg-[#001D39] active:scale-98 text-white font-bold text-sm shadow-xs transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
             >
               {isLoading ? (
                 <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -292,7 +288,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
                 placeholder="e.g. Suraj Shekhawat"
                 value={registerName}
                 onChange={(e) => setRegisterName(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0A4174]"
               />
             </div>
 
@@ -306,7 +302,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
                 placeholder="e.g. suraj_fin"
                 value={registerUsername}
                 onChange={(e) => setRegisterUsername(e.target.value.toLowerCase().replace(/\s+/g, ''))}
-                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 lowercase font-medium"
+                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0A4174] lowercase font-medium"
               />
             </div>
 
@@ -320,7 +316,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
                 placeholder="Kam se kam 4 characters"
                 value={registerPassword}
                 onChange={(e) => setRegisterPassword(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0A4174]"
               />
             </div>
 
@@ -334,14 +330,14 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
                 placeholder="Password dobara likhein"
                 value={registerConfirmPassword}
                 onChange={(e) => setRegisterConfirmPassword(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0A4174]"
               />
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-98 text-white font-bold text-sm shadow-lg shadow-emerald-600/25 transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 mt-2"
+              className="w-full py-3 rounded-xl bg-[#0A4174] hover:bg-[#001D39] active:scale-98 text-white font-bold text-sm shadow-xs transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 mt-2"
             >
               {isLoading ? (
                 <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -357,7 +353,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
 
         {/* Security Badge */}
         <div className="pt-2 border-t border-slate-100 flex items-center justify-center gap-1.5 text-[11px] text-slate-400">
-          <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
+          <ShieldCheck className="h-3.5 w-3.5 text-[#0A4174]" />
           <span>100% Encrypted & Private (PBKDF2-SHA512 Salted Hashing)</span>
         </div>
 

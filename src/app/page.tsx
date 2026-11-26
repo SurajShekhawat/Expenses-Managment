@@ -1,27 +1,28 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { 
-  FinancialData, 
+import React, { useState, useEffect, useMemo } from 'react';
+import dynamic from 'next/dynamic';
+import {
+  FinancialData,
   FinancialAccount,
-  Transaction, 
-  Investment, 
-  LoanLiability, 
+  Transaction,
+  Investment,
+  LoanLiability,
   FinancialGoal,
   Subscription,
   InsurancePolicy
 } from '@/types/finance';
-import { 
-  loadFinancialData, 
-  saveFinancialData, 
-  resetToDemoData, 
+import {
+  loadFinancialData,
+  saveFinancialData,
+  resetToDemoData,
   exportDataAsJSON,
-  INITIAL_DEMO_DATA 
+  INITIAL_DEMO_DATA
 } from '@/lib/storage';
-import { 
-  fetchRemoteFinancialData, 
-  syncFullDataToRemote, 
-  apiResetDemo 
+import {
+  fetchRemoteFinancialData,
+  syncFullDataToRemote,
+  apiResetDemo
 } from '@/lib/apiClient';
 import { exportFinancialDataToExcel } from '@/lib/excelExport';
 import { MarketTicker } from '@/components/MarketTicker';
@@ -40,11 +41,14 @@ import { AddTransactionModal } from '@/components/modals/AddTransactionModal';
 import { AddAccountModal } from '@/components/modals/AddAccountModal';
 import { AddInvestmentModal } from '@/components/modals/AddInvestmentModal';
 import { AddLoanModal } from '@/components/modals/AddLoanModal';
-import { SMSParserModal } from '@/components/modals/SMSParserModal';
-import { VoiceExpenseModal } from '@/components/modals/VoiceExpenseModal';
-import { CSVImportModal } from '@/components/modals/CSVImportModal';
-import { GroupSplitModal } from '@/components/modals/GroupSplitModal';
-import { FinGuruDrawer } from '@/components/ai/FinGuruDrawer';
+
+// Optimized code-split dynamic imports for on-demand modals
+const SMSParserModal = dynamic(() => import('@/components/modals/SMSParserModal').then((m) => m.SMSParserModal), { ssr: false });
+const VoiceExpenseModal = dynamic(() => import('@/components/modals/VoiceExpenseModal').then((m) => m.VoiceExpenseModal), { ssr: false });
+const CSVImportModal = dynamic(() => import('@/components/modals/CSVImportModal').then((m) => m.CSVImportModal), { ssr: false });
+const GroupSplitModal = dynamic(() => import('@/components/modals/GroupSplitModal').then((m) => m.GroupSplitModal), { ssr: false });
+const FinGuruDrawer = dynamic(() => import('@/components/ai/FinGuruDrawer').then((m) => m.FinGuruDrawer), { ssr: false });
+
 import { getDueRecurringItems } from '@/lib/recurringEngine';
 import { printMonthlyFinancialReport } from '@/lib/reportGenerator';
 import { getTodayDateString } from '@/lib/formatters';
@@ -67,6 +71,22 @@ export default function Home() {
   const [isPrivacyMode, setIsPrivacyMode] = useState(false);
   const [showMobileFabMenu, setShowMobileFabMenu] = useState(false);
   const [dbSource, setDbSource] = useState<'mysql' | 'local'>('mysql');
+
+  // Optimized memoized calculations (placed at top level to obey React Rules of Hooks)
+  const { totalLiquidCash, netWorth } = useMemo(() => {
+    const liquidAccounts = data.accounts?.filter((a) => a.accountType !== 'credit_card') || [];
+    const liquidCash = liquidAccounts.reduce((acc, a) => acc + a.balance, 0);
+    const totalInvestments = data.investments?.reduce((acc, inv) => acc + inv.currentValue, 0) || 0;
+    const totalDebt = (data.loans || [])
+      .filter((l) => l.direction === 'i_owe')
+      .reduce((acc, l) => acc + l.remainingBalance, 0);
+    const totalReceivables = (data.loans || [])
+      .filter((l) => l.direction === 'they_owe_me')
+      .reduce((acc, l) => acc + l.remainingBalance, 0);
+
+    const calculatedNetWorth = liquidCash + totalInvestments + totalReceivables - totalDebt;
+    return { totalLiquidCash: liquidCash, netWorth: calculatedNetWorth };
+  }, [data.accounts, data.investments, data.loans]);
 
   // Load from MySQL (or local storage fallback) on client mount
   useEffect(() => {
@@ -415,7 +435,7 @@ export default function Home() {
     const primaryAccount = data.accounts.find((a) => a.isPrimary) || data.accounts[0];
     let updatedAccounts = [...data.accounts];
     if (primaryAccount) {
-      updatedAccounts = updatedAccounts.map((a) => 
+      updatedAccounts = updatedAccounts.map((a) =>
         a.id === primaryAccount.id ? { ...a, balance: a.balance - emiAmount } : a
       );
     }
@@ -545,7 +565,7 @@ export default function Home() {
     participants: { name: string; amountOwed: number }[];
   }) => {
     const today = getTodayDateString();
-    
+
     // 1. Record user's actual share as an Expense
     const myExpenseTx: Transaction = {
       id: `tx-split-${Date.now()}`,
@@ -643,10 +663,10 @@ export default function Home() {
 
   if (isAuthLoading || !isLoaded) {
     return (
-      <div className="min-h-screen bg-slate-50 text-slate-800 flex items-center justify-center font-sans">
+      <div className="min-h-screen bg-[#f4f8fa] text-[#001D39] flex items-center justify-center font-sans">
         <div className="text-center space-y-3">
-          <div className="w-10 h-10 border-3 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-xs text-slate-500 font-semibold">FinGroww Loading Command Center...</p>
+          <div className="w-10 h-10 border-3 border-[#0A4174] border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-xs text-[#49769F] font-semibold">FinGroww Loading Command Center...</p>
         </div>
       </div>
     );
@@ -663,21 +683,9 @@ export default function Home() {
     );
   }
 
-  const liquidAccounts = data.accounts.filter((a) => a.accountType !== 'credit_card');
-  const totalLiquidCash = liquidAccounts.reduce((acc, a) => acc + a.balance, 0);
-  const totalCurrentInvestments = data.investments.reduce((acc, inv) => acc + inv.currentValue, 0);
-  const totalDebtOutstanding = data.loans
-    .filter((l) => l.direction === 'i_owe')
-    .reduce((acc, l) => acc + l.remainingBalance, 0);
-  const totalReceivables = data.loans
-    .filter((l) => l.direction === 'they_owe_me')
-    .reduce((acc, l) => acc + l.remainingBalance, 0);
-
-  const netWorth = totalLiquidCash + totalCurrentInvestments + totalReceivables - totalDebtOutstanding;
-
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans relative">
-      
+    <div className="min-h-screen bg-[#f4f8fa] text-[#001D39] flex flex-col font-sans relative">
+
       {/* PWA Install Banner */}
       <PWAInstallBanner />
 
@@ -709,7 +717,7 @@ export default function Home() {
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 pb-28 md:pb-8">
-        
+
         {/* Due Recurring Bills / Kist Notification Alert */}
         {getDueRecurringItems(data).length > 0 && (
           <div className="mb-6 p-4 rounded-2xl bg-amber-50/90 border border-amber-200/90 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in duration-200">
@@ -827,14 +835,14 @@ export default function Home() {
       <div className="md:hidden fixed bottom-18 right-4 z-40">
         <button
           onClick={() => setShowMobileFabMenu(!showMobileFabMenu)}
-          className="h-14 w-14 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg flex items-center justify-center transition-transform active:scale-90"
+          className="h-14 w-14 rounded-full bg-[#0A4174] hover:bg-[#001D39] text-white shadow-xl shadow-[#0A4174]/30 border border-[#BDD8E9]/60 flex items-center justify-center transition-transform active:scale-90"
           aria-label="Add entry"
         >
-          {showMobileFabMenu ? <X className="h-6 w-6" /> : <Plus className="h-6 w-6 stroke-[2.5]" />}
+          {showMobileFabMenu ? <X className="h-6 w-6 text-[#BDD8E9]" /> : <Plus className="h-6 w-6 stroke-[2.5] text-[#BDD8E9]" />}
         </button>
 
         {showMobileFabMenu && (
-          <div className="absolute bottom-16 right-0 w-52 rounded-2xl bg-white border border-slate-200 shadow-2xl p-2 space-y-1 animate-in fade-in slide-in-from-bottom-3 duration-150">
+          <div className="absolute bottom-16 right-0 w-52 rounded-2xl bg-white/95 backdrop-blur-xl border border-[#BDD8E9]/80 shadow-2xl shadow-[#001D39]/20 p-2 space-y-1 animate-in fade-in slide-in-from-bottom-3 duration-150">
             <button
               onClick={() => {
                 setIsVoiceModalOpen(true);

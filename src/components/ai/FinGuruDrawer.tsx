@@ -191,47 +191,47 @@ export const FinGuruDrawer: React.FC<FinGuruDrawerProps> = ({ data, userName }) 
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-20 left-4 md:bottom-6 md:right-6 md:left-auto z-40 group flex items-center gap-2.5 px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-full bg-slate-900 text-white shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 border border-emerald-500/30"
+          className="fixed bottom-20 left-4 md:bottom-6 md:right-6 md:left-auto z-40 group flex items-center gap-2.5 px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-full bg-[#001D39] text-white shadow-2xl shadow-[#001D39]/40 hover:scale-105 active:scale-95 transition-all duration-300 border border-[#7BBDE8]/40"
           title="Open FinGuru AI CA"
         >
           <div className="relative">
-            <div className="p-1.5 rounded-full bg-emerald-500 text-slate-900">
+            <div className="p-1.5 rounded-full bg-[#7BBDE8] text-[#001D39]">
               <Bot className="h-5 w-5" />
             </div>
             <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7BBDE8] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#7BBDE8]" />
             </span>
           </div>
 
           <div className="text-left">
             <span className="text-xs font-black tracking-wide flex items-center gap-1 text-white">
-              FinGuru <Sparkles className="h-3 w-3 text-emerald-400 fill-emerald-400" />
+              FinGuru <Sparkles className="h-3 w-3 text-[#7BBDE8] fill-[#7BBDE8]" />
             </span>
-            <span className="text-[10px] text-emerald-400 font-bold block sm:inline">AI Advisor</span>
+            <span className="text-[10px] text-[#BDD8E9] font-bold block sm:inline">AI Advisor</span>
           </div>
         </button>
       )}
 
       {/* Slide-out Drawer */}
       {isOpen && (
-        <div className="fixed inset-y-0 right-0 w-full sm:w-[420px] bg-white shadow-2xl z-50 flex flex-col border-l border-slate-200 animate-in slide-in-from-right duration-300">
+        <div className="fixed inset-y-0 right-0 w-full sm:w-[420px] bg-white shadow-2xl z-50 flex flex-col border-l border-[#BDD8E9]/60 animate-in slide-in-from-right duration-300">
           
           {/* Header */}
-          <div className="p-4 bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 text-white flex items-center justify-between border-b border-emerald-500/20">
+          <div className="p-4 bg-[#001D39] text-white flex items-center justify-between border-b border-[#49769F]/40">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-2xl bg-emerald-500 text-slate-900 shadow-md shadow-emerald-500/30">
+              <div className="p-2.5 rounded-2xl bg-[#0A4174] text-[#BDD8E9] shadow-xs">
                 <Bot className="h-5 w-5" />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
                   <h3 className="text-sm font-black text-white">FinGuru AI</h3>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold">
+                  <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#BDD8E9]/20 text-[#BDD8E9] border border-[#BDD8E9]/30 font-bold">
                     CA Edition
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <p className="text-[11px] text-[#BDD8E9]/80 flex items-center gap-1 mt-0.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#7BBDE8] animate-pulse" />
                   Live synced with your finances
                 </p>
               </div>
@@ -242,8 +242,8 @@ export const FinGuruDrawer: React.FC<FinGuruDrawerProps> = ({ data, userName }) 
                 onClick={() => setIsKeyConfigOpen(!isKeyConfigOpen)}
                 className={`p-1.5 rounded-lg transition text-xs flex items-center gap-1 ${
                   apiKey 
-                    ? 'bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30' 
-                    : 'text-amber-300 hover:bg-white/10'
+                    ? 'bg-[#7BBDE8]/25 text-[#BDD8E9] hover:bg-[#7BBDE8]/35' 
+                    : 'text-[#7BBDE8] hover:bg-white/10'
                 }`}
                 title="Gemini API Key Settings"
               >
@@ -253,7 +253,7 @@ export const FinGuruDrawer: React.FC<FinGuruDrawerProps> = ({ data, userName }) 
 
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-white/10 transition"
+                className="p-1.5 text-slate-300 hover:text-white rounded-lg hover:bg-white/10 transition"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -364,14 +364,14 @@ export const FinGuruDrawer: React.FC<FinGuruDrawerProps> = ({ data, userName }) 
               value={inputQuery}
               onChange={(e) => setInputQuery(e.target.value)}
               disabled={isLoading}
-              className="flex-1 px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium"
+              className="flex-1 px-3.5 py-2.5 rounded-xl border border-[#BDD8E9]/70 bg-slate-50 text-xs text-[#001D39] focus:outline-none focus:ring-2 focus:ring-[#4E8EA2] font-medium"
             />
             <button
               type="submit"
               disabled={!inputQuery.trim() || isLoading}
-              className="p-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition disabled:opacity-40 cursor-pointer shadow-xs"
+              className="p-2.5 rounded-xl bg-[#0A4174] hover:bg-[#001D39] text-white transition disabled:opacity-40 cursor-pointer shadow-xs"
             >
-              <Send className="h-4 w-4" />
+              <Send className="h-4 w-4 text-[#BDD8E9]" />
             </button>
           </form>
 

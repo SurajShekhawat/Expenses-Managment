@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="FinGroww"
-            android:textColor="#059669"
+            android:textColor="#0A4174"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -41,8 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:gravity="center"
-            android:text="Server se connect nahi ho pa raha hai.\nKripya check karein ki Next.js server chal raha hai aur same WiFi par hain."
-            android:textColor="#64748B"
+            android:text="Server se connect nahi ho pa raha hai.\nKripya apna internet connection check karein."
+            android:textColor="#49769F"
             android:textSize="13sp" />
 
         <Button
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#059669"
+            android:backgroundTint="#0A4174"
             android:text="Retry Connection"
             android:textColor="#FFFFFF" />
 

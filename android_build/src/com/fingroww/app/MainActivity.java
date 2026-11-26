@@ -73,6 +73,15 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
         settings.setMediaPlaybackRequiresUserGesture(false);
+        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
+        }
+
+        // Hardware-Accelerated 60fps GPU rendering
+        webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
 
         webView.setWebViewClient(new AppWebViewClient(this));
         webView.setWebChromeClient(new AppWebChromeClient(this));

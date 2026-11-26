@@ -45,19 +45,19 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({ data }) 
       {/* Bell Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 rounded-xl bg-slate-100 hover:bg-slate-200/80 text-slate-700 transition flex items-center justify-center cursor-pointer"
+        className="relative p-2 rounded-xl bg-[#BDD8E9]/40 hover:bg-[#BDD8E9]/70 text-[#001D39] border border-[#7BBDE8]/50 transition flex items-center justify-center cursor-pointer shadow-xs"
         title="Due Alerts & Notifications"
       >
         {alerts.length > 0 ? (
-          <BellRing className="h-4 w-4 text-emerald-600 animate-pulse" />
+          <BellRing className="h-4 w-4 text-[#0A4174] animate-pulse" />
         ) : (
-          <Bell className="h-4 w-4 text-slate-600" />
+          <Bell className="h-4 w-4 text-[#49769F]" />
         )}
 
         {/* Badge counter */}
         {alerts.length > 0 && (
           <span className={`absolute -top-1 -right-1 h-4 min-w-[16px] px-1 rounded-full text-[10px] font-black flex items-center justify-center text-white ${
-            highPriorityCount > 0 ? 'bg-rose-500 animate-bounce' : 'bg-emerald-600'
+            highPriorityCount > 0 ? 'bg-rose-500 animate-bounce' : 'bg-[#0A4174]'
           }`}>
             {alerts.length}
           </span>

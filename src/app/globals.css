@@ -1,62 +1,113 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  /* Solid Color Palette (No Gradients) */
+  --color-navy: #001D39;
+  --color-primary: #0A4174;
+  --color-steel: #49769F;
+  --color-teal: #4E8EA2;
+  --color-mist: #6EA2B3;
+  --color-ice: #7BBDE8;
+  --color-frost: #BDD8E9;
+
+  --background: #f4f8fa;
+  --foreground: #001D39;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background-color: #f8fafc;
-  /* Premium subtle geometric mesh mesh pattern for frosted glass depth */
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(5, 150, 105, 0.05) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.04) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, rgba(245, 158, 11, 0.03) 0px, transparent 50%);
-  background-attachment: fixed;
-  color: var(--foreground);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: #f4f8fa;
+  color: #001D39;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: touch;
 }
 
 button {
   cursor: pointer;
+  user-select: none;
 }
 
-/* --- High-End Glassmorphism Utilities --- */
+/* --- Clean Solid Glassmorphism (Matte Frost, No Gradients) --- */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.04), 0 1px 3px 0 rgba(15, 23, 42, 0.02);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid #BDD8E9;
+  box-shadow: 0 4px 20px -2px rgba(0, 29, 57, 0.05);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 4px 20px 0 rgba(15, 23, 42, 0.03);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(189, 216, 233, 0.8);
+  box-shadow: 0 2px 10px -1px rgba(0, 29, 57, 0.04);
 }
 
 .glass-card-subtle {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(189, 216, 233, 0.5);
 }
 
 .glass-pill {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: #ffffff;
+  border: 1px solid #BDD8E9;
+  box-shadow: 0 2px 6px 0 rgba(0, 29, 57, 0.04);
 }
 
 .glass-modal {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(255, 255, 255, 0.6);
+  border: 1px solid #BDD8E9;
+  box-shadow: 0 20px 40px -12px rgba(0, 29, 57, 0.16);
+}
+
+/* Solid Brand Action Buttons */
+.btn-primary {
+  background-color: #0A4174;
+  color: #ffffff;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+.btn-primary:hover {
+  background-color: #001D39;
+}
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background-color: #BDD8E9;
+  color: #001D39;
+  transition: background-color 0.15s ease;
+}
+.btn-secondary:hover {
+  background-color: #7BBDE8;
+}
+
+/* Smooth Native-feel Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #BDD8E9;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #49769F;
 }
