@@ -1,0 +1,19 @@
+{
+  "name": "FinGroww - DhanVridhi Money Manager",
+  "short_name": "FinGroww",
+  "description": "Personal Money Control, Bank Balances, Groww Investments & Loan Command Center",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#059669",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "192x192 512x512 any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "productivity", "utilities"]
+}
