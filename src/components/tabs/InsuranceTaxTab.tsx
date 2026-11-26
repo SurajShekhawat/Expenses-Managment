@@ -196,10 +196,10 @@ export const InsuranceTaxTab: React.FC<InsuranceTaxTabProps> = ({
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-5">
       
       {/* Top Banner: Family Protection & Premium Cashflow */}
-      <div className="rounded-2xl p-6 glass-panel">
+      <div className="rounded-xl p-4 sm:p-5 glass-panel">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2">
@@ -232,7 +232,7 @@ export const InsuranceTaxTab: React.FC<InsuranceTaxTabProps> = ({
 
       {/* Add Policy Form with Flexible Payment Frequency */}
       {showAddForm && (
-        <form onSubmit={handleAddSubmit} className="p-5 rounded-2xl glass-card space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
+        <form onSubmit={handleAddSubmit} className="p-5 rounded-xl glass-card space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="flex items-center justify-between border-b border-slate-200 pb-2">
             <h3 className="text-xs font-bold uppercase tracking-wider text-blue-700">
               Add Policy with Monthly or Yearly Premium
@@ -453,7 +453,7 @@ export const InsuranceTaxTab: React.FC<InsuranceTaxTabProps> = ({
       {/* Policies Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredPolicies.length === 0 ? (
-          <div className="col-span-full py-12 text-center rounded-2xl glass-card border-dashed border-slate-200">
+          <div className="col-span-full py-12 text-center rounded-xl glass-card border-dashed border-slate-200">
             <ShieldCheck className="h-10 w-10 text-blue-500 mx-auto mb-2 opacity-60" />
             <p className="text-xs font-bold text-slate-700">Koi Insurance Policy record nahi hai</p>
             <p className="text-[11px] text-slate-400 mt-0.5">Apni Health, Term Life ya Vehicle insurance policy yahan add karein.</p>
@@ -473,7 +473,7 @@ export const InsuranceTaxTab: React.FC<InsuranceTaxTabProps> = ({
             return (
               <div 
                 key={ins.id}
-                className="p-5 rounded-2xl glass-card flex flex-col justify-between hover:shadow-md transition group relative overflow-hidden"
+                className="p-5 rounded-xl glass-card flex flex-col justify-between hover:shadow-md transition group relative overflow-hidden"
               >
                 <div>
                   <div className="flex items-start justify-between">
@@ -568,7 +568,7 @@ export const InsuranceTaxTab: React.FC<InsuranceTaxTabProps> = ({
       </div>
 
       {/* --- Section 80C & 80D Tax Savers --- */}
-      <div className="rounded-2xl glass-panel p-6 space-y-5">
+      <div className="rounded-xl glass-panel p-6 space-y-5">
         <div>
           <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
             <FileCheck2 className="h-5 w-5 text-emerald-600" />
@@ -623,7 +623,7 @@ export const InsuranceTaxTab: React.FC<InsuranceTaxTabProps> = ({
       </div>
 
       {/* --- Live Income Tax Comparison Calculator --- */}
-      <div className="rounded-2xl glass-panel p-6 space-y-5">
+      <div className="rounded-xl glass-panel p-6 space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">

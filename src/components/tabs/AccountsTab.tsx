@@ -93,17 +93,17 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-5">
       
       {/* Credit Card Free Credit Period & Billing Cycle Optimizer */}
       {getCreditCardOptimization(data.accounts).length > 0 && (
-        <div className="p-4 rounded-2xl glass-panel space-y-3">
+        <div className="p-4 rounded-xl glass-panel space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <CreditCard className="h-4 w-4 text-blue-600" />
+              <CreditCard className="h-4 w-4 text-[#0A4174]" />
               <h2 className="text-sm font-bold text-slate-900">Credit Card Optimizer & Free Credit Engine</h2>
             </div>
-            <span className="text-[11px] text-emerald-700 font-bold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+            <span className="text-[11px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
               Up to 50 Days Free Credit
             </span>
           </div>
@@ -112,8 +112,8 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
             {getCreditCardOptimization(data.accounts).map((advice) => (
               <div 
                 key={advice.card.id}
-                className={`p-3.5 rounded-xl border transition ${
-                  advice.isBestChoice ? 'bg-emerald-50/80 border-emerald-300 shadow-xs ring-1 ring-emerald-300' : 'bg-white/60 border-slate-200'
+                className={`p-3 rounded-lg border transition ${
+                  advice.isBestChoice ? 'bg-emerald-50/80 border-emerald-300 shadow-xs ring-1 ring-emerald-300' : 'bg-white/70 border-slate-200'
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -125,7 +125,7 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
                       </span>
                     )}
                   </div>
-                  <span className="text-xs font-extrabold text-blue-700">
+                  <span className="text-xs font-extrabold text-[#0A4174]">
                     ~{advice.daysFreeCreditRemaining} Days Free Credit
                   </span>
                 </div>
@@ -153,46 +153,46 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
       )}
 
       {/* Top Banner: Liquid Wealth vs Card Dues */}
-      <div className="rounded-2xl p-6 glass-panel relative overflow-hidden">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="rounded-xl p-4 sm:p-5 glass-panel relative overflow-hidden">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
                 Total Liquid Bank & Cash Balance
               </span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-bold">
+              <span className="text-[10px] px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200 font-bold">
                 {data.accounts.length} Accounts Active
               </span>
             </div>
-            <h1 className="text-3xl font-extrabold text-slate-900 mt-1">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
               {formatINR(totalLiquidCash, false, privacyMode)}
             </h1>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-slate-500 mt-0.5">
               Money ready in savings accounts, digital wallets & cash.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2.5">
             {creditCards.length > 0 && (
-              <div className="p-3.5 rounded-xl bg-orange-50/70 border border-orange-200/80">
-                <span className="text-[11px] text-orange-700 block font-medium">Credit Card Dues</span>
-                <span className="text-base font-bold text-orange-900">{formatINR(totalCardOutstanding, false, privacyMode)}</span>
+              <div className="p-2.5 sm:p-3 rounded-lg bg-orange-50/70 border border-orange-200/80">
+                <span className="text-[10px] sm:text-[11px] text-orange-700 block font-medium">Credit Card Dues</span>
+                <span className="text-sm sm:text-base font-bold text-orange-900">{formatINR(totalCardOutstanding, false, privacyMode)}</span>
               </div>
             )}
 
             <button
               onClick={() => setShowTransferModal(true)}
-              className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs sm:text-sm border border-slate-200 transition active:scale-95"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs border border-slate-200 transition active:scale-95"
             >
-              <ArrowRightLeft className="h-4 w-4 text-blue-600" />
+              <ArrowRightLeft className="h-3.5 w-3.5 text-[#0A4174]" />
               <span>Transfer Funds</span>
             </button>
 
             <button
               onClick={() => onOpenAddModal('account')}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs sm:text-sm shadow-md shadow-blue-600/20 transition active:scale-95"
+              className="btn-primary flex items-center gap-1.5 px-3.5 py-2 text-xs"
             >
-              <Plus className="h-4 w-4" />
+              <Plus className="h-3.5 w-3.5" />
               <span>Add New Account</span>
             </button>
           </div>
@@ -200,17 +200,17 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
       </div>
 
       {/* Accounts Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-3.5">
         {data.accounts.length === 0 && (
-          <div className="col-span-full p-12 text-center rounded-2xl glass-card flex flex-col items-center justify-center space-y-3">
-            <div className="p-4 rounded-2xl bg-blue-50 text-blue-600 border border-blue-100">
-              <Landmark className="h-8 w-8" />
+          <div className="col-span-full p-8 text-center rounded-xl glass-card flex flex-col items-center justify-center space-y-3">
+            <div className="p-3 rounded-lg bg-blue-50 text-[#0A4174] border border-blue-100">
+              <Landmark className="h-6 w-6" />
             </div>
-            <h3 className="text-base font-bold text-slate-800">Koi Bank Account ya Wallet nahi hai</h3>
+            <h3 className="text-sm font-bold text-slate-800">Koi Bank Account ya Wallet nahi hai</h3>
             <p className="text-xs text-slate-500 max-w-sm">Apna pehla bank account, credit card ya cash balance add kijiye taaki aap apna balance track kar sakein.</p>
             <button 
               onClick={() => onOpenAddModal('account')} 
-              className="mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs rounded-xl shadow-xs transition"
+              className="mt-2 px-3 py-1.5 bg-[#0A4174] hover:bg-[#001D39] text-white font-semibold text-xs rounded-lg transition"
             >
               + Pehla Account Add Karein
             </button>
@@ -223,16 +223,16 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
           return (
             <div
               key={acc.id}
-              className="p-5 rounded-2xl glass-card hover:bg-white/85 border border-white/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4 group hover:-translate-y-0.5"
+              className="p-4 rounded-xl glass-card hover:bg-white/85 border border-[#BDD8E9]/80 shadow-xs transition-all flex flex-col justify-between space-y-3 group"
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-2">
                     <div 
-                      className="p-2.5 rounded-xl border"
+                      className="p-2 rounded-lg border"
                       style={{ 
-                        backgroundColor: `${acc.color || '#0284c7'}15`,
-                        borderColor: `${acc.color || '#0284c7'}30`,
+                        backgroundColor: `${acc.color || '#0A4174'}15`,
+                        borderColor: `${acc.color || '#0A4174'}30`,
                       }}
                     >
                       {ACCOUNT_ICONS[acc.accountType]}
@@ -372,11 +372,11 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
       {/* Inter-Account Fund Transfer Modal */}
       {showTransferModal && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#001D39]/40 backdrop-blur-xs">
-          <div className="relative w-full max-w-md rounded-t-3xl sm:rounded-3xl glass-modal p-5 sm:p-6 pb-[max(1.5rem,calc(1rem+env(safe-area-inset-bottom,0px)))] text-slate-800 animate-in slide-in-from-bottom-4 sm:fade-in duration-200">
+          <div className="relative w-full max-w-md rounded-t-2xl sm:rounded-xl glass-modal p-4 sm:p-5 pb-[max(1.5rem,calc(1rem+env(safe-area-inset-bottom,0px)))] text-slate-800 animate-in slide-in-from-bottom-4 sm:fade-in duration-200">
             <div className="sm:hidden w-10 h-1 bg-[#BDD8E9] rounded-full mx-auto mb-2 opacity-80" />
-            <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-[#BDD8E9]/50">
+            <div className="flex items-center justify-between pb-3 border-b border-[#BDD8E9]/50">
               <h3 className="text-sm sm:text-base font-bold text-[#001D39] flex items-center gap-2">
-                <ArrowRightLeft className="h-5 w-5 text-[#0A4174]" />
+                <ArrowRightLeft className="h-4 w-4 text-[#0A4174]" />
                 <span>Transfer Money Between Accounts</span>
               </h3>
               <button
@@ -387,7 +387,7 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
               </button>
             </div>
 
-            <form onSubmit={handleTransferSubmit} className="mt-4 space-y-4">
+            <form onSubmit={handleTransferSubmit} className="mt-3.5 space-y-3.5">
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
                   From Account (Paisa kahan se nikalega)
@@ -395,7 +395,7 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
                 <select
                   value={fromAcc}
                   onChange={(e) => setFromAcc(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-xs focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 rounded-lg border border-[#BDD8E9] bg-white text-slate-900 text-xs focus:ring-2 focus:ring-[#0A4174]"
                 >
                   {data.accounts.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -412,7 +412,7 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
                 <select
                   value={toAcc}
                   onChange={(e) => setToAcc(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-xs focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 rounded-lg border border-[#BDD8E9] bg-white text-slate-900 text-xs focus:ring-2 focus:ring-[#0A4174]"
                 >
                   {data.accounts.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -433,7 +433,7 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
                   placeholder="e.g. 5000"
                   value={transferAmount}
                   onChange={(e) => setTransferAmount(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold text-sm focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 rounded-lg border border-[#BDD8E9] bg-white text-slate-900 font-bold text-sm focus:ring-2 focus:ring-[#0A4174]"
                 />
               </div>
 
@@ -446,14 +446,14 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
                   placeholder="e.g. Added funds to Zerodha, Transferred to savings"
                   value={transferNote}
                   onChange={(e) => setTransferNote(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-xs focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 rounded-lg border border-[#BDD8E9] bg-white text-slate-900 text-xs focus:ring-2 focus:ring-[#0A4174]"
                 />
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition shadow-md shadow-blue-600/20"
+                  className="w-full py-2.5 rounded-lg btn-primary text-xs font-semibold"
                 >
                   Complete Transfer
                 </button>

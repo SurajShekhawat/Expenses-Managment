@@ -56,6 +56,7 @@ import { Plus, Receipt, Landmark, TrendingUp, Building2, X, Sparkles, Mic, FileS
 import confetti from 'canvas-confetti';
 import { User } from '@/types/auth';
 import { LoginView } from '@/components/auth/LoginView';
+import { LoadingScreen } from '@/components/ui/LoadingScreen';
 
 export default function Home() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -662,14 +663,7 @@ export default function Home() {
   };
 
   if (isAuthLoading || !isLoaded) {
-    return (
-      <div className="min-h-screen bg-[#f4f8fa] text-[#001D39] flex items-center justify-center font-sans">
-        <div className="text-center space-y-3">
-          <div className="w-10 h-10 border-3 border-[#0A4174] border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-xs text-[#49769F] font-semibold">FinGroww Loading Command Center...</p>
-        </div>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   if (!currentUser) {
@@ -720,27 +714,27 @@ export default function Home() {
 
         {/* Due Recurring Bills / Kist Notification Alert */}
         {getDueRecurringItems(data).length > 0 && (
-          <div className="mb-6 p-4 rounded-2xl bg-amber-50/90 border border-amber-200/90 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in duration-200">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-amber-100 text-amber-800">
-                <Receipt className="h-5 w-5" />
+          <div className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-amber-50/95 border border-amber-200/90 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 animate-in fade-in duration-200">
+            <div className="flex items-start sm:items-center gap-2.5 sm:gap-3">
+              <div className="p-2 sm:p-2.5 rounded-xl bg-amber-100 text-amber-800 shrink-0 mt-0.5 sm:mt-0">
+                <Receipt className="h-4 w-4 sm:h-5 sm:w-5" />
               </div>
-              <div>
-                <h3 className="text-xs font-bold text-amber-900">
+              <div className="min-w-0">
+                <h3 className="text-xs font-bold text-amber-900 truncate">
                   {getDueRecurringItems(data).length} Recurring Payment(s) Due This Month!
                 </h3>
-                <p className="text-[11px] text-amber-700">
+                <p className="text-[10px] sm:text-[11px] text-amber-700 mt-0.5">
                   Insurance premiums, SIPs, ya Subscriptions due hain. Auto-debit record karein:
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-2 flex-wrap sm:shrink-0">
               {getDueRecurringItems(data).slice(0, 2).map((item) => (
                 <button
                   key={item.id}
                   onClick={() => handleProcessDueItem(item)}
-                  className="px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-xs transition"
+                  className="px-2.5 sm:px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs transition active:scale-95 whitespace-nowrap"
                 >
                   Pay ₹{item.amount} ({item.sourceType.toUpperCase()})
                 </button>

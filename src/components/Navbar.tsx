@@ -171,61 +171,80 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 onClick={() => setShowMoreMenu(!showMoreMenu)}
                 title="Backup & Data Options"
-                className="p-2 rounded-xl bg-white/60 backdrop-blur-md hover:bg-white/90 text-slate-600 border border-white/80 transition text-xs flex items-center justify-center shadow-xs"
+                className="p-2 rounded-xl bg-white/60 backdrop-blur-md hover:bg-white/90 text-slate-600 border border-white/80 transition text-xs flex items-center justify-center shadow-xs active:scale-95"
               >
                 <MoreHorizontal className="h-4 w-4 text-slate-500" />
               </button>
 
               {showMoreMenu && (
-                <div 
-                  className="absolute right-0 top-full mt-1.5 w-48 rounded-2xl glass-modal shadow-2xl py-1.5 z-50 animate-fadeIn"
-                  onMouseLeave={() => setShowMoreMenu(false)}
-                >
-                  {onExportExcel && (
+                <>
+                  <div 
+                    className="fixed inset-0 z-40 bg-[#001D39]/30 backdrop-blur-xs" 
+                    onClick={() => setShowMoreMenu(false)} 
+                  />
+                  <div 
+                    className="fixed inset-x-3 top-16 sm:top-auto sm:inset-auto sm:right-0 sm:mt-1.5 w-auto sm:w-56 rounded-2xl glass-modal shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150 border border-[#BDD8E9]"
+                    onMouseLeave={() => setShowMoreMenu(false)}
+                  >
+                    {onExportExcel && (
+                      <button
+                        onClick={() => {
+                          onExportExcel();
+                          setShowMoreMenu(false);
+                        }}
+                        className="w-full text-left px-3.5 py-2 text-xs text-emerald-700 hover:bg-emerald-50 rounded-xl flex items-center gap-2 transition font-semibold"
+                      >
+                        <FileSpreadsheet className="h-3.5 w-3.5 text-emerald-600" />
+                        <span>Download Excel (.xlsx)</span>
+                      </button>
+                    )}
                     <button
                       onClick={() => {
-                        onExportExcel();
+                        onExport();
                         setShowMoreMenu(false);
                       }}
-                      className="w-full text-left px-3.5 py-2 text-xs text-emerald-700 hover:bg-emerald-50 flex items-center gap-2 transition font-semibold"
+                      className="w-full text-left px-3.5 py-2 text-xs text-slate-700 hover:bg-slate-50 rounded-xl flex items-center gap-2 transition font-medium"
                     >
-                      <FileSpreadsheet className="h-3.5 w-3.5 text-emerald-600" />
-                      <span>Download Excel (.xlsx)</span>
+                      <Download className="h-3.5 w-3.5 text-slate-500" />
+                      <span>Download Backup (JSON)</span>
                     </button>
-                  )}
-                  <button
-                    onClick={() => {
-                      onExport();
-                      setShowMoreMenu(false);
-                    }}
-                    className="w-full text-left px-3.5 py-2 text-xs text-slate-700 hover:bg-slate-50 flex items-center gap-2 transition"
-                  >
-                    <Download className="h-3.5 w-3.5 text-slate-500" />
-                    <span>Download Backup (JSON)</span>
-                  </button>
-                  <button
-                    onClick={() => {
-                      onReset();
-                      setShowMoreMenu(false);
-                    }}
-                    className="w-full text-left px-3.5 py-2 text-xs text-rose-600 hover:bg-rose-50 flex items-center gap-2 transition"
-                  >
-                    <RotateCcw className="h-3.5 w-3.5 text-rose-500" />
-                    <span>Clear & Reset All Data</span>
-                  </button>
-                </div>
+                    <button
+                      onClick={() => {
+                        onReset();
+                        setShowMoreMenu(false);
+                      }}
+                      className="w-full text-left px-3.5 py-2 text-xs text-rose-600 hover:bg-rose-50 rounded-xl flex items-center gap-2 transition font-medium"
+                    >
+                      <RotateCcw className="h-3.5 w-3.5 text-rose-500" />
+                      <span>Clear & Reset All Data</span>
+                    </button>
+                    {currentUser && onLogout && (
+                      <div className="pt-1.5 mt-1 border-t border-[#BDD8E9]/60 sm:hidden">
+                        <button
+                          onClick={() => {
+                            setShowMoreMenu(false);
+                            onLogout();
+                          }}
+                          className="w-full text-left px-3.5 py-2 text-xs text-rose-600 hover:bg-rose-50 rounded-xl flex items-center gap-2 transition font-bold"
+                        >
+                          <LogOut className="h-3.5 w-3.5 text-rose-500" />
+                          <span>Log Out ({currentUser.name})</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </>
               )}
             </div>
 
-            {/* Primary "+ Add" Button with Dropdown (Touch & Hover Friendly) */}
-            <div className="relative group">
+            {/* Primary "+ Add" Button with Dropdown (Desktop/Tablet View) */}
+            <div className="hidden sm:block relative group">
               <button
                 onClick={() => setShowAddMenu(!showAddMenu)}
-                className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-2 rounded-xl bg-[#0A4174] hover:bg-[#001D39] text-white font-bold text-xs sm:text-sm shadow-xs transition active:scale-95"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#0A4174] hover:bg-[#001D39] text-white font-bold text-xs sm:text-sm shadow-xs transition active:scale-95"
               >
                 <PlusCircle className="h-4 w-4 shrink-0 text-[#BDD8E9]" />
-                <span className="hidden sm:inline">+ Add Entry</span>
-                <span className="sm:hidden">Add</span>
+                <span>+ Add Entry</span>
               </button>
               
               <div 
@@ -301,11 +320,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             </div>
 
-            {/* User Profile Pill & Logout */}
+            {/* User Profile Pill & Logout (Desktop/Tablet) */}
             {currentUser && (
-              <div className="flex items-center gap-1.5 pl-2 border-l border-slate-200">
-                <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100/80 border border-slate-200 text-xs">
-                  <div className="h-5 w-5 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-[10px] uppercase">
+              <div className="hidden sm:flex items-center gap-1.5 pl-2 border-l border-slate-200">
+                <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100/80 border border-slate-200 text-xs">
+                  <div className="h-5 w-5 rounded-full bg-[#0A4174] text-white flex items-center justify-center font-bold text-[10px] uppercase">
                     {currentUser.name.charAt(0)}
                   </div>
                   <span className="font-bold text-slate-800 max-w-[110px] truncate">{currentUser.name}</span>

@@ -22,7 +22,7 @@ public final class R {
     public static final int btn_retry=0x7f030001;
     public static final int error_layout=0x7f030002;
     public static final int error_message=0x7f030003;
-    public static final int loading_spinner=0x7f030004;
+    public static final int loading_layout=0x7f030004;
     public static final int webview=0x7f030005;
   }
   public static final class layout {

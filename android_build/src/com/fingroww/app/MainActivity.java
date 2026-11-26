@@ -29,7 +29,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
     public static final int PERMISSION_REQUEST_CODE = 2001;
 
     private WebView webView;
-    private ProgressBar loadingSpinner;
+    private View loadingSpinner;
     private View errorLayout;
     private TextView errorMessage;
     private Button btnRetry;
@@ -52,7 +52,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
         prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
         webView = (WebView) findViewById(R.id.webview);
-        loadingSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+        loadingSpinner = findViewById(R.id.loading_layout);
         errorLayout = findViewById(R.id.error_layout);
         errorMessage = (TextView) findViewById(R.id.error_message);
         btnRetry = (Button) findViewById(R.id.btn_retry);

@@ -87,7 +87,7 @@ export const GroupSplitModal: React.FC<GroupSplitModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#001D39]/40 backdrop-blur-xs">
-      <div className="w-full max-w-lg glass-modal rounded-t-3xl sm:rounded-3xl border border-[#BDD8E9] p-5 sm:p-6 pb-[max(1.5rem,calc(1rem+env(safe-area-inset-bottom,0px)))] space-y-4 sm:space-y-5 shadow-2xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom-4 sm:zoom-in-95 duration-200">
+      <div className="w-full max-w-lg glass-modal rounded-t-2xl sm:rounded-xl border border-[#BDD8E9] p-4 sm:p-5 pb-[max(1.5rem,calc(1rem+env(safe-area-inset-bottom,0px)))] space-y-3.5 shadow-xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom-4 sm:zoom-in-95 duration-200">
         
         {/* Mobile Pull Indicator */}
         <div className="sm:hidden w-10 h-1 bg-[#BDD8E9] rounded-full mx-auto mb-1 opacity-80" />

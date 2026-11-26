@@ -69,22 +69,22 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({ data }) 
         <>
           {/* Backdrop */}
           <div 
-            className="fixed inset-0 z-40" 
+            className="fixed inset-0 z-40 bg-[#001D39]/30 backdrop-blur-xs" 
             onClick={() => setIsOpen(false)} 
           />
 
-          <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-white shadow-2xl border border-slate-200/80 p-4 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="fixed inset-x-3 top-16 sm:top-auto sm:inset-auto sm:right-0 sm:mt-2 w-auto sm:w-96 rounded-2xl glass-modal shadow-2xl border border-[#BDD8E9] p-4 z-50 animate-in fade-in slide-in-from-top-2 duration-150 max-h-[80vh] flex flex-col">
             {/* Header */}
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div className="flex items-center justify-between pb-3 border-b border-[#BDD8E9]/60 shrink-0">
               <div className="flex items-center gap-2">
-                <BellRing className="h-4 w-4 text-emerald-600" />
-                <h3 className="text-sm font-bold text-slate-900">
+                <BellRing className="h-4 w-4 text-[#0A4174]" />
+                <h3 className="text-sm font-extrabold text-[#001D39]">
                   Dues & Bill Reminders
                 </h3>
               </div>
               <button 
                 onClick={() => setIsOpen(false)}
-                className="text-slate-400 hover:text-slate-700 p-1 rounded-lg"
+                className="text-slate-400 hover:text-[#001D39] p-1 rounded-lg active:scale-90"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -92,14 +92,14 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({ data }) 
 
             {/* Notification Permission Banner */}
             {permission !== 'granted' && (
-              <div className="mt-3 p-3 rounded-xl bg-emerald-50 border border-emerald-200/70 text-xs flex items-center justify-between gap-2">
+              <div className="mt-3 p-3 rounded-xl bg-[#BDD8E9]/30 border border-[#7BBDE8]/60 text-xs flex items-center justify-between gap-2 shrink-0">
                 <div>
-                  <span className="font-bold text-emerald-900 block">Push Notifications</span>
-                  <span className="text-[11px] text-emerald-700">Mobile & desktop par direct alerts paayein</span>
+                  <span className="font-bold text-[#001D39] block">Push Notifications</span>
+                  <span className="text-[11px] text-[#49769F]">Mobile par direct payment alerts paayein</span>
                 </div>
                 <button
                   onClick={handleEnablePush}
-                  className="px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] shrink-0 transition"
+                  className="px-2.5 py-1.5 rounded-lg bg-[#0A4174] hover:bg-[#001D39] text-white font-bold text-[11px] shrink-0 transition active:scale-95"
                 >
                   Turn On
                 </button>

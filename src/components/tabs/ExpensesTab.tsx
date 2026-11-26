@@ -209,12 +209,12 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
   const totalExpenseAmount = expenseTransactions.reduce((acc, t) => acc + t.amount, 0);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-5">
       
       {/* View Switcher: List View vs Calendar View */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-2xl glass-panel border border-[#BDD8E9] shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-xl glass-panel border border-[#BDD8E9] shadow-xs">
         <div className="flex items-center gap-2.5">
-          <div className="p-2.5 rounded-xl bg-[#0A4174] text-[#BDD8E9] shadow-xs">
+          <div className="p-2 rounded-lg bg-[#0A4174] text-[#BDD8E9] shadow-xs">
             <Receipt className="h-4 w-4" />
           </div>
           <div>
@@ -223,10 +223,10 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 p-1 bg-white/90 rounded-xl border border-[#BDD8E9] shadow-xs self-start sm:self-auto">
+        <div className="flex items-center gap-1.5 p-1 bg-white/90 rounded-lg border border-[#BDD8E9] shadow-xs self-start sm:self-auto">
           <button
             onClick={() => setViewMode('list')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition active:scale-95 ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition active:scale-95 ${
               viewMode === 'list'
                 ? 'bg-[#0A4174] text-white shadow-xs'
                 : 'text-[#49769F] hover:text-[#001D39]'
@@ -237,7 +237,7 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
           </button>
           <button
             onClick={() => setViewMode('calendar')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition active:scale-95 ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition active:scale-95 ${
               viewMode === 'calendar'
                 ? 'bg-[#0A4174] text-white shadow-xs'
                 : 'text-[#49769F] hover:text-[#001D39]'
@@ -259,18 +259,18 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
       ) : (
         <>
       {/* Top Banner & Budget Progress */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3.5 sm:gap-4">
         
         {/* Category Breakdown Donut */}
-        <div className="rounded-2xl glass-panel p-5 flex flex-col justify-between">
+        <div className="rounded-xl glass-panel p-4 sm:p-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-sm font-bold text-slate-900">Kharcha Breakdown</h2>
                 <p className="text-xs text-slate-500">Total Spent: {formatINR(totalExpenseAmount)}</p>
               </div>
-              <div className="p-2 rounded-xl bg-amber-50 text-amber-600">
-                <Receipt className="h-5 w-5" />
+              <div className="p-2 rounded-lg bg-amber-50 text-amber-600">
+                <Receipt className="h-4 w-4" />
               </div>
             </div>
 
@@ -291,7 +291,7 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
                     ))}
                   </Pie>
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '12px', fontSize: '11px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                    contentStyle={{ backgroundColor: '#ffffff', borderColor: '#BDD8E9', borderRadius: '8px', fontSize: '11px', boxShadow: '0 2px 4px rgba(0,29,57,0.06)' }}
                     formatter={(val: any) => [typeof val === 'number' ? formatINR(val) : String(val || ''), 'Kharcha']}
                   />
                 </PieChart>
@@ -304,27 +304,27 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
               <div key={item.name} className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }} />
-                  <span className="text-slate-600 truncate max-w-[130px] font-medium">{item.name}</span>
+                  <span className="text-slate-600 truncate max-w-[130px] font-medium text-[11px]">{item.name}</span>
                 </div>
-                <span className="font-bold text-slate-900">{formatINR(item.value)}</span>
+                <span className="font-bold text-slate-900 text-[11px]">{formatINR(item.value)}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Monthly Budget Limits & Warnings */}
-        <div className="lg:col-span-2 rounded-2xl glass-panel p-5">
+        <div className="lg:col-span-2 rounded-xl glass-panel p-4 sm:p-5">
           <div className="flex items-center justify-between mb-3">
             <div>
               <h2 className="text-sm font-bold text-slate-900">Monthly Category Budgets</h2>
               <p className="text-xs text-slate-500">Control spending before it overflows</p>
             </div>
-            <span className="text-xs text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 font-semibold">
+            <span className="text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200 font-semibold">
               Active Budgets
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mt-2">
             {data.budgets.map((budget) => {
               const spent = categoryTotals[budget.category] || 0;
               const percent = Math.min(Math.round((spent / budget.limit) * 100), 100);
@@ -332,7 +332,7 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
               const isNear = percent >= 80 && !isOver;
 
               return (
-                <div key={budget.category} className="p-3 rounded-xl bg-white/60 backdrop-blur-md border border-white/80 shadow-xs">
+                <div key={budget.category} className="p-3 rounded-lg bg-white/70 backdrop-blur-md border border-[#BDD8E9]/70 shadow-xs">
                   <div className="flex items-center justify-between text-xs mb-1.5">
                     <span className="font-bold text-slate-800">{budget.category}</span>
                     <span className={`text-[11px] font-bold ${
@@ -343,7 +343,7 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
                   </div>
 
                   {/* Progress bar */}
-                  <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
+                  <div className="w-full h-1.5 rounded-full bg-slate-200 overflow-hidden">
                     <div 
                       className={`h-full transition-all duration-500 rounded-full ${
                         isOver ? 'bg-rose-500' : isNear ? 'bg-amber-500' : 'bg-emerald-500'
@@ -372,7 +372,7 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
       </div>
 
       {/* Transactions Table Section with Comprehensive Filters */}
-      <div className="rounded-2xl glass-panel p-5">
+      <div className="rounded-xl glass-panel p-4 sm:p-5">
         
         {/* Header & Main Search Row */}
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 mb-4">

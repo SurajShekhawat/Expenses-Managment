@@ -131,14 +131,14 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
   const overspendDifference = Math.max(0, projectedMonthEndExpense - totalMonthlyBudget);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-5">
 
       {/* Top Banner: Authentic Clean Wealth Header */}
-      <div className="rounded-2xl p-4 sm:p-6 glass-panel border border-white/80 shadow-xs relative overflow-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
+      <div className="rounded-xl p-4 sm:p-5 glass-panel border border-[#BDD8E9]/70 shadow-xs relative overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-5 items-center">
 
           {/* Net Worth */}
-          <div className="md:col-span-1 border-b md:border-b-0 md:border-r border-slate-200/80 pb-4 md:pb-0 md:pr-4">
+          <div className="md:col-span-1 border-b md:border-b-0 md:border-r border-slate-200/80 pb-3 md:pb-0 md:pr-4">
             <span className="text-xs uppercase tracking-wider text-emerald-700 font-extrabold flex items-center gap-1.5">
               <ShieldCheck className="h-4 w-4 text-emerald-600" />
               Total Net Worth
@@ -152,10 +152,10 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
           </div>
 
           {/* Monthly Inflow / Outflow */}
-          <div className="md:col-span-3 grid grid-cols-3 gap-2 sm:gap-3.5">
+          <div className="md:col-span-3 grid grid-cols-3 gap-2 sm:gap-3">
 
             {/* Income */}
-            <div className="p-2.5 sm:p-3.5 rounded-xl bg-emerald-50/70 backdrop-blur-md border border-emerald-100 shadow-xs hover:bg-emerald-50 transition">
+            <div className="p-2.5 sm:p-3 rounded-lg bg-emerald-50/70 backdrop-blur-md border border-emerald-100 shadow-xs hover:bg-emerald-50 transition">
               <div className="flex items-center justify-between text-[10px] sm:text-xs text-emerald-800 mb-0.5 sm:mb-1 font-bold">
                 <span className="truncate">Income</span>
                 <ArrowUpRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-emerald-600 shrink-0" />
@@ -165,7 +165,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
             </div>
 
             {/* Expenses */}
-            <div className="p-2.5 sm:p-3.5 rounded-xl bg-rose-50/70 backdrop-blur-md border border-rose-100 shadow-xs hover:bg-rose-50 transition">
+            <div className="p-2.5 sm:p-3 rounded-lg bg-rose-50/70 backdrop-blur-md border border-rose-100 shadow-xs hover:bg-rose-50 transition">
               <div className="flex items-center justify-between text-[10px] sm:text-xs text-rose-800 mb-0.5 sm:mb-1 font-bold">
                 <span className="truncate">Kharcha</span>
                 <ArrowDownRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-rose-600 shrink-0" />
@@ -175,7 +175,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
             </div>
 
             {/* Savings Rate */}
-            <div className="p-2.5 sm:p-3.5 rounded-xl bg-blue-50/70 backdrop-blur-md border border-blue-100 shadow-xs hover:bg-blue-50 transition">
+            <div className="p-2.5 sm:p-3 rounded-lg bg-blue-50/70 backdrop-blur-md border border-blue-100 shadow-xs hover:bg-blue-50 transition">
               <div className="flex items-center justify-between text-[10px] sm:text-xs text-blue-800 mb-0.5 sm:mb-1 font-bold">
                 <span className="truncate">Savings</span>
                 <CheckCircle2 className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-blue-600 shrink-0" />
@@ -191,10 +191,10 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
       </div>
 
       {/* --- Smart Daily Safe Spend Meter & Velocity Alert --- */}
-      <div className="rounded-2xl p-5 glass-panel space-y-4">
+      <div className="rounded-xl p-4 sm:p-5 glass-panel space-y-3.5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-blue-50 text-blue-700 border border-blue-200 shadow-xs">
+            <div className="p-2 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 shadow-xs">
               <Gauge className="h-4 w-4" />
             </div>
             <div>
@@ -207,14 +207,14 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
 
           <div className="flex items-center gap-2">
             <span className="text-xs text-slate-500">Remaining Budget:</span>
-            <span className="text-xs font-bold text-slate-900 px-2.5 py-1 rounded-lg bg-white/60 backdrop-blur-md border border-white/80 shadow-xs">
+            <span className="text-xs font-bold text-slate-900 px-2.5 py-1 rounded-md bg-white/70 backdrop-blur-md border border-[#BDD8E9]/70 shadow-xs">
               {formatINR(remainingBudget, false, privacyMode)}
             </span>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div className="p-3 rounded-xl bg-white/60 backdrop-blur-md border border-white/80 shadow-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
+          <div className="p-3 rounded-lg bg-white/70 backdrop-blur-md border border-[#BDD8E9]/70 shadow-xs">
             <span className="text-[11px] text-slate-500 font-medium block">Daily Safe Spend Limit</span>
             <span className="text-lg font-extrabold text-emerald-700 mt-0.5 block">
               {formatINR(dailySafeSpend, false, privacyMode)} / day
@@ -222,7 +222,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
             <span className="text-[10px] text-slate-400">Target to stay within budget</span>
           </div>
 
-          <div className="p-3 rounded-xl bg-white/60 backdrop-blur-md border border-white/80 shadow-xs">
+          <div className="p-3 rounded-lg bg-white/70 backdrop-blur-md border border-[#BDD8E9]/70 shadow-xs">
             <span className="text-[11px] text-slate-500 font-medium block">Spent Today</span>
             <span className={`text-lg font-extrabold mt-0.5 block ${todayExpenses > dailySafeSpend ? 'text-rose-600' : 'text-slate-900'
               }`}>
@@ -233,7 +233,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
             </span>
           </div>
 
-          <div className="p-3 rounded-xl bg-white/60 backdrop-blur-md border border-white/80 shadow-xs">
+          <div className="p-3 rounded-lg bg-white/70 backdrop-blur-md border border-[#BDD8E9]/70 shadow-xs">
             <span className="text-[11px] text-slate-500 font-medium block">Month-End Projection</span>
             <span className={`text-lg font-extrabold mt-0.5 block ${isPacingOverBudget ? 'text-rose-600' : 'text-blue-700'
               }`}>
@@ -246,7 +246,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
         </div>
 
         {isPacingOverBudget && (
-          <div className="p-3 rounded-xl bg-rose-50/80 backdrop-blur-md border border-rose-200/90 flex items-start gap-2.5 text-xs text-rose-800 shadow-xs">
+          <div className="p-3 rounded-lg bg-rose-50/80 backdrop-blur-md border border-rose-200/90 flex items-start gap-2.5 text-xs text-rose-800 shadow-xs">
             <AlertOctagon className="h-4 w-4 text-rose-600 shrink-0 mt-0.5" />
             <div>
               <strong className="font-bold">Overspending Velocity Alert:</strong> Aapka kharcha is mahine target budget se lagbhag {formatINR(overspendDifference, false, privacyMode)} exceed kar sakta hai. Is hafte Dining, Shopping aur unnecessary kharche control karein.
@@ -256,15 +256,15 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
       </div>
 
       {/* --- Connected Bank Accounts Quick Row --- */}
-      <div className="rounded-2xl glass-panel p-5">
+      <div className="rounded-xl glass-panel p-4 sm:p-5">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
-            <Landmark className="h-4 w-4 text-blue-600" />
+            <Landmark className="h-4 w-4 text-[#0A4174]" />
             <h2 className="text-sm font-bold text-slate-900">Your Bank & Wallet Balances</h2>
           </div>
           <button
             onClick={() => onSelectTab('accounts')}
-            className="text-xs text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-1"
+            className="text-xs text-[#0A4174] hover:text-[#001D39] font-semibold flex items-center gap-1"
           >
             <span>Manage All ({data.accounts.length})</span>
             <ArrowRight className="h-3 w-3" />
@@ -272,27 +272,27 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
         </div>
 
         {data.accounts.length === 0 ? (
-          <div className="p-4 rounded-xl bg-white/60 backdrop-blur-md border border-white/80 text-center py-6">
+          <div className="p-4 rounded-lg bg-white/70 backdrop-blur-md border border-[#BDD8E9]/70 text-center py-5">
             <p className="text-xs text-slate-500 font-medium">Koi Bank Account ya Wallet connected nahi hai.</p>
             <button
               onClick={() => onSelectTab('accounts')}
-              className="mt-2 text-xs text-blue-600 hover:text-blue-700 font-bold"
+              className="mt-2 text-xs text-[#0A4174] hover:text-[#001D39] font-bold"
             >
               + Pehla Account Add Karein →
             </button>
           </div>
         ) : (
-          <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible gap-2.5 pb-2 sm:pb-0 no-scrollbar snap-x snap-mandatory sm:grid-cols-3 lg:grid-cols-6">
+          <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible gap-2 pb-2 sm:pb-0 no-scrollbar snap-x snap-mandatory sm:grid-cols-3 lg:grid-cols-6">
             {data.accounts.slice(0, 6).map((acc) => (
               <div
                 key={acc.id}
                 onClick={() => onSelectTab('accounts')}
-                className="min-w-[130px] sm:min-w-0 shrink-0 snap-start p-3 rounded-xl bg-white/70 hover:bg-white/90 backdrop-blur-md border border-[#BDD8E9]/80 cursor-pointer transition-all shadow-xs active:scale-95 sm:hover:-translate-y-0.5"
+                className="min-w-[130px] sm:min-w-0 shrink-0 snap-start p-3 rounded-lg bg-white/80 hover:bg-white backdrop-blur-md border border-[#BDD8E9]/80 cursor-pointer transition-all shadow-xs active:scale-95 sm:hover:-translate-y-0.5"
               >
                 <span className="text-[10px] text-slate-500 truncate block font-medium">
                   {acc.name}
                 </span>
-                <span className="text-xs sm:text-sm font-extrabold text-slate-900 mt-1 block truncate">
+                <span className="text-xs sm:text-sm font-extrabold text-slate-900 mt-0.5 block truncate">
                   {formatINR(acc.balance, false, privacyMode)}
                 </span>
                 <span className="text-[9px] uppercase tracking-wider text-slate-400 block mt-0.5 font-bold">
@@ -305,22 +305,22 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
       </div>
 
       {/* 4 Cards: Investments, Debt, SIP, Udhaari */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5">
 
         {/* Groww Investment Card */}
         <div
           onClick={() => onSelectTab('investments')}
-          className="cursor-pointer p-3.5 sm:p-4 rounded-xl sm:rounded-2xl glass-card hover:bg-white/85 border border-[#BDD8E9]/80 hover:border-[#0A4174] hover:shadow-md transition-all active:scale-95 sm:hover:-translate-y-0.5"
+          className="cursor-pointer p-3 sm:p-3.5 rounded-xl glass-card hover:bg-white/90 border border-[#BDD8E9]/80 hover:border-[#0A4174] hover:shadow-xs transition-all active:scale-95"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider truncate">Groww</span>
-            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-emerald-50 text-emerald-600 shrink-0">
-              <TrendingUp className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600 shrink-0">
+              <TrendingUp className="h-3.5 w-3.5" />
             </div>
           </div>
-          <div className="mt-2 sm:mt-3">
-            <div className="text-sm sm:text-xl font-bold text-slate-900 truncate">{formatINR(totalCurrentInvestments, false, privacyMode)}</div>
-            <div className="flex items-center gap-1 mt-1 text-[10px] sm:text-xs truncate">
+          <div className="mt-2">
+            <div className="text-sm sm:text-lg font-bold text-slate-900 truncate">{formatINR(totalCurrentInvestments, false, privacyMode)}</div>
+            <div className="flex items-center gap-1 mt-0.5 text-[10px] sm:text-xs truncate">
               <span className={totalProfitLoss >= 0 ? 'text-emerald-600 font-bold' : 'text-rose-600 font-bold'}>
                 {formatINR(totalProfitLoss, true, privacyMode)}
               </span>
@@ -332,17 +332,17 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
         {/* Active Loans & Liabilities Card */}
         <div
           onClick={() => onSelectTab('loans')}
-          className="cursor-pointer p-3.5 sm:p-4 rounded-xl sm:rounded-2xl glass-card hover:bg-white/85 border border-[#BDD8E9]/80 hover:border-rose-300 hover:shadow-md transition-all active:scale-95 sm:hover:-translate-y-0.5"
+          className="cursor-pointer p-3 sm:p-3.5 rounded-xl glass-card hover:bg-white/90 border border-[#BDD8E9]/80 hover:border-rose-300 hover:shadow-xs transition-all active:scale-95"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider truncate">Loans / EMI</span>
-            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-rose-50 text-rose-600 shrink-0">
-              <Building2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <div className="p-1.5 rounded-lg bg-rose-50 text-rose-600 shrink-0">
+              <Building2 className="h-3.5 w-3.5" />
             </div>
           </div>
-          <div className="mt-2 sm:mt-3">
-            <div className="text-sm sm:text-xl font-bold text-slate-900 truncate">{formatINR(totalDebtOutstanding, false, privacyMode)}</div>
-            <div className="flex items-center gap-1 mt-1 text-[10px] sm:text-xs text-slate-500 truncate">
+          <div className="mt-2">
+            <div className="text-sm sm:text-lg font-bold text-slate-900 truncate">{formatINR(totalDebtOutstanding, false, privacyMode)}</div>
+            <div className="flex items-center gap-1 mt-0.5 text-[10px] sm:text-xs text-slate-500 truncate">
               <span className="hidden xs:inline">EMI:</span>
               <span className="text-rose-600 font-bold">{formatINR(totalMonthlyEmi, false, privacyMode)}</span>
             </div>
@@ -352,19 +352,19 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
         {/* Monthly SIP Running */}
         <div
           onClick={() => onSelectTab('investments')}
-          className="cursor-pointer p-3.5 sm:p-4 rounded-xl sm:rounded-2xl glass-card hover:bg-white/85 border border-[#BDD8E9]/80 hover:border-blue-300 hover:shadow-md transition-all active:scale-95 sm:hover:-translate-y-0.5"
+          className="cursor-pointer p-3 sm:p-3.5 rounded-xl glass-card hover:bg-white/90 border border-[#BDD8E9]/80 hover:border-blue-300 hover:shadow-xs transition-all active:scale-95"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider truncate">Monthly SIP</span>
-            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-blue-50 text-blue-600 shrink-0">
-              <LineChart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <div className="p-1.5 rounded-lg bg-blue-50 text-blue-600 shrink-0">
+              <LineChart className="h-3.5 w-3.5" />
             </div>
           </div>
-          <div className="mt-2 sm:mt-3">
-            <div className="text-sm sm:text-xl font-bold text-slate-900 truncate">
+          <div className="mt-2">
+            <div className="text-sm sm:text-lg font-bold text-slate-900 truncate">
               {formatINR(data.investments.reduce((acc, i) => acc + (i.sipMonthlyAmount || 0), 0), false, privacyMode)}
             </div>
-            <div className="mt-1 text-[10px] sm:text-xs text-slate-500 truncate">
+            <div className="mt-0.5 text-[10px] sm:text-xs text-slate-500 truncate">
               Auto-compounding
             </div>
           </div>
@@ -373,17 +373,17 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
         {/* Udhaari Tracker */}
         <div
           onClick={() => onSelectTab('loans')}
-          className="cursor-pointer p-3.5 sm:p-4 rounded-xl sm:rounded-2xl glass-card hover:bg-white/85 border border-[#BDD8E9]/80 hover:border-slate-300 hover:shadow-md transition-all active:scale-95 sm:hover:-translate-y-0.5"
+          className="cursor-pointer p-3 sm:p-3.5 rounded-xl glass-card hover:bg-white/90 border border-[#BDD8E9]/80 hover:border-slate-300 hover:shadow-xs transition-all active:scale-95"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider truncate">Paise Lene Hain</span>
-            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-slate-100 text-slate-700 shrink-0">
-              <Wallet className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <div className="p-1.5 rounded-lg bg-slate-100 text-slate-700 shrink-0">
+              <Wallet className="h-3.5 w-3.5" />
             </div>
           </div>
-          <div className="mt-2 sm:mt-3">
-            <div className="text-sm sm:text-xl font-bold text-emerald-600 truncate">{formatINR(totalReceivables, false, privacyMode)}</div>
-            <div className="mt-1 text-[10px] sm:text-xs text-slate-500 truncate">
+          <div className="mt-2">
+            <div className="text-sm sm:text-lg font-bold text-emerald-600 truncate">{formatINR(totalReceivables, false, privacyMode)}</div>
+            <div className="mt-0.5 text-[10px] sm:text-xs text-slate-500 truncate">
               {theyOweMe.length} Pending Udhaar
             </div>
           </div>
@@ -392,11 +392,11 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
       </div>
 
       {/* Main Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3.5 sm:gap-4">
 
         {/* Left 2 Cols: Cash Flow Trend */}
-        <div className="lg:col-span-2 rounded-2xl glass-panel p-5">
-          <div className="flex items-center justify-between mb-4">
+        <div className="lg:col-span-2 rounded-xl glass-panel p-4 sm:p-5">
+          <div className="flex items-center justify-between mb-3">
             <div>
               <h2 className="text-sm font-bold text-slate-900">Income vs Kharcha Cashflow</h2>
               <p className="text-xs text-slate-500">Track monthly stability and savings power</p>
@@ -404,11 +404,11 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
             <div className="flex items-center gap-3 text-xs">
               <div className="flex items-center gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                <span className="text-slate-600 font-medium">Income</span>
+                <span className="text-slate-600 font-medium text-[11px]">Income</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-rose-500" />
-                <span className="text-slate-600 font-medium">Kharcha</span>
+                <span className="text-slate-600 font-medium text-[11px]">Kharcha</span>
               </div>
             </div>
           </div>
@@ -419,7 +419,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
                 <XAxis dataKey="month" stroke="#94a3b8" fontSize={10} tickLine={false} />
                 <YAxis stroke="#94a3b8" fontSize={10} tickLine={false} tickFormatter={(val) => `₹${val / 1000}k`} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '12px', fontSize: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#BDD8E9', borderRadius: '8px', fontSize: '11px', boxShadow: '0 2px 4px rgba(0,29,57,0.06)' }}
                   formatter={(val: any) => [typeof val === 'number' ? formatINR(val) : String(val || ''), '']}
                 />
                 <Area type="monotone" dataKey="income" stroke="#10b981" strokeWidth={2.5} fillOpacity={0.12} fill="#10b981" />
@@ -430,7 +430,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
         </div>
 
         {/* Right 1 Col: Asset Allocation Donut */}
-        <div className="rounded-2xl glass-panel p-5 flex flex-col justify-between">
+        <div className="rounded-xl glass-panel p-4 sm:p-5 flex flex-col justify-between">
           <div>
             <h2 className="text-sm font-bold text-slate-900">Investment Asset Breakdown</h2>
             <p className="text-xs text-slate-500">Diversification across equity, debt & gold</p>
@@ -452,7 +452,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
                     ))}
                   </Pie>
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '12px', fontSize: '11px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                    contentStyle={{ backgroundColor: '#ffffff', borderColor: '#BDD8E9', borderRadius: '8px', fontSize: '11px', boxShadow: '0 2px 4px rgba(0,29,57,0.06)' }}
                     formatter={(val: any) => [typeof val === 'number' ? formatINR(val) : String(val || ''), 'Value']}
                   />
                 </PieChart>
@@ -464,10 +464,10 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
             {assetAllocationData.slice(0, 4).map((item, idx) => (
               <div key={item.name} className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: ASSET_DONUT_COLORS[idx % ASSET_DONUT_COLORS.length] }} />
-                  <span className="text-slate-600 truncate max-w-[120px] font-medium">{item.name}</span>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ASSET_DONUT_COLORS[idx % ASSET_DONUT_COLORS.length] }} />
+                  <span className="text-slate-600 truncate max-w-[120px] font-medium text-[11px]">{item.name}</span>
                 </div>
-                <span className="font-bold text-slate-900">{formatINR(item.value, true)}</span>
+                <span className="font-bold text-slate-900 text-[11px]">{formatINR(item.value, true)}</span>
               </div>
             ))}
           </div>
@@ -476,10 +476,10 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
       </div>
 
       {/* Bottom Section: Upcoming EMIs & Recent Transactions */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3.5 sm:gap-4">
 
         {/* Upcoming EMIs */}
-        <div className="rounded-2xl glass-panel p-5">
+        <div className="rounded-xl glass-panel p-4 sm:p-5">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
               <AlertCircle className="h-4 w-4 text-rose-600" />
@@ -487,7 +487,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
             </h2>
             <button
               onClick={() => onSelectTab('loans')}
-              className="text-xs text-blue-600 hover:text-blue-700 font-semibold"
+              className="text-xs text-[#0A4174] hover:text-[#001D39] font-semibold"
             >
               View all
             </button>
@@ -496,9 +496,9 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
           {upcomingEmis.length === 0 ? (
             <p className="text-xs text-slate-400 py-6 text-center">No active EMIs due!</p>
           ) : (
-            <div className="space-y-2.5">
+            <div className="space-y-2">
               {upcomingEmis.map((loan) => (
-                <div key={loan.id} className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
+                <div key={loan.id} className="p-2.5 sm:p-3 rounded-lg bg-slate-50/90 border border-slate-200/80 flex items-center justify-between">
                   <div>
                     <h3 className="text-xs font-bold text-slate-900">{loan.title}</h3>
                     <p className="text-[11px] text-slate-500">
@@ -516,8 +516,8 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
         </div>
 
         {/* Recent Transactions list */}
-        <div className="lg:col-span-2 rounded-2xl glass-panel p-5">
-          <div className="flex items-center justify-between mb-4">
+        <div className="lg:col-span-2 rounded-xl glass-panel p-4 sm:p-5">
+          <div className="flex items-center justify-between mb-3">
             <div>
               <h2 className="text-sm font-bold text-slate-900">Recent Transactions</h2>
               <p className="text-xs text-slate-500">Latest income, expenses, and account transfers</p>
@@ -532,7 +532,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
               </button>
               <button
                 onClick={() => onOpenAddModal('transaction')}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xs font-semibold border border-emerald-200 transition active:scale-95"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xs font-semibold border border-emerald-200 transition active:scale-95"
               >
                 <Plus className="h-3.5 w-3.5" />
                 <span>Add Kharcha</span>
@@ -547,19 +547,19 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
           </div>
 
           {data.transactions.length === 0 ? (
-            <div className="py-8 text-center text-xs text-slate-400">
+            <div className="py-6 text-center text-xs text-slate-400">
               Koi transaction record nahi hai. Click <strong className="text-emerald-700">+ Add Kharcha</strong> par naya kharcha ya income record karne ke liye.
             </div>
           ) : (
             <div className="divide-y divide-slate-100">
               {data.transactions.slice(0, 5).map((tx) => (
-                <div key={tx.id} className="py-2.5 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-xl ${tx.type === 'income'
+                <div key={tx.id} className="py-2 flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className={`p-2 rounded-lg ${tx.type === 'income'
                       ? 'bg-emerald-50 text-emerald-600'
                       : 'bg-rose-50 text-rose-600'
                       }`}>
-                      {tx.type === 'income' ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
+                      {tx.type === 'income' ? <ArrowUpRight className="h-3.5 w-3.5" /> : <ArrowDownRight className="h-3.5 w-3.5" />}
                     </div>
                     <div>
                       <p className="text-xs font-bold text-slate-900">{tx.description}</p>

@@ -162,7 +162,7 @@ export function VoiceExpenseModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#001D39]/40 backdrop-blur-xs animate-fadeIn">
-      <div className="relative w-full max-w-lg glass-modal rounded-t-3xl sm:rounded-3xl p-5 sm:p-7 pb-[max(1.5rem,calc(1rem+env(safe-area-inset-bottom,0px)))] max-h-[92vh] sm:max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom-4 sm:fade-in duration-200">
+      <div className="relative w-full max-w-lg glass-modal rounded-t-2xl sm:rounded-xl p-4 sm:p-6 pb-[max(1.5rem,calc(1rem+env(safe-area-inset-bottom,0px)))] max-h-[92vh] sm:max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom-4 sm:fade-in duration-200">
         
         {/* Mobile Pull Indicator */}
         <div className="sm:hidden w-10 h-1 bg-[#BDD8E9] rounded-full mx-auto mb-2 opacity-80" />

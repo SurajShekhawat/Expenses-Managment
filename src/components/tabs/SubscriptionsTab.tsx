@@ -81,10 +81,10 @@ export const SubscriptionsTab: React.FC<SubscriptionsTabProps> = ({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-5">
       
       {/* Top Banner: Monthly Fixed Commitment */}
-      <div className="rounded-2xl p-6 glass-panel">
+      <div className="rounded-xl p-4 sm:p-5 glass-panel">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2">
@@ -117,7 +117,7 @@ export const SubscriptionsTab: React.FC<SubscriptionsTabProps> = ({
 
       {/* Add Subscription Collapsible Form */}
       {showAddForm && (
-        <form onSubmit={handleAddSubmit} className="p-5 rounded-2xl glass-card space-y-4">
+        <form onSubmit={handleAddSubmit} className="p-5 rounded-xl glass-card space-y-4">
           <h3 className="text-xs font-bold uppercase tracking-wider text-purple-700">Add New Subscription</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             <div>
@@ -207,8 +207,8 @@ export const SubscriptionsTab: React.FC<SubscriptionsTabProps> = ({
       {/* Subscriptions Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.subscriptions.length === 0 && (
-          <div className="col-span-full py-12 text-center rounded-2xl glass-card flex flex-col items-center justify-center space-y-3">
-            <div className="p-4 rounded-2xl bg-purple-50 text-purple-600 border border-purple-100">
+          <div className="col-span-full py-12 text-center rounded-xl glass-card flex flex-col items-center justify-center space-y-3">
+            <div className="p-4 rounded-xl bg-purple-50 text-purple-600 border border-purple-100">
               <Calendar className="h-8 w-8" />
             </div>
             <h3 className="text-base font-bold text-slate-800">Koi Recurring Subscription nahi hai</h3>
@@ -225,7 +225,7 @@ export const SubscriptionsTab: React.FC<SubscriptionsTabProps> = ({
           return (
             <div 
               key={sub.id}
-              className="p-4 rounded-2xl glass-card hover:border-purple-300 transition flex flex-col justify-between space-y-4 group"
+              className="p-4 rounded-xl glass-card hover:border-purple-300 transition flex flex-col justify-between space-y-4 group"
             >
               <div>
                 <div className="flex items-center justify-between">

@@ -2,34 +2,95 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFC">
+    android:background="#F4F8FA">
 
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ProgressBar
-        android:id="@+id/loading_spinner"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="center"
-        android:indeterminate="true"
-        android:visibility="visible" />
+    <!-- Premium Native Fintech Splash / Loading Screen -->
+    <LinearLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F4F8FA"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:visibility="visible">
 
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:src="@drawable/ic_launcher"
+            android:contentDescription="FinGroww Logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="FinGroww"
+            android:textColor="#001D39"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Personal Wealth &amp; FIRE Command Center"
+            android:textColor="#49769F"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="32dp"
+            android:indeterminate="true"
+            android:indeterminateTint="#0A4174" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Loading Command Center..."
+            android:textColor="#0A4174"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="🔒 256-Bit Bank Grade Encryption • 100% Private"
+            android:textColor="#49769F"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <!-- Error Fallback Layout -->
     <LinearLayout
         android:id="@+id/error_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#F4F8FA"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="24dp"
         android:visibility="gone">
 
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_launcher"
+            android:contentDescription="FinGroww Logo" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="FinGroww"
             android:textColor="#0A4174"
             android:textSize="24sp"
@@ -61,6 +122,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Change Server IP / URL"
-            android:textColor="#059669" />
+            android:textColor="#0A4174" />
     </LinearLayout>
 </FrameLayout>

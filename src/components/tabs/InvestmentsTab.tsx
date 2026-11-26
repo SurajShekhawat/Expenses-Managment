@@ -183,24 +183,24 @@ export const InvestmentsTab: React.FC<InvestmentsTabProps> = ({
   }, [sipMonthly, sipReturnRate, sipYears]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-5">
       
       {/* Portfolio Overview Banner */}
-      <div className="rounded-2xl p-6 glass-panel">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="rounded-xl p-4 sm:p-5 glass-panel">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
                 Total Portfolio Value
               </span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-teal-50 text-teal-700 border border-teal-200 font-bold">
+              <span className="text-[10px] px-2 py-0.5 rounded-md bg-teal-50 text-teal-700 border border-teal-200 font-bold">
                 Groww Mode
               </span>
             </div>
-            <h1 className="text-3xl font-extrabold text-slate-900 mt-1">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
               {formatINR(totalCurrent)}
             </h1>
-            <div className="flex items-center gap-3 mt-2 text-xs">
+            <div className="flex items-center gap-3 mt-1.5 text-xs">
               <span className="text-slate-500">
                 Invested: <strong className="text-slate-900">{formatINR(totalInvested)}</strong>
               </span>
@@ -211,17 +211,17 @@ export const InvestmentsTab: React.FC<InvestmentsTabProps> = ({
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="p-3 rounded-xl bg-teal-50/70 border border-teal-100">
-              <span className="text-[11px] text-teal-700 block font-medium">Monthly Active SIP</span>
-              <span className="text-base font-bold text-teal-900">{formatINR(activeMonthlySip)} / mo</span>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <div className="p-2.5 sm:p-3 rounded-lg bg-teal-50/70 border border-teal-100">
+              <span className="text-[10px] sm:text-[11px] text-teal-700 block font-medium">Monthly Active SIP</span>
+              <span className="text-sm sm:text-base font-bold text-teal-900">{formatINR(activeMonthlySip)} / mo</span>
             </div>
 
             <button
               onClick={() => onOpenAddModal('investment')}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-xs sm:text-sm shadow-md shadow-teal-600/20 transition active:scale-95"
+              className="btn-primary flex items-center gap-1.5 px-3.5 py-2 text-xs"
             >
-              <Plus className="h-4 w-4" />
+              <Plus className="h-3.5 w-3.5" />
               <span>Add Investment</span>
             </button>
           </div>
@@ -229,10 +229,10 @@ export const InvestmentsTab: React.FC<InvestmentsTabProps> = ({
       </div>
 
       {/* Asset Allocation & Holdings Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3.5 sm:gap-4">
         
         {/* Asset Allocation Donut */}
-        <div className="rounded-2xl glass-panel p-5 flex flex-col justify-between">
+        <div className="rounded-xl glass-panel p-4 sm:p-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <div>
@@ -259,7 +259,7 @@ export const InvestmentsTab: React.FC<InvestmentsTabProps> = ({
                     ))}
                   </Pie>
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '12px', fontSize: '11px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                    contentStyle={{ backgroundColor: '#ffffff', borderColor: '#BDD8E9', borderRadius: '8px', fontSize: '11px', boxShadow: '0 2px 4px rgba(0,29,57,0.06)' }}
                     formatter={(val: any) => [typeof val === 'number' ? formatINR(val) : String(val || ''), 'Value']}
                   />
                 </PieChart>
@@ -271,11 +271,11 @@ export const InvestmentsTab: React.FC<InvestmentsTabProps> = ({
             {assetBreakdown.map((item) => (
               <div key={item.label} className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
-                  <span className="text-slate-600 font-medium">{item.label}</span>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
+                  <span className="text-slate-600 font-medium text-[11px]">{item.label}</span>
                 </div>
                 <div className="text-right">
-                  <span className="font-bold text-slate-900">{formatINR(item.value)}</span>
+                  <span className="font-bold text-slate-900 text-[11px]">{formatINR(item.value)}</span>
                   <span className="text-[10px] text-slate-400 ml-1.5">
                     ({totalCurrent > 0 ? ((item.value / totalCurrent) * 100).toFixed(0) : 0}%)
                   </span>
@@ -286,7 +286,7 @@ export const InvestmentsTab: React.FC<InvestmentsTabProps> = ({
         </div>
 
         {/* Investment Holdings Table / Cards with Filter */}
-        <div className="lg:col-span-2 rounded-2xl glass-panel p-5">
+        <div className="lg:col-span-2 rounded-xl glass-panel p-4 sm:p-5">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div>
               <h2 className="text-sm font-bold text-slate-900">Your Investment Holdings</h2>
@@ -481,7 +481,7 @@ export const InvestmentsTab: React.FC<InvestmentsTabProps> = ({
       </div>
 
       {/* SIP Wealth & Goal Multiplier Calculator */}
-      <div className="rounded-2xl glass-panel p-6">
+      <div className="rounded-xl glass-panel p-4 sm:p-5">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">

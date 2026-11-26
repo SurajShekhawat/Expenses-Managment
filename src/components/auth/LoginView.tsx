@@ -140,7 +140,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
     <div className="min-h-screen w-full flex items-center justify-center p-4 relative overflow-hidden bg-[#f4f8fa]">
       
       {/* Auth Card (Clean Solid Matte Frost) */}
-      <div className="w-full max-w-md bg-white/90 backdrop-blur-2xl rounded-3xl p-5 sm:p-8 border border-[#BDD8E9] shadow-xl shadow-[#001D39]/8 relative z-10 space-y-6">
+      <div className="w-full max-w-md bg-white/90 backdrop-blur-2xl rounded-2xl p-5 sm:p-8 border border-[#BDD8E9] shadow-xl shadow-[#001D39]/8 relative z-10 space-y-6">
         
         {/* Brand Header */}
         <div className="text-center space-y-2">

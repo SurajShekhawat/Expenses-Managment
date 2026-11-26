@@ -87,10 +87,10 @@ export const LoansTab: React.FC<LoansTabProps> = ({
   }, [selectedLoan, extraPrepaymentMonthly]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-5">
       
       {/* Top Banner: Debt & Liabilities Health */}
-      <div className="rounded-2xl p-6 glass-panel">
+      <div className="rounded-xl p-4 sm:p-5 glass-panel">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2">
@@ -144,7 +144,7 @@ export const LoansTab: React.FC<LoansTabProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Left 2 Cols: Active Loans List with Paid Progress */}
-        <div className="lg:col-span-2 rounded-2xl glass-panel p-5 space-y-4">
+        <div className="lg:col-span-2 rounded-xl glass-panel p-5 space-y-4">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
@@ -251,7 +251,7 @@ export const LoansTab: React.FC<LoansTabProps> = ({
         </div>
 
         {/* Right 1 Col: Udhaari Tracker */}
-        <div className="rounded-2xl glass-panel p-5 space-y-4">
+        <div className="rounded-xl glass-panel p-5 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <HandCoins className="h-4 w-4 text-amber-600" />
@@ -308,7 +308,7 @@ export const LoansTab: React.FC<LoansTabProps> = ({
 
       {/* --- EMI Pre-Payment & Early Debt Freedom Simulator --- */}
       {myLoans.length > 0 && (
-        <div className="rounded-2xl glass-panel p-6">
+        <div className="rounded-xl glass-panel p-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <div className="p-2 rounded-xl bg-rose-50 text-rose-600 border border-rose-100">
@@ -379,7 +379,7 @@ export const LoansTab: React.FC<LoansTabProps> = ({
             {/* Impact Results */}
             <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
               
-              <div className="p-5 rounded-2xl bg-emerald-50/50 border border-emerald-200 shadow-xs relative overflow-hidden">
+              <div className="p-5 rounded-xl bg-emerald-50/50 border border-emerald-200 shadow-xs relative overflow-hidden">
                 <span className="text-xs text-emerald-800 font-bold uppercase tracking-wider block">
                   💰 Interest You Will Save
                 </span>
@@ -391,7 +391,7 @@ export const LoansTab: React.FC<LoansTabProps> = ({
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-blue-50/50 border border-blue-200 shadow-xs relative overflow-hidden">
+              <div className="p-5 rounded-xl bg-blue-50/50 border border-blue-200 shadow-xs relative overflow-hidden">
                 <span className="text-xs text-blue-800 font-bold uppercase tracking-wider block">
                   ⏱️ Early Loan Closure
                 </span>

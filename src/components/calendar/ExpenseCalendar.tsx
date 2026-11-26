@@ -184,19 +184,19 @@ export const ExpenseCalendar: React.FC<ExpenseCalendarProps> = ({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-5">
       
       {/* Calendar Card Container */}
-      <div className="rounded-2xl glass-panel p-4 sm:p-6 border border-[#BDD8E9] shadow-xs">
+      <div className="rounded-xl glass-panel p-4 sm:p-5 border border-[#BDD8E9] shadow-xs">
         
         {/* Month Navigation & Controls */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#BDD8E9]/60">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-[#0A4174] text-[#BDD8E9] shadow-xs">
-              <CalendarIcon className="h-5 w-5" />
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-3 sm:pb-4 border-b border-[#BDD8E9]/60">
+          <div className="flex items-center gap-2.5">
+            <div className="p-2 rounded-lg bg-[#0A4174] text-[#BDD8E9] shadow-xs">
+              <CalendarIcon className="h-4 w-4" />
             </div>
             <div>
-              <h2 className="text-lg sm:text-xl font-extrabold text-[#001D39] tracking-tight">
+              <h2 className="text-base sm:text-lg font-extrabold text-[#001D39] tracking-tight">
                 {monthNames[currentMonth]} {currentYear}
               </h2>
               <p className="text-xs text-[#49769F] font-medium">
@@ -208,11 +208,11 @@ export const ExpenseCalendar: React.FC<ExpenseCalendarProps> = ({
           <div className="flex items-center gap-2 self-end sm:self-auto">
             <button
               onClick={handleJumpToToday}
-              className="px-3 py-1.5 rounded-xl bg-[#BDD8E9]/40 hover:bg-[#BDD8E9] text-[#001D39] font-bold text-xs border border-[#7BBDE8]/60 transition active:scale-95"
+              className="px-2.5 py-1.5 rounded-lg bg-[#BDD8E9]/40 hover:bg-[#BDD8E9] text-[#001D39] font-bold text-xs border border-[#7BBDE8]/60 transition active:scale-95"
             >
               Today
             </button>
-            <div className="flex items-center rounded-xl border border-[#BDD8E9] bg-white p-0.5 shadow-xs">
+            <div className="flex items-center rounded-lg border border-[#BDD8E9] bg-white p-0.5 shadow-xs">
               <button
                 onClick={handlePrevMonth}
                 aria-label="Previous Month"
@@ -379,7 +379,7 @@ export const ExpenseCalendar: React.FC<ExpenseCalendarProps> = ({
       </div>
 
       {/* Selected Date Inspector: Detailed Transaction Breakdown */}
-      <div className="rounded-2xl glass-panel p-4 sm:p-6 border border-[#BDD8E9] shadow-xs space-y-4">
+      <div className="rounded-xl glass-panel p-4 sm:p-5 border border-[#BDD8E9] shadow-xs space-y-3.5">
         
         {/* Day Inspector Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#BDD8E9]/60">
