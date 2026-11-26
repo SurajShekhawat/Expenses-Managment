@@ -2,6 +2,20 @@ import { FinancialData, FinancialAccount, Transaction, Investment, LoanLiability
 
 const STORAGE_KEY = 'fingroww_personal_finance_v4_clean';
 
+function getStorageKey(userId?: string): string {
+  if (userId) return `fingroww_data_${userId}`;
+  if (typeof window !== 'undefined') {
+    try {
+      const userRaw = localStorage.getItem('fingroww_user');
+      if (userRaw) {
+        const u = JSON.parse(userRaw);
+        if (u?.id) return `fingroww_data_${u.id}`;
+      }
+    } catch (e) {}
+  }
+  return STORAGE_KEY;
+}
+
 export const INITIAL_DEMO_ACCOUNTS: FinancialAccount[] = [];
 
 export const INITIAL_DEMO_SUBSCRIPTIONS: Subscription[] = [];
@@ -28,15 +42,16 @@ export const INITIAL_DEMO_DATA: FinancialData = {
   insurances: [],
 };
 
-export function loadFinancialData(): FinancialData {
+export function loadFinancialData(userId?: string): FinancialData {
   if (typeof window === 'undefined') {
     return INITIAL_DEMO_DATA;
   }
 
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const key = getStorageKey(userId);
+    const raw = localStorage.getItem(key);
     if (!raw) {
-      saveFinancialData(INITIAL_DEMO_DATA);
+      saveFinancialData(INITIAL_DEMO_DATA, userId);
       return INITIAL_DEMO_DATA;
     }
     const parsed = JSON.parse(raw);
@@ -56,22 +71,23 @@ export function loadFinancialData(): FinancialData {
   }
 }
 
-export function saveFinancialData(data: FinancialData): void {
+export function saveFinancialData(data: FinancialData, userId?: string): void {
   if (typeof window === 'undefined') return;
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    const key = getStorageKey(userId);
+    localStorage.setItem(key, JSON.stringify(data));
   } catch (err) {
     console.error('Failed to save data to localStorage:', err);
   }
 }
 
-export function resetToDemoData(): FinancialData {
-  saveFinancialData(INITIAL_DEMO_DATA);
+export function resetToDemoData(userId?: string): FinancialData {
+  saveFinancialData(INITIAL_DEMO_DATA, userId);
   return INITIAL_DEMO_DATA;
 }
 
-export function exportDataAsJSON(): void {
-  const data = loadFinancialData();
+export function exportDataAsJSON(userId?: string): void {
+  const data = loadFinancialData(userId);
   const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data, null, 2));
   const downloadAnchor = document.createElement('a');
   downloadAnchor.setAttribute('href', dataStr);

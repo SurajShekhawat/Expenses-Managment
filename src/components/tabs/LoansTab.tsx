@@ -199,7 +199,7 @@ export const LoansTab: React.FC<LoansTabProps> = ({
 
                         <button
                           onClick={() => setEditingLoan(loan)}
-                          className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition"
+                          className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition"
                           title="Edit loan"
                         >
                           <Pencil className="h-4 w-4" />
@@ -207,7 +207,7 @@ export const LoansTab: React.FC<LoansTabProps> = ({
 
                         <button
                           onClick={() => onDeleteLoan(loan.id)}
-                          className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                          className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
                           title="Delete loan"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -230,13 +230,13 @@ export const LoansTab: React.FC<LoansTabProps> = ({
                     </div>
 
                     {/* Quick Action: Mark EMI paid */}
-                    <div className="flex items-center justify-between pt-2 border-t border-slate-200 text-xs">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-slate-200 text-xs">
                       <span className="text-[11px] text-slate-400">
                         {loan.notes || 'Scheduled via auto-debit'}
                       </span>
                       <button
                         onClick={() => onPayEmi(loan.id, loan.monthlyEmi)}
-                        className="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-700 text-[11px] font-semibold border border-slate-200 transition flex items-center gap-1.5 shadow-xs"
+                        className="w-full sm:w-auto justify-center px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-700 text-[11px] font-semibold border border-slate-200 transition flex items-center gap-1.5 shadow-xs"
                       >
                         <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
                         <span>Pay This Month EMI ({formatINR(loan.monthlyEmi)})</span>
@@ -281,18 +281,18 @@ export const LoansTab: React.FC<LoansTabProps> = ({
                     <p className="text-[11px] text-slate-500">{item.title}</p>
                     {item.notes && <p className="text-[10px] text-slate-400">{item.notes}</p>}
                   </div>
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-1.5 shrink-0">
                     <span className="font-bold text-emerald-600">{formatINR(item.remainingBalance)}</span>
                     <button
                       onClick={() => setEditingLoan(item)}
-                      className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-emerald-600"
+                      className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1 text-slate-400 hover:text-emerald-600"
                       title="Edit"
                     >
                       <Pencil className="h-3.5 w-3.5" />
                     </button>
                     <button
                       onClick={() => onDeleteLoan(item.id)}
-                      className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-rose-600"
+                      className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1 text-slate-400 hover:text-rose-600"
                       title="Settle/Remove"
                     >
                       <Trash2 className="h-3.5 w-3.5" />

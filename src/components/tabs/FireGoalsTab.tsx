@@ -194,12 +194,12 @@ export const FireGoalsTab: React.FC<FireGoalsTabProps> = ({
     <div className="space-y-6">
       
       {/* --- Section 1: Financial Health & Wealth Score (0 to 1000) --- */}
-      <div className="rounded-2xl p-6 glass-panel">
+      <div className="rounded-2xl p-4 sm:p-6 glass-panel">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             {/* Circular / Big Score Display */}
-            <div className="h-24 w-24 rounded-2xl bg-slate-900 text-white flex flex-col items-center justify-center shadow-sm shrink-0">
-              <span className="text-3xl font-black leading-none text-emerald-400">{healthScoreDetails.totalScore}</span>
+            <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-2xl bg-slate-900 text-white flex flex-col items-center justify-center shadow-sm shrink-0">
+              <span className="text-2xl sm:text-3xl font-black leading-none text-emerald-400">{healthScoreDetails.totalScore}</span>
               <span className="text-[10px] uppercase font-bold text-slate-300 tracking-wider mt-1">/ 1000</span>
             </div>
 
@@ -210,7 +210,7 @@ export const FireGoalsTab: React.FC<FireGoalsTabProps> = ({
                 </span>
                 <span className="text-[11px] text-slate-400 font-medium hidden sm:inline">• Live Assessment</span>
               </div>
-              <h2 className="text-xl font-bold text-slate-900 mt-1">Your Personal Wealth Health Score</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-slate-900 mt-1">Your Personal Wealth Health Score</h2>
               <p className="text-xs text-slate-500 mt-0.5">
                 Evaluated from savings rate, emergency shield, liabilities & portfolio balance.
               </p>

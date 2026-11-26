@@ -492,7 +492,7 @@ export const InsuranceTaxTab: React.FC<InsuranceTaxTabProps> = ({
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => setEditingIns(ins)}
-                        className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition"
+                        className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition"
                         title="Edit policy"
                       >
                         <Pencil className="h-4 w-4" />
@@ -500,7 +500,7 @@ export const InsuranceTaxTab: React.FC<InsuranceTaxTabProps> = ({
 
                       <button
                         onClick={() => onDeleteInsurance(ins.id)}
-                        className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                        className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
                         title="Delete"
                       >
                         <Trash2 className="h-4 w-4" />

@@ -557,8 +557,8 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
         )}
 
         {/* Filter Summary Badge Bar */}
-        <div className="flex items-center justify-between text-xs text-slate-500 mb-3 px-1">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-500 mb-3 px-1">
+          <div className="flex items-center gap-2 flex-wrap">
             <span>Showing <strong className="text-slate-900 font-bold">{filteredTransactions.length}</strong> of {data.transactions.length} entries</span>
             {filteredTransactions.length < data.transactions.length && (
               <span className="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">
@@ -567,7 +567,7 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
             )}
           </div>
 
-          <div className="flex items-center gap-3 text-xs">
+          <div className="flex items-center gap-3 text-xs flex-wrap">
             {filteredExpenseAmount > 0 && (
               <span>Kharcha: <strong className="text-rose-600 font-bold">{formatINR(filteredExpenseAmount)}</strong></span>
             )}
@@ -577,89 +577,134 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
           </div>
         </div>
 
-        {/* Table */}
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="border-b border-slate-100 text-[11px] uppercase tracking-wider text-slate-400 bg-slate-50/50">
-                <th className="py-2.5 px-3">Date</th>
-                <th className="py-2.5 px-3">Description</th>
-                <th className="py-2.5 px-3">Account / Bank</th>
-                <th className="py-2.5 px-3">Category</th>
-                <th className="py-2.5 px-3">Mode</th>
-                <th className="py-2.5 px-3 text-right">Amount</th>
-                <th className="py-2.5 px-3 text-center">Action</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 text-xs">
-              {filteredTransactions.length === 0 ? (
-                <tr>
-                  <td colSpan={7} className="py-12 text-center text-slate-400">
-                    <p className="font-semibold text-slate-600 mb-1">No transactions match your filters.</p>
-                    <p className="text-xs text-slate-400 mb-3">Try clearing filters or changing search keywords.</p>
-                    {activeFilterCount > 0 && (
-                      <button
-                        onClick={handleResetFilters}
-                        className="px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold hover:bg-emerald-100 transition"
-                      >
-                        Clear All Filters
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              ) : (
-                filteredTransactions.map((tx) => (
-                  <tr key={tx.id} className="hover:bg-slate-50/70 transition group">
-                    <td className="py-3 px-3 text-slate-500 whitespace-nowrap">
-                      {formatDate(tx.date)}
-                    </td>
-                    <td className="py-3 px-3">
-                      <div className="font-bold text-slate-900 flex items-center gap-2">
-                        {tx.type === 'income' ? (
-                          <ArrowUpRight className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
-                        ) : (
-                          <ArrowDownRight className="h-3.5 w-3.5 text-rose-600 shrink-0" />
+        {/* Empty State */}
+        {filteredTransactions.length === 0 ? (
+          <div className="py-12 text-center text-slate-400 rounded-xl bg-white/40 border border-dashed border-slate-200">
+            <p className="font-semibold text-slate-600 mb-1">No transactions match your filters.</p>
+            <p className="text-xs text-slate-400 mb-3">Try clearing filters or changing search keywords.</p>
+            {activeFilterCount > 0 && (
+              <button
+                onClick={handleResetFilters}
+                className="px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold hover:bg-emerald-100 transition"
+              >
+                Clear All Filters
+              </button>
+            )}
+          </div>
+        ) : (
+          <>
+            {/* Mobile Cards View (< 768px) */}
+            <div className="md:hidden space-y-2.5">
+              {filteredTransactions.map((tx) => (
+                <div 
+                  key={tx.id} 
+                  className="p-3.5 rounded-xl bg-white/70 border border-slate-200/80 shadow-xs flex items-center justify-between gap-2.5"
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className={`p-2 rounded-xl shrink-0 ${tx.type === 'income' ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'}`}>
+                      {tx.type === 'income' ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
+                    </div>
+                    <div className="min-w-0">
+                      <div className="font-bold text-xs text-slate-900 truncate">{tx.description}</div>
+                      <div className="flex items-center gap-1.5 text-[10px] text-slate-500 mt-0.5 flex-wrap">
+                        <span>{formatDate(tx.date)}</span>
+                        <span>•</span>
+                        <span className="px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 font-medium">{tx.category}</span>
+                        {tx.accountId && accountMap.get(tx.accountId) && (
+                          <span className="px-1.5 py-0.2 rounded bg-blue-50 text-blue-700 border border-blue-100 font-medium truncate max-w-[100px]">
+                            {accountMap.get(tx.accountId)}
+                          </span>
                         )}
-                        <span>{tx.description}</span>
                       </div>
-                    </td>
-                    <td className="py-3 px-3">
-                      {tx.accountId && accountMap.get(tx.accountId) ? (
-                        <span className="text-[11px] text-blue-700 font-medium bg-blue-50 px-2 py-0.5 rounded-md border border-blue-100">
-                          {accountMap.get(tx.accountId)}
-                        </span>
-                      ) : (
-                        <span className="text-slate-400 text-[11px]">—</span>
-                      )}
-                    </td>
-                    <td className="py-3 px-3">
-                      <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[11px] font-medium">
-                        {tx.category}
-                      </span>
-                    </td>
-                    <td className="py-3 px-3">
-                      <span className="text-slate-500 text-[11px]">{tx.paymentMode}</span>
-                    </td>
-                    <td className={`py-3 px-3 text-right font-bold whitespace-nowrap ${
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    <div className={`text-right font-extrabold text-xs sm:text-sm whitespace-nowrap ${
                       tx.type === 'income' ? 'text-emerald-600' : 'text-slate-900'
                     }`}>
                       {tx.type === 'income' ? '+' : '-'}{formatINR(tx.amount, false, privacyMode)}
-                    </td>
-                    <td className="py-3 px-3 text-center">
-                      <button
-                        onClick={() => onDeleteTransaction(tx.id)}
-                        className="opacity-0 group-hover:opacity-100 p-1.5 rounded-md text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
-                        title="Delete transaction"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" />
-                      </button>
-                    </td>
+                    </div>
+                    <button
+                      onClick={() => onDeleteTransaction(tx.id)}
+                      className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                      title="Delete transaction"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop Table View (>= 768px) */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-slate-100 text-[11px] uppercase tracking-wider text-slate-400 bg-slate-50/50">
+                    <th className="py-2.5 px-3">Date</th>
+                    <th className="py-2.5 px-3">Description</th>
+                    <th className="py-2.5 px-3">Account / Bank</th>
+                    <th className="py-2.5 px-3">Category</th>
+                    <th className="py-2.5 px-3">Mode</th>
+                    <th className="py-2.5 px-3 text-right">Amount</th>
+                    <th className="py-2.5 px-3 text-center">Action</th>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                </thead>
+                <tbody className="divide-y divide-slate-100 text-xs">
+                  {filteredTransactions.map((tx) => (
+                    <tr key={tx.id} className="hover:bg-slate-50/70 transition group">
+                      <td className="py-3 px-3 text-slate-500 whitespace-nowrap">
+                        {formatDate(tx.date)}
+                      </td>
+                      <td className="py-3 px-3">
+                        <div className="font-bold text-slate-900 flex items-center gap-2">
+                          {tx.type === 'income' ? (
+                            <ArrowUpRight className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                          ) : (
+                            <ArrowDownRight className="h-3.5 w-3.5 text-rose-600 shrink-0" />
+                          )}
+                          <span>{tx.description}</span>
+                        </div>
+                      </td>
+                      <td className="py-3 px-3">
+                        {tx.accountId && accountMap.get(tx.accountId) ? (
+                          <span className="text-[11px] text-blue-700 font-medium bg-blue-50 px-2 py-0.5 rounded-md border border-blue-100">
+                            {accountMap.get(tx.accountId)}
+                          </span>
+                        ) : (
+                          <span className="text-slate-400 text-[11px]">—</span>
+                        )}
+                      </td>
+                      <td className="py-3 px-3">
+                        <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[11px] font-medium">
+                          {tx.category}
+                        </span>
+                      </td>
+                      <td className="py-3 px-3">
+                        <span className="text-slate-500 text-[11px]">{tx.paymentMode}</span>
+                      </td>
+                      <td className={`py-3 px-3 text-right font-bold whitespace-nowrap ${
+                        tx.type === 'income' ? 'text-emerald-600' : 'text-slate-900'
+                      }`}>
+                        {tx.type === 'income' ? '+' : '-'}{formatINR(tx.amount, false, privacyMode)}
+                      </td>
+                      <td className="py-3 px-3 text-center">
+                        <button
+                          onClick={() => onDeleteTransaction(tx.id)}
+                          className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1.5 rounded-md text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                          title="Delete transaction"
+                        >
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
 
       </div>
 

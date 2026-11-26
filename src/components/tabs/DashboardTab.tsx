@@ -134,7 +134,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
     <div className="space-y-6">
       
       {/* Top Banner: Authentic Clean Wealth Header */}
-      <div className="rounded-2xl p-6 glass-panel border border-white/80 shadow-xs relative overflow-hidden">
+      <div className="rounded-2xl p-4 sm:p-6 glass-panel border border-white/80 shadow-xs relative overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
           
           {/* Net Worth */}
@@ -143,7 +143,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
               <ShieldCheck className="h-4 w-4 text-emerald-600" />
               Total Net Worth
             </span>
-            <h1 className="text-3xl font-extrabold text-slate-900 mt-1 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1 tracking-tight break-words">
               {formatINR(netWorth, false, privacyMode)}
             </h1>
             <p className="text-[11px] text-slate-500 mt-1 font-medium">
@@ -152,7 +152,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
           </div>
 
           {/* Monthly Inflow / Outflow */}
-          <div className="md:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-3.5">
+          <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-3.5">
             
             {/* Income */}
             <div className="p-3.5 rounded-xl bg-emerald-50/70 backdrop-blur-md border border-emerald-100 shadow-xs hover:bg-emerald-50 transition">
@@ -160,7 +160,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
                 <span>Total Income</span>
                 <ArrowUpRight className="h-3.5 w-3.5 text-emerald-600" />
               </div>
-              <p className="text-xl font-extrabold text-slate-900">{formatINR(totalIncome, false, privacyMode)}</p>
+              <p className="text-lg sm:text-xl font-extrabold text-slate-900">{formatINR(totalIncome, false, privacyMode)}</p>
               <span className="text-[11px] text-emerald-700 font-medium">Monthly inflow</span>
             </div>
 
@@ -170,17 +170,17 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
                 <span>Total Kharcha</span>
                 <ArrowDownRight className="h-3.5 w-3.5 text-rose-600" />
               </div>
-              <p className="text-xl font-extrabold text-slate-900">{formatINR(totalExpense, false, privacyMode)}</p>
+              <p className="text-lg sm:text-xl font-extrabold text-slate-900">{formatINR(totalExpense, false, privacyMode)}</p>
               <span className="text-[11px] text-rose-700 font-medium">Expenses + EMIs</span>
             </div>
 
             {/* Savings Rate */}
-            <div className="p-3.5 rounded-xl bg-blue-50/70 backdrop-blur-md border border-blue-100 shadow-xs hover:bg-blue-50 transition col-span-2 sm:col-span-1">
+            <div className="p-3.5 rounded-xl bg-blue-50/70 backdrop-blur-md border border-blue-100 shadow-xs hover:bg-blue-50 transition">
               <div className="flex items-center justify-between text-xs text-blue-800 mb-1 font-bold">
                 <span>Savings Rate</span>
                 <CheckCircle2 className="h-3.5 w-3.5 text-blue-600" />
               </div>
-              <p className="text-xl font-extrabold text-slate-900">{savingsRate.toFixed(1)}%</p>
+              <p className="text-lg sm:text-xl font-extrabold text-slate-900">{savingsRate.toFixed(1)}%</p>
               <span className="text-[11px] text-blue-700 font-medium">
                 {savingsRate >= 20 ? 'Healthy 20%+ zone' : 'Target 20%+ savings'}
               </span>

@@ -41,15 +41,18 @@ import { AddLoanModal } from '@/components/modals/AddLoanModal';
 import { SMSParserModal } from '@/components/modals/SMSParserModal';
 import { VoiceExpenseModal } from '@/components/modals/VoiceExpenseModal';
 import { CSVImportModal } from '@/components/modals/CSVImportModal';
-import { AppLockModal } from '@/components/modals/AppLockModal';
 import { GroupSplitModal } from '@/components/modals/GroupSplitModal';
 import { getDueRecurringItems } from '@/lib/recurringEngine';
 import { printMonthlyFinancialReport } from '@/lib/reportGenerator';
 import { getTodayDateString } from '@/lib/formatters';
 import { Plus, Receipt, Landmark, TrendingUp, Building2, X, Sparkles, Mic, FileSpreadsheet } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { User } from '@/types/auth';
+import { LoginView } from '@/components/auth/LoginView';
 
 export default function Home() {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [data, setData] = useState<FinancialData>(INITIAL_DEMO_DATA);
   const [isLoaded, setIsLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState<NavTabType>('overview');
@@ -59,38 +62,102 @@ export default function Home() {
   const [isCsvModalOpen, setIsCsvModalOpen] = useState(false);
   const [isGroupSplitOpen, setIsGroupSplitOpen] = useState(false);
   const [isPrivacyMode, setIsPrivacyMode] = useState(false);
-  const [isAppLocked, setIsAppLocked] = useState(false);
-  const [isLockSettingsOpen, setIsLockSettingsOpen] = useState(false);
   const [showMobileFabMenu, setShowMobileFabMenu] = useState(false);
   const [dbSource, setDbSource] = useState<'mysql' | 'local'>('mysql');
 
   // Load from MySQL (or local storage fallback) on client mount
   useEffect(() => {
-    async function loadInitialData() {
+    async function checkAuthAndLoadData() {
       try {
-        const res = await fetchRemoteFinancialData();
-        setData(res.data);
-        setDbSource(res.source);
+        // 1. Check local cached user first
+        let userToSet: User | null = null;
+        if (typeof window !== 'undefined') {
+          const raw = localStorage.getItem('fingroww_user');
+          if (raw) {
+            try {
+              userToSet = JSON.parse(raw);
+              setCurrentUser(userToSet);
+            } catch (e) {
+              // ignore
+            }
+          }
+        }
+
+        // 2. Verify with server /api/auth
+        const authRes = await fetch('/api/auth');
+        if (authRes.ok) {
+          const authJson = await authRes.json();
+          if (authJson.authenticated && authJson.user) {
+            setCurrentUser(authJson.user);
+            userToSet = authJson.user;
+            if (typeof window !== 'undefined') {
+              localStorage.setItem('fingroww_user', JSON.stringify(authJson.user));
+            }
+          } else {
+            // Not authenticated on server
+            if (typeof window !== 'undefined') {
+              localStorage.removeItem('fingroww_user');
+              localStorage.removeItem('fingroww_token');
+            }
+            setCurrentUser(null);
+            userToSet = null;
+          }
+        }
+
+        // 3. If authenticated, fetch user financial data
+        if (userToSet) {
+          const res = await fetchRemoteFinancialData();
+          setData(res.data);
+          setDbSource(res.source);
+        }
       } catch (e) {
-        console.warn('Initial remote load failed, using local demo data', e);
+        console.warn('Auth/Data initialization warning:', e);
       } finally {
+        setIsAuthLoading(false);
         setIsLoaded(true);
       }
     }
 
-    loadInitialData();
+    checkAuthAndLoadData();
 
     if (typeof window !== 'undefined') {
       const savedPrivacy = localStorage.getItem('fingroww_privacy_mode');
       if (savedPrivacy === 'true') {
         setIsPrivacyMode(true);
       }
-      const existingPin = localStorage.getItem('fingroww_security_pin');
-      if (existingPin) {
-        setIsAppLocked(true);
-      }
     }
   }, []);
+
+  const loadUserData = async () => {
+    try {
+      setIsLoaded(false);
+      const res = await fetchRemoteFinancialData();
+      setData(res.data);
+      setDbSource(res.source);
+    } catch (e) {
+      console.warn('Remote load after login failed:', e);
+    } finally {
+      setIsLoaded(true);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'logout' }),
+      });
+    } catch (e) {
+      console.warn('Logout error:', e);
+    }
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('fingroww_user');
+      localStorage.removeItem('fingroww_token');
+    }
+    setCurrentUser(null);
+    setData(INITIAL_DEMO_DATA);
+  };
 
   const updateData = (newData: FinancialData) => {
     setData(newData);
@@ -571,7 +638,7 @@ export default function Home() {
     }
   };
 
-  if (!isLoaded) {
+  if (isAuthLoading || !isLoaded) {
     return (
       <div className="min-h-screen bg-slate-50 text-slate-800 flex items-center justify-center font-sans">
         <div className="text-center space-y-3">
@@ -579,6 +646,17 @@ export default function Home() {
           <p className="text-xs text-slate-500 font-semibold">FinGroww Loading Command Center...</p>
         </div>
       </div>
+    );
+  }
+
+  if (!currentUser) {
+    return (
+      <LoginView
+        onLoginSuccess={(user) => {
+          setCurrentUser(user);
+          loadUserData();
+        }}
+      />
     );
   }
 
@@ -607,6 +685,8 @@ export default function Home() {
         netWorth={netWorth}
         totalLiquidCash={totalLiquidCash}
         dbSource={dbSource}
+        currentUser={currentUser}
+        onLogout={handleLogout}
         onOpenAddModal={(type) => setAddModalType(type)}
         onOpenSmsParser={() => setIsSmsModalOpen(true)}
         onOpenVoiceModal={() => setIsVoiceModalOpen(true)}
@@ -615,7 +695,6 @@ export default function Home() {
         onGenerateReport={() => printMonthlyFinancialReport(data)}
         isPrivacyMode={isPrivacyMode}
         onTogglePrivacyMode={handleTogglePrivacyMode}
-        onLockApp={() => setIsAppLocked(true)}
         onExport={exportDataAsJSON}
         onReset={handleReset}
       />
@@ -826,6 +905,8 @@ export default function Home() {
       <MobileBottomNav
         activeTab={activeTab}
         setActiveTab={setActiveTab}
+        currentUser={currentUser}
+        onLogout={handleLogout}
       />
 
       {/* Modals */}
@@ -880,12 +961,6 @@ export default function Home() {
         onClose={() => setIsGroupSplitOpen(false)}
         accounts={data.accounts}
         onConfirmSplit={handleConfirmGroupSplit}
-      />
-
-      <AppLockModal
-        isOpen={isAppLocked}
-        isUnlocked={!isAppLocked}
-        onUnlockSuccess={() => setIsAppLocked(false)}
       />
 
     </div>

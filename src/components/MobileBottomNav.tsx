@@ -11,19 +11,25 @@ import {
   Target,
   Calendar,
   ShieldCheck,
-  X
+  X,
+  LogOut
 } from 'lucide-react';
 import { NavTabType } from './Navbar';
 import { FinGrowwLogo } from './FinGrowwLogo';
+import { User } from '@/types/auth';
 
 interface MobileBottomNavProps {
   activeTab: NavTabType;
   setActiveTab: (tab: NavTabType) => void;
+  currentUser?: User | null;
+  onLogout?: () => void;
 }
 
 export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   activeTab,
   setActiveTab,
+  currentUser,
+  onLogout,
 }) => {
   const [showMoreMenu, setShowMoreMenu] = useState(false);
 
@@ -95,6 +101,31 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
                 <span className="text-xs font-bold">Insurance/Tax</span>
               </button>
             </div>
+
+            {/* Mobile User Profile & Logout */}
+            {currentUser && onLogout && (
+              <div className="pt-3 border-t border-slate-200/60 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="h-7 w-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs uppercase">
+                    {currentUser.name.charAt(0)}
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold text-slate-800 block">{currentUser.name}</span>
+                    <span className="text-[10px] text-slate-400 block">@{currentUser.username}</span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => {
+                    setShowMoreMenu(false);
+                    onLogout();
+                  }}
+                  className="px-3 py-1.5 rounded-xl bg-rose-50 text-rose-600 font-bold text-xs border border-rose-200 flex items-center gap-1.5 hover:bg-rose-100 transition"
+                >
+                  <LogOut className="h-3.5 w-3.5" />
+                  <span>Log Out</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

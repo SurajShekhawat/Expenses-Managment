@@ -1,17 +1,32 @@
 import { FinancialData, FinancialAccount, Transaction, Investment, LoanLiability, FinancialGoal, Subscription, InsurancePolicy } from '@/types/finance';
 import { loadFinancialData, saveFinancialData } from './storage';
 
+function getAuthHeaders(): Record<string, string> {
+  const headers: Record<string, string> = {};
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('fingroww_token');
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+  }
+  return headers;
+}
+
 export async function fetchRemoteFinancialData(): Promise<{ data: FinancialData; source: 'mysql' | 'local' }> {
   try {
     const res = await fetch('/api/finance', {
       method: 'GET',
-      headers: { 'Cache-Control': 'no-cache' },
+      credentials: 'include',
+      headers: { 
+        'Cache-Control': 'no-cache',
+        ...getAuthHeaders()
+      },
     });
 
     if (res.ok) {
       const json = await res.json();
       if (json.success && json.data) {
-        // Also cache locally for offline access
+        // Also cache locally for offline access (scoped to active user)
         saveFinancialData(json.data);
         return { data: json.data, source: 'mysql' };
       }
@@ -30,7 +45,11 @@ export async function syncFullDataToRemote(data: FinancialData): Promise<boolean
   try {
     const res = await fetch('/api/finance', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      headers: { 
+        'Content-Type': 'application/json',
+        ...getAuthHeaders()
+      },
       body: JSON.stringify({ action: 'sync_all', payload: data }),
     });
     return res.ok;
@@ -44,7 +63,8 @@ export async function apiAddTransaction(tx: Transaction): Promise<void> {
   try {
     await fetch('/api/finance', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
       body: JSON.stringify({ action: 'add_transaction', transaction: tx }),
     });
   } catch (e) {
@@ -56,7 +76,8 @@ export async function apiDeleteTransaction(id: string): Promise<void> {
   try {
     await fetch('/api/finance', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
       body: JSON.stringify({ action: 'delete_transaction', id }),
     });
   } catch (e) {
@@ -68,7 +89,8 @@ export async function apiAddAccount(acc: FinancialAccount): Promise<void> {
   try {
     await fetch('/api/finance', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
       body: JSON.stringify({ action: 'add_account', account: acc }),
     });
   } catch (e) {
@@ -80,7 +102,8 @@ export async function apiUpdateAccountBalance(id: string, balance: number): Prom
   try {
     await fetch('/api/finance', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
       body: JSON.stringify({ action: 'update_account_balance', id, balance }),
     });
   } catch (e) {
@@ -92,7 +115,8 @@ export async function apiDeleteAccount(id: string): Promise<void> {
   try {
     await fetch('/api/finance', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
       body: JSON.stringify({ action: 'delete_account', id }),
     });
   } catch (e) {
@@ -104,7 +128,8 @@ export async function apiTransferFunds(fromId: string, toId: string, amount: num
   try {
     await fetch('/api/finance', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
       body: JSON.stringify({ action: 'transfer_funds', fromId, toId, amount }),
     });
   } catch (e) {
@@ -116,7 +141,8 @@ export async function apiResetDemo(): Promise<void> {
   try {
     await fetch('/api/finance', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
       body: JSON.stringify({ action: 'reset_demo' }),
     });
   } catch (e) {

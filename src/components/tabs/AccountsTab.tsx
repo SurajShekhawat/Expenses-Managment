@@ -247,7 +247,7 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
 
                   <button
                     onClick={() => onDeleteAccount(acc.id)}
-                    className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                    className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
                     title="Delete Account"
                   >
                     <Trash2 className="h-4 w-4" />
@@ -288,7 +288,7 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
                       </span>
                       <button
                         onClick={() => startEdit(acc)}
-                        className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-blue-600 transition"
+                        className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1 text-slate-400 hover:text-blue-600 transition"
                         title="Update balance directly"
                       >
                         <Edit3 className="h-3.5 w-3.5" />

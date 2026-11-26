@@ -242,7 +242,7 @@ export const SubscriptionsTab: React.FC<SubscriptionsTabProps> = ({
                   <div className="flex items-center gap-1">
                     <button
                       onClick={() => setEditingSub(sub)}
-                      className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-purple-600 hover:bg-purple-50 transition"
+                      className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-purple-600 hover:bg-purple-50 transition"
                       title="Edit"
                     >
                       <Pencil className="h-4 w-4" />
@@ -250,7 +250,7 @@ export const SubscriptionsTab: React.FC<SubscriptionsTabProps> = ({
 
                     <button
                       onClick={() => onDeleteSubscription(sub.id)}
-                      className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                      className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
                       title="Delete"
                     >
                       <Trash2 className="h-4 w-4" />

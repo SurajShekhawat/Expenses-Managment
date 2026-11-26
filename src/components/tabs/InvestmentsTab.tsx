@@ -456,7 +456,7 @@ export const InvestmentsTab: React.FC<InvestmentsTabProps> = ({
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => setEditingInvestment(inv)}
-                          className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-teal-600 hover:bg-teal-50 transition"
+                          className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-teal-600 hover:bg-teal-50 transition"
                           title="Edit holding"
                         >
                           <Pencil className="h-3.5 w-3.5" />
@@ -464,7 +464,7 @@ export const InvestmentsTab: React.FC<InvestmentsTabProps> = ({
 
                         <button
                           onClick={() => onDeleteInvestment(inv.id)}
-                          className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                          className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
                           title="Delete holding"
                         >
                           <Trash2 className="h-3.5 w-3.5" />

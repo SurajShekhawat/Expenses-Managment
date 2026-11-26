@@ -21,11 +21,12 @@ import {
   Printer,
   Eye,
   EyeOff,
-  Lock,
-  MoreHorizontal
+  MoreHorizontal,
+  LogOut
 } from 'lucide-react';
 import { formatINR } from '@/lib/formatters';
 import { FinGrowwLogo } from './FinGrowwLogo';
+import { User } from '@/types/auth';
 
 export type NavTabType = 
   | 'overview' 
@@ -43,6 +44,8 @@ interface NavbarProps {
   netWorth: number;
   totalLiquidCash: number;
   dbSource?: 'mysql' | 'local';
+  currentUser?: User | null;
+  onLogout?: () => void;
   onOpenAddModal: (type: 'transaction' | 'investment' | 'loan' | 'account') => void;
   onOpenSmsParser: () => void;
   onOpenVoiceModal?: () => void;
@@ -51,7 +54,6 @@ interface NavbarProps {
   onGenerateReport?: () => void;
   isPrivacyMode?: boolean;
   onTogglePrivacyMode?: () => void;
-  onLockApp?: () => void;
   onExport: () => void;
   onReset: () => void;
 }
@@ -62,6 +64,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   netWorth,
   totalLiquidCash,
   dbSource = 'mysql',
+  currentUser,
+  onLogout,
   onOpenAddModal,
   onOpenSmsParser,
   onOpenVoiceModal,
@@ -70,11 +74,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   onGenerateReport,
   isPrivacyMode = false,
   onTogglePrivacyMode,
-  onLockApp,
   onExport,
   onReset,
 }) => {
   const [showMoreMenu, setShowMoreMenu] = useState(false);
+  const [showAddMenu, setShowAddMenu] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/60 bg-white/75 backdrop-blur-xl shadow-xs">
@@ -91,7 +95,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span className="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 font-sans">
                   Fin<span className="text-emerald-600">Groww</span>
                 </span>
-                <span className="text-[10px] font-extrabold tracking-wider uppercase px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200/80 shadow-xs">
+                <span className="hidden xs:inline-flex text-[10px] font-extrabold tracking-wider uppercase px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200/80 shadow-xs">
                   DhanVridhi
                 </span>
                 {dbSource === 'mysql' ? (
@@ -153,17 +157,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
             )}
 
-            {/* Lock App Button */}
-            {onLockApp && (
-              <button
-                onClick={onLockApp}
-                title="Lock FinGroww with Master PIN"
-                className="p-2 rounded-xl bg-white/60 backdrop-blur-md hover:bg-white/90 text-slate-600 border border-white/80 transition text-xs flex items-center justify-center shadow-xs"
-              >
-                <Lock className="h-4 w-4 text-slate-500" />
-              </button>
-            )}
-
             {/* More Menu (Backup & Clear Data) */}
             <div className="relative">
               <button
@@ -203,18 +196,28 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </div>
 
-            {/* Primary "+ Add" Button with Dropdown */}
+            {/* Primary "+ Add" Button with Dropdown (Touch & Hover Friendly) */}
             <div className="relative group">
               <button
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-xs transition active:scale-95"
+                onClick={() => setShowAddMenu(!showAddMenu)}
+                className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-xs transition active:scale-95"
               >
-                <PlusCircle className="h-4 w-4" />
-                <span>+ Add Entry</span>
+                <PlusCircle className="h-4 w-4 shrink-0" />
+                <span className="hidden sm:inline">+ Add Entry</span>
+                <span className="sm:hidden">Add</span>
               </button>
               
-              <div className="absolute right-0 top-full mt-1.5 w-56 rounded-2xl glass-modal shadow-2xl py-1.5 hidden group-hover:block hover:block z-50">
+              <div 
+                className={`absolute right-0 top-full mt-1.5 w-56 rounded-2xl glass-modal shadow-2xl py-1.5 z-50 transition-all ${
+                  showAddMenu ? 'block' : 'hidden sm:group-hover:block'
+                }`}
+                onMouseLeave={() => setShowAddMenu(false)}
+              >
                 <button
-                  onClick={() => onOpenAddModal('transaction')}
+                  onClick={() => {
+                    setShowAddMenu(false);
+                    onOpenAddModal('transaction');
+                  }}
                   className="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-emerald-50/80 hover:text-emerald-700 flex items-center gap-2.5 transition"
                 >
                   <Receipt className="h-4 w-4 text-emerald-600" />
@@ -222,7 +225,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </button>
                 {onOpenVoiceModal && (
                   <button
-                    onClick={onOpenVoiceModal}
+                    onClick={() => {
+                      setShowAddMenu(false);
+                      onOpenVoiceModal();
+                    }}
                     className="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-emerald-50/80 hover:text-emerald-700 flex items-center gap-2.5 transition"
                   >
                     <Mic className="h-4 w-4 text-emerald-600" />
@@ -231,7 +237,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 )}
                 {onOpenCsvModal && (
                   <button
-                    onClick={onOpenCsvModal}
+                    onClick={() => {
+                      setShowAddMenu(false);
+                      onOpenCsvModal();
+                    }}
                     className="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-blue-50/80 hover:text-blue-700 flex items-center gap-2.5 transition"
                   >
                     <FileSpreadsheet className="h-4 w-4 text-blue-600" />
@@ -239,21 +248,30 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </button>
                 )}
                 <button
-                  onClick={() => onOpenAddModal('account')}
+                  onClick={() => {
+                    setShowAddMenu(false);
+                    onOpenAddModal('account');
+                  }}
                   className="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-blue-50/80 hover:text-blue-700 flex items-center gap-2.5 transition"
                 >
                   <Landmark className="h-4 w-4 text-blue-600" />
                   <span>Add Bank Account / Card</span>
                 </button>
                 <button
-                  onClick={() => onOpenAddModal('investment')}
+                  onClick={() => {
+                    setShowAddMenu(false);
+                    onOpenAddModal('investment');
+                  }}
                   className="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-teal-50/80 hover:text-teal-700 flex items-center gap-2.5 transition"
                 >
                   <TrendingUp className="h-4 w-4 text-teal-600" />
                   <span>Add Investment / SIP</span>
                 </button>
                 <button
-                  onClick={() => onOpenAddModal('loan')}
+                  onClick={() => {
+                    setShowAddMenu(false);
+                    onOpenAddModal('loan');
+                  }}
                   className="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-rose-50/80 hover:text-rose-700 flex items-center gap-2.5 transition"
                 >
                   <Building2 className="h-4 w-4 text-rose-600" />
@@ -261,6 +279,27 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </button>
               </div>
             </div>
+
+            {/* User Profile Pill & Logout */}
+            {currentUser && (
+              <div className="flex items-center gap-1.5 pl-2 border-l border-slate-200">
+                <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100/80 border border-slate-200 text-xs">
+                  <div className="h-5 w-5 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-[10px] uppercase">
+                    {currentUser.name.charAt(0)}
+                  </div>
+                  <span className="font-bold text-slate-800 max-w-[110px] truncate">{currentUser.name}</span>
+                </div>
+                {onLogout && (
+                  <button
+                    onClick={onLogout}
+                    title="Log Out (साइन आउट)"
+                    className="p-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 transition text-xs flex items-center justify-center shadow-xs"
+                  >
+                    <LogOut className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+            )}
 
           </div>
         </div>
