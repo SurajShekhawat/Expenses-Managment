@@ -57,18 +57,21 @@ export const AddAccountModal: React.FC<AddAccountModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/40 backdrop-blur-sm">
-      <div className="relative w-full max-w-md rounded-2xl glass-modal p-4 sm:p-6 max-h-[90vh] overflow-y-auto text-slate-800">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#001D39]/40 backdrop-blur-xs">
+      <div className="relative w-full max-w-md rounded-t-3xl sm:rounded-2xl glass-modal p-5 sm:p-6 pb-[max(1.5rem,calc(1rem+env(safe-area-inset-bottom,0px)))] max-h-[92vh] sm:max-h-[90vh] overflow-y-auto text-slate-800 animate-in slide-in-from-bottom-4 sm:fade-in duration-200">
+        
+        {/* Mobile Pull Indicator */}
+        <div className="sm:hidden w-10 h-1 bg-[#BDD8E9] rounded-full mx-auto mb-2 opacity-80" />
         
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-[#BDD8E9]/50">
           <div className="flex items-center gap-2">
             <div className="p-2 rounded-xl bg-blue-50 text-blue-600 border border-blue-100">
               <Landmark className="h-5 w-5" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-slate-900">Add New Account / Bank</h2>
-              <p className="text-xs text-slate-500">Track balance in your bank, wallet, or credit card</p>
+              <h2 className="text-sm sm:text-base font-bold text-[#001D39]">Add New Account / Bank</h2>
+              <p className="text-[11px] sm:text-xs text-[#49769F]">Track balance in your bank, wallet, or card</p>
             </div>
           </div>
           <button

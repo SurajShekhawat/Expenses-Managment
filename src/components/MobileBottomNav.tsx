@@ -54,14 +54,14 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
     <>
       {/* More Options Popover on Mobile */}
       {showMoreMenu && (
-        <div className="md:hidden fixed inset-0 z-50 bg-slate-900/30 backdrop-blur-xs flex items-end">
-          <div className="w-full glass-modal rounded-t-3xl border-t border-white/80 p-5 space-y-3 shadow-2xl animate-in slide-in-from-bottom duration-200">
-            <div className="flex items-center justify-between pb-2 border-b border-white/40">
+        <div className="md:hidden fixed inset-0 z-50 bg-[#001D39]/40 backdrop-blur-xs flex items-end">
+          <div className="w-full glass-modal rounded-t-3xl border-t border-[#BDD8E9]/80 p-5 pb-[max(1.5rem,calc(1.5rem+env(safe-area-inset-bottom,0px)))] space-y-3 shadow-2xl animate-in slide-in-from-bottom duration-200">
+            <div className="flex items-center justify-between pb-2 border-b border-[#BDD8E9]/40">
               <div className="flex items-center gap-2">
                 <FinGrowwLogo size={24} />
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-700">More Financial Tools</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#001D39]">More Financial Tools</span>
               </div>
-              <button onClick={() => setShowMoreMenu(false)} className="p-1 rounded-lg text-slate-400">
+              <button onClick={() => setShowMoreMenu(false)} className="p-1 rounded-lg text-[#49769F] hover:bg-[#BDD8E9]/30">
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -159,7 +159,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
       )}
 
       {/* Main Bottom Bar */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/85 backdrop-blur-2xl border-t border-[#BDD8E9]/70 shadow-lg px-2 py-1.5">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/92 backdrop-blur-2xl border-t border-[#BDD8E9]/80 shadow-lg px-2 pt-1.5 pb-[max(0.5rem,env(safe-area-inset-bottom,0.5rem))]">
         <div className="flex items-center justify-around">
           {mainNavItems.map((item) => {
             const Icon = item.icon;

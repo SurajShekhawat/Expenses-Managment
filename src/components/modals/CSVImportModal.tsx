@@ -105,11 +105,14 @@ export function CSVImportModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-3xl glass-modal rounded-3xl p-6 sm:p-7 max-h-[90vh] flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#001D39]/40 backdrop-blur-xs animate-fadeIn">
+      <div className="relative w-full max-w-3xl glass-modal rounded-t-3xl sm:rounded-3xl p-5 sm:p-7 pb-[max(1.5rem,calc(1rem+env(safe-area-inset-bottom,0px)))] max-h-[92vh] sm:max-h-[90vh] flex flex-col animate-in slide-in-from-bottom-4 sm:fade-in duration-200">
         
+        {/* Mobile Pull Indicator */}
+        <div className="sm:hidden w-10 h-1 bg-[#BDD8E9] rounded-full mx-auto mb-2 opacity-80" />
+
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-slate-100 shrink-0">
+        <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-[#BDD8E9]/50 shrink-0">
           <div className="flex items-center gap-2.5">
             <div className="p-2 rounded-xl bg-blue-50 text-blue-600 border border-blue-200">
               <FileSpreadsheet className="h-5 w-5" />

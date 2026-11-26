@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react';
-import { 
-  TrendingUp, 
-  ArrowUpRight, 
-  ArrowDownRight, 
-  Building2, 
-  AlertCircle, 
-  CheckCircle2, 
-  Clock, 
+import {
+  TrendingUp,
+  ArrowUpRight,
+  ArrowDownRight,
+  Building2,
+  AlertCircle,
+  CheckCircle2,
+  Clock,
   Wallet,
   Plus,
   Landmark,
@@ -81,14 +81,14 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
       inv.assetType === 'mutual_funds'
         ? 'Mutual Funds'
         : inv.assetType === 'stocks'
-        ? 'Stocks'
-        : inv.assetType === 'gold'
-        ? 'Gold'
-        : inv.assetType === 'fixed_deposit'
-        ? 'Fixed Deposit'
-        : inv.assetType === 'ppf_epf'
-        ? 'PPF / EPF'
-        : 'Others';
+          ? 'Stocks'
+          : inv.assetType === 'gold'
+            ? 'Gold'
+            : inv.assetType === 'fixed_deposit'
+              ? 'Fixed Deposit'
+              : inv.assetType === 'ppf_epf'
+                ? 'PPF / EPF'
+                : 'Others';
     assetMap[typeLabel] = (assetMap[typeLabel] || 0) + inv.currentValue;
   });
 
@@ -116,7 +116,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
   const currentDay = now.getDate() || 21;
   const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate() || 30;
   const daysRemaining = Math.max(1, daysInMonth - currentDay);
-  
+
   const totalMonthlyBudget = data.budgets.reduce((acc, b) => acc + b.limit, 0) || (totalIncome > 0 ? totalIncome * 0.65 : 55000);
   const remainingBudget = Math.max(0, totalMonthlyBudget - totalExpense);
   const dailySafeSpend = Math.round(remainingBudget / daysRemaining);
@@ -132,11 +132,11 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
 
   return (
     <div className="space-y-6">
-      
+
       {/* Top Banner: Authentic Clean Wealth Header */}
       <div className="rounded-2xl p-4 sm:p-6 glass-panel border border-white/80 shadow-xs relative overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
-          
+
           {/* Net Worth */}
           <div className="md:col-span-1 border-b md:border-b-0 md:border-r border-slate-200/80 pb-4 md:pb-0 md:pr-4">
             <span className="text-xs uppercase tracking-wider text-emerald-700 font-extrabold flex items-center gap-1.5">
@@ -152,37 +152,37 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
           </div>
 
           {/* Monthly Inflow / Outflow */}
-          <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-3.5">
-            
+          <div className="md:col-span-3 grid grid-cols-3 gap-2 sm:gap-3.5">
+
             {/* Income */}
-            <div className="p-3.5 rounded-xl bg-emerald-50/70 backdrop-blur-md border border-emerald-100 shadow-xs hover:bg-emerald-50 transition">
-              <div className="flex items-center justify-between text-xs text-emerald-800 mb-1 font-bold">
-                <span>Total Income</span>
-                <ArrowUpRight className="h-3.5 w-3.5 text-emerald-600" />
+            <div className="p-2.5 sm:p-3.5 rounded-xl bg-emerald-50/70 backdrop-blur-md border border-emerald-100 shadow-xs hover:bg-emerald-50 transition">
+              <div className="flex items-center justify-between text-[10px] sm:text-xs text-emerald-800 mb-0.5 sm:mb-1 font-bold">
+                <span className="truncate">Income</span>
+                <ArrowUpRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-emerald-600 shrink-0" />
               </div>
-              <p className="text-lg sm:text-xl font-extrabold text-slate-900">{formatINR(totalIncome, false, privacyMode)}</p>
-              <span className="text-[11px] text-emerald-700 font-medium">Monthly inflow</span>
+              <p className="text-xs sm:text-lg font-extrabold text-slate-900 truncate">{formatINR(totalIncome, false, privacyMode)}</p>
+              <span className="text-[9px] sm:text-[11px] text-emerald-700 font-medium hidden xs:block">Inflow</span>
             </div>
 
             {/* Expenses */}
-            <div className="p-3.5 rounded-xl bg-rose-50/70 backdrop-blur-md border border-rose-100 shadow-xs hover:bg-rose-50 transition">
-              <div className="flex items-center justify-between text-xs text-rose-800 mb-1 font-bold">
-                <span>Total Kharcha</span>
-                <ArrowDownRight className="h-3.5 w-3.5 text-rose-600" />
+            <div className="p-2.5 sm:p-3.5 rounded-xl bg-rose-50/70 backdrop-blur-md border border-rose-100 shadow-xs hover:bg-rose-50 transition">
+              <div className="flex items-center justify-between text-[10px] sm:text-xs text-rose-800 mb-0.5 sm:mb-1 font-bold">
+                <span className="truncate">Kharcha</span>
+                <ArrowDownRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-rose-600 shrink-0" />
               </div>
-              <p className="text-lg sm:text-xl font-extrabold text-slate-900">{formatINR(totalExpense, false, privacyMode)}</p>
-              <span className="text-[11px] text-rose-700 font-medium">Expenses + EMIs</span>
+              <p className="text-xs sm:text-lg font-extrabold text-slate-900 truncate">{formatINR(totalExpense, false, privacyMode)}</p>
+              <span className="text-[9px] sm:text-[11px] text-rose-700 font-medium hidden xs:block">Outflow</span>
             </div>
 
             {/* Savings Rate */}
-            <div className="p-3.5 rounded-xl bg-blue-50/70 backdrop-blur-md border border-blue-100 shadow-xs hover:bg-blue-50 transition">
-              <div className="flex items-center justify-between text-xs text-blue-800 mb-1 font-bold">
-                <span>Savings Rate</span>
-                <CheckCircle2 className="h-3.5 w-3.5 text-blue-600" />
+            <div className="p-2.5 sm:p-3.5 rounded-xl bg-blue-50/70 backdrop-blur-md border border-blue-100 shadow-xs hover:bg-blue-50 transition">
+              <div className="flex items-center justify-between text-[10px] sm:text-xs text-blue-800 mb-0.5 sm:mb-1 font-bold">
+                <span className="truncate">Savings</span>
+                <CheckCircle2 className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-blue-600 shrink-0" />
               </div>
-              <p className="text-lg sm:text-xl font-extrabold text-slate-900">{savingsRate.toFixed(1)}%</p>
-              <span className="text-[11px] text-blue-700 font-medium">
-                {savingsRate >= 20 ? 'Healthy 20%+ zone' : 'Target 20%+ savings'}
+              <p className="text-xs sm:text-lg font-extrabold text-slate-900">{savingsRate.toFixed(1)}%</p>
+              <span className="text-[9px] sm:text-[11px] text-blue-700 font-medium hidden xs:block">
+                {savingsRate >= 20 ? 'Healthy' : 'Target 20%'}
               </span>
             </div>
 
@@ -224,9 +224,8 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
 
           <div className="p-3 rounded-xl bg-white/60 backdrop-blur-md border border-white/80 shadow-xs">
             <span className="text-[11px] text-slate-500 font-medium block">Spent Today</span>
-            <span className={`text-lg font-extrabold mt-0.5 block ${
-              todayExpenses > dailySafeSpend ? 'text-rose-600' : 'text-slate-900'
-            }`}>
+            <span className={`text-lg font-extrabold mt-0.5 block ${todayExpenses > dailySafeSpend ? 'text-rose-600' : 'text-slate-900'
+              }`}>
               {formatINR(todayExpenses, false, privacyMode)}
             </span>
             <span className="text-[10px] text-slate-400">
@@ -236,9 +235,8 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
 
           <div className="p-3 rounded-xl bg-white/60 backdrop-blur-md border border-white/80 shadow-xs">
             <span className="text-[11px] text-slate-500 font-medium block">Month-End Projection</span>
-            <span className={`text-lg font-extrabold mt-0.5 block ${
-              isPacingOverBudget ? 'text-rose-600' : 'text-blue-700'
-            }`}>
+            <span className={`text-lg font-extrabold mt-0.5 block ${isPacingOverBudget ? 'text-rose-600' : 'text-blue-700'
+              }`}>
               {formatINR(projectedMonthEndExpense, false, privacyMode)}
             </span>
             <span className="text-[10px] text-slate-400">
@@ -284,17 +282,17 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible gap-2.5 pb-2 sm:pb-0 no-scrollbar snap-x snap-mandatory sm:grid-cols-3 lg:grid-cols-6">
             {data.accounts.slice(0, 6).map((acc) => (
-              <div 
+              <div
                 key={acc.id}
                 onClick={() => onSelectTab('accounts')}
-                className="p-3 rounded-xl bg-white/60 hover:bg-white/90 backdrop-blur-md border border-white/80 cursor-pointer transition-all shadow-xs hover:-translate-y-0.5"
+                className="min-w-[130px] sm:min-w-0 shrink-0 snap-start p-3 rounded-xl bg-white/70 hover:bg-white/90 backdrop-blur-md border border-[#BDD8E9]/80 cursor-pointer transition-all shadow-xs active:scale-95 sm:hover:-translate-y-0.5"
               >
                 <span className="text-[10px] text-slate-500 truncate block font-medium">
                   {acc.name}
                 </span>
-                <span className="text-sm font-extrabold text-slate-900 mt-1 block">
+                <span className="text-xs sm:text-sm font-extrabold text-slate-900 mt-1 block truncate">
                   {formatINR(acc.balance, false, privacyMode)}
                 </span>
                 <span className="text-[9px] uppercase tracking-wider text-slate-400 block mt-0.5 font-bold">
@@ -307,86 +305,86 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
       </div>
 
       {/* 4 Cards: Investments, Debt, SIP, Udhaari */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+
         {/* Groww Investment Card */}
-        <div 
+        <div
           onClick={() => onSelectTab('investments')}
-          className="cursor-pointer p-4 rounded-2xl glass-card hover:bg-white/85 border border-white/80 hover:border-emerald-300 hover:shadow-md transition-all hover:-translate-y-0.5"
+          className="cursor-pointer p-3.5 sm:p-4 rounded-xl sm:rounded-2xl glass-card hover:bg-white/85 border border-[#BDD8E9]/80 hover:border-[#0A4174] hover:shadow-md transition-all active:scale-95 sm:hover:-translate-y-0.5"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Groww Portfolio</span>
-            <div className="p-2 rounded-xl bg-emerald-50 text-emerald-600">
-              <TrendingUp className="h-4 w-4" />
+            <span className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider truncate">Groww</span>
+            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-emerald-50 text-emerald-600 shrink-0">
+              <TrendingUp className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </div>
           </div>
-          <div className="mt-3">
-            <div className="text-xl font-bold text-slate-900">{formatINR(totalCurrentInvestments, false, privacyMode)}</div>
-            <div className="flex items-center gap-1.5 mt-1 text-xs">
+          <div className="mt-2 sm:mt-3">
+            <div className="text-sm sm:text-xl font-bold text-slate-900 truncate">{formatINR(totalCurrentInvestments, false, privacyMode)}</div>
+            <div className="flex items-center gap-1 mt-1 text-[10px] sm:text-xs truncate">
               <span className={totalProfitLoss >= 0 ? 'text-emerald-600 font-bold' : 'text-rose-600 font-bold'}>
-                {formatINR(totalProfitLoss, false, privacyMode)} ({formatPercent(portfolioReturnPercent)})
+                {formatINR(totalProfitLoss, true, privacyMode)}
               </span>
-              <span className="text-slate-400">Returns</span>
+              <span className="text-slate-400 hidden xs:inline">Returns</span>
             </div>
           </div>
         </div>
 
         {/* Active Loans & Liabilities Card */}
-        <div 
+        <div
           onClick={() => onSelectTab('loans')}
-          className="cursor-pointer p-4 rounded-2xl glass-card hover:bg-white/85 border border-white/80 hover:border-rose-300 hover:shadow-md transition-all hover:-translate-y-0.5"
+          className="cursor-pointer p-3.5 sm:p-4 rounded-xl sm:rounded-2xl glass-card hover:bg-white/85 border border-[#BDD8E9]/80 hover:border-rose-300 hover:shadow-md transition-all active:scale-95 sm:hover:-translate-y-0.5"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Loans / Karz</span>
-            <div className="p-2 rounded-xl bg-rose-50 text-rose-600">
-              <Building2 className="h-4 w-4" />
+            <span className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider truncate">Loans / EMI</span>
+            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-rose-50 text-rose-600 shrink-0">
+              <Building2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </div>
           </div>
-          <div className="mt-3">
-            <div className="text-xl font-bold text-slate-900">{formatINR(totalDebtOutstanding, false, privacyMode)}</div>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-slate-500">
-              <span>Monthly EMI:</span>
+          <div className="mt-2 sm:mt-3">
+            <div className="text-sm sm:text-xl font-bold text-slate-900 truncate">{formatINR(totalDebtOutstanding, false, privacyMode)}</div>
+            <div className="flex items-center gap-1 mt-1 text-[10px] sm:text-xs text-slate-500 truncate">
+              <span className="hidden xs:inline">EMI:</span>
               <span className="text-rose-600 font-bold">{formatINR(totalMonthlyEmi, false, privacyMode)}</span>
             </div>
           </div>
         </div>
 
         {/* Monthly SIP Running */}
-        <div 
+        <div
           onClick={() => onSelectTab('investments')}
-          className="cursor-pointer p-4 rounded-2xl glass-card hover:bg-white/85 border border-white/80 hover:border-blue-300 hover:shadow-md transition-all hover:-translate-y-0.5"
+          className="cursor-pointer p-3.5 sm:p-4 rounded-xl sm:rounded-2xl glass-card hover:bg-white/85 border border-[#BDD8E9]/80 hover:border-blue-300 hover:shadow-md transition-all active:scale-95 sm:hover:-translate-y-0.5"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Monthly SIP</span>
-            <div className="p-2 rounded-xl bg-blue-50 text-blue-600">
-              <LineChart className="h-4 w-4" />
+            <span className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider truncate">Monthly SIP</span>
+            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-blue-50 text-blue-600 shrink-0">
+              <LineChart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </div>
           </div>
-          <div className="mt-3">
-            <div className="text-xl font-bold text-slate-900">
+          <div className="mt-2 sm:mt-3">
+            <div className="text-sm sm:text-xl font-bold text-slate-900 truncate">
               {formatINR(data.investments.reduce((acc, i) => acc + (i.sipMonthlyAmount || 0), 0), false, privacyMode)}
             </div>
-            <div className="mt-1 text-xs text-slate-500">
-              Auto-compounding wealth
+            <div className="mt-1 text-[10px] sm:text-xs text-slate-500 truncate">
+              Auto-compounding
             </div>
           </div>
         </div>
 
         {/* Udhaari Tracker */}
-        <div 
+        <div
           onClick={() => onSelectTab('loans')}
-          className="cursor-pointer p-4 rounded-2xl glass-card hover:bg-white/85 border border-white/80 hover:border-slate-300 hover:shadow-md transition-all hover:-translate-y-0.5"
+          className="cursor-pointer p-3.5 sm:p-4 rounded-xl sm:rounded-2xl glass-card hover:bg-white/85 border border-[#BDD8E9]/80 hover:border-slate-300 hover:shadow-md transition-all active:scale-95 sm:hover:-translate-y-0.5"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Paise Lene Hain</span>
-            <div className="p-2 rounded-xl bg-slate-100 text-slate-700">
-              <Wallet className="h-4 w-4" />
+            <span className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider truncate">Paise Lene Hain</span>
+            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-slate-100 text-slate-700 shrink-0">
+              <Wallet className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </div>
           </div>
-          <div className="mt-3">
-            <div className="text-xl font-bold text-emerald-600">{formatINR(totalReceivables, false, privacyMode)}</div>
-            <div className="mt-1 text-xs text-slate-500">
-              {theyOweMe.length} Pending from friends
+          <div className="mt-2 sm:mt-3">
+            <div className="text-sm sm:text-xl font-bold text-emerald-600 truncate">{formatINR(totalReceivables, false, privacyMode)}</div>
+            <div className="mt-1 text-[10px] sm:text-xs text-slate-500 truncate">
+              {theyOweMe.length} Pending Udhaar
             </div>
           </div>
         </div>
@@ -395,7 +393,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
 
       {/* Main Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Left 2 Cols: Cash Flow Trend */}
         <div className="lg:col-span-2 rounded-2xl glass-panel p-5">
           <div className="flex items-center justify-between mb-4">
@@ -415,11 +413,11 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
             </div>
           </div>
 
-          <div className="h-64 w-full">
+          <div className="h-52 sm:h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={cashflowTrend} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <XAxis dataKey="month" stroke="#94a3b8" fontSize={11} tickLine={false} />
-                <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} tickFormatter={(val) => `₹${val / 1000}k`} />
+              <AreaChart data={cashflowTrend} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+                <XAxis dataKey="month" stroke="#94a3b8" fontSize={10} tickLine={false} />
+                <YAxis stroke="#94a3b8" fontSize={10} tickLine={false} tickFormatter={(val) => `₹${val / 1000}k`} />
                 <Tooltip
                   contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '12px', fontSize: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
                   formatter={(val: any) => [typeof val === 'number' ? formatINR(val) : String(val || ''), '']}
@@ -436,7 +434,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
           <div>
             <h2 className="text-sm font-bold text-slate-900">Investment Asset Breakdown</h2>
             <p className="text-xs text-slate-500">Diversification across equity, debt & gold</p>
-            
+
             <div className="h-44 w-full mt-3">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -479,7 +477,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
 
       {/* Bottom Section: Upcoming EMIs & Recent Transactions */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Upcoming EMIs */}
         <div className="rounded-2xl glass-panel p-5">
           <div className="flex items-center justify-between mb-3">
@@ -524,17 +522,24 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
               <h2 className="text-sm font-bold text-slate-900">Recent Transactions</h2>
               <p className="text-xs text-slate-500">Latest income, expenses, and account transfers</p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
+              <button
+                onClick={() => onSelectTab('expenses')}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#BDD8E9]/40 hover:bg-[#BDD8E9] text-[#001D39] text-xs font-bold border border-[#7BBDE8]/60 transition active:scale-95"
+              >
+                <Calendar className="h-3.5 w-3.5 text-[#0A4174]" />
+                <span>Calendar View</span>
+              </button>
               <button
                 onClick={() => onOpenAddModal('transaction')}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xs font-semibold border border-emerald-200 transition"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xs font-semibold border border-emerald-200 transition active:scale-95"
               >
                 <Plus className="h-3.5 w-3.5" />
                 <span>Add Kharcha</span>
               </button>
               <button
                 onClick={() => onSelectTab('expenses')}
-                className="text-xs text-blue-600 hover:text-blue-700 font-semibold"
+                className="text-xs text-[#0A4174] hover:text-[#001D39] font-bold"
               >
                 Full History →
               </button>
@@ -550,11 +555,10 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
               {data.transactions.slice(0, 5).map((tx) => (
                 <div key={tx.id} className="py-2.5 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-xl ${
-                      tx.type === 'income' 
-                        ? 'bg-emerald-50 text-emerald-600' 
-                        : 'bg-rose-50 text-rose-600'
-                    }`}>
+                    <div className={`p-2 rounded-xl ${tx.type === 'income'
+                      ? 'bg-emerald-50 text-emerald-600'
+                      : 'bg-rose-50 text-rose-600'
+                      }`}>
                       {tx.type === 'income' ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
                     </div>
                     <div>
@@ -564,9 +568,8 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
                       </p>
                     </div>
                   </div>
-                  <div className={`text-xs font-bold ${
-                    tx.type === 'income' ? 'text-emerald-600' : 'text-slate-800'
-                  }`}>
+                  <div className={`text-xs font-bold ${tx.type === 'income' ? 'text-emerald-600' : 'text-slate-800'
+                    }`}>
                     {tx.type === 'income' ? '+' : '-'}{formatINR(tx.amount)}
                   </div>
                 </div>

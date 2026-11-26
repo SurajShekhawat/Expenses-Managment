@@ -2,11 +2,12 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const viewport: Viewport = {
-  themeColor: "#059669",
+  themeColor: "#0A4174",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
+  viewportFit: "cover",
 };
 
 export const metadata: Metadata = {
@@ -32,14 +33,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <body 
-        className="min-h-full flex flex-col bg-slate-50/80 text-slate-900 font-sans selection:bg-emerald-200 selection:text-emerald-900 relative"
+        className="min-h-full flex flex-col bg-[#f4f8fa] text-[#001D39] font-sans selection:bg-[#BDD8E9] selection:text-[#001D39] relative overflow-x-hidden"
         suppressHydrationWarning
       >
-        {/* Subtle Ambient Refraction Blobs for Glassmorphism */}
+        {/* Subtle Ambient Refraction Blobs for Frosted Glass */}
         <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden select-none">
-          <div className="absolute -top-[15%] -left-[10%] w-[55vw] h-[55vw] rounded-full bg-emerald-200/35 blur-[130px]" />
-          <div className="absolute top-[25%] -right-[15%] w-[45vw] h-[45vw] rounded-full bg-sky-200/30 blur-[140px]" />
-          <div className="absolute -bottom-[20%] left-[20%] w-[50vw] h-[50vw] rounded-full bg-teal-100/40 blur-[150px]" />
+          <div className="absolute -top-[15%] -left-[10%] w-[55vw] h-[55vw] rounded-full bg-[#BDD8E9]/30 blur-[130px]" />
+          <div className="absolute top-[25%] -right-[15%] w-[45vw] h-[45vw] rounded-full bg-[#7BBDE8]/20 blur-[140px]" />
+          <div className="absolute -bottom-[20%] left-[20%] w-[50vw] h-[50vw] rounded-full bg-[#6EA2B3]/20 blur-[150px]" />
         </div>
         {children}
       </body>

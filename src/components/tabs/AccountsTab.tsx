@@ -371,16 +371,17 @@ export const AccountsTab: React.FC<AccountsTabProps> = ({
 
       {/* Inter-Account Fund Transfer Modal */}
       {showTransferModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/30 backdrop-blur-sm">
-          <div className="relative w-full max-w-md rounded-3xl glass-modal p-6 text-slate-800">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <ArrowRightLeft className="h-5 w-5 text-blue-600" />
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#001D39]/40 backdrop-blur-xs">
+          <div className="relative w-full max-w-md rounded-t-3xl sm:rounded-3xl glass-modal p-5 sm:p-6 pb-[max(1.5rem,calc(1rem+env(safe-area-inset-bottom,0px)))] text-slate-800 animate-in slide-in-from-bottom-4 sm:fade-in duration-200">
+            <div className="sm:hidden w-10 h-1 bg-[#BDD8E9] rounded-full mx-auto mb-2 opacity-80" />
+            <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-[#BDD8E9]/50">
+              <h3 className="text-sm sm:text-base font-bold text-[#001D39] flex items-center gap-2">
+                <ArrowRightLeft className="h-5 w-5 text-[#0A4174]" />
                 <span>Transfer Money Between Accounts</span>
               </h3>
               <button
                 onClick={() => setShowTransferModal(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-600"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-[#BDD8E9]/30 transition active:scale-90"
               >
                 ×
               </button>

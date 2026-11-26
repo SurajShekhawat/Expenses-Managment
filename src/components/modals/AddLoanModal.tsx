@@ -82,18 +82,21 @@ export const AddLoanModal: React.FC<AddLoanModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
-      <div className="relative w-full max-w-lg rounded-2xl glass-modal p-6 max-h-[90vh] overflow-y-auto text-slate-800">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#001D39]/40 backdrop-blur-xs">
+      <div className="relative w-full max-w-lg rounded-t-3xl sm:rounded-2xl glass-modal p-5 sm:p-6 pb-[max(1.5rem,calc(1rem+env(safe-area-inset-bottom,0px)))] max-h-[92vh] sm:max-h-[90vh] overflow-y-auto text-slate-800 animate-in slide-in-from-bottom-4 sm:fade-in duration-200">
+        
+        {/* Mobile Pull Indicator */}
+        <div className="sm:hidden w-10 h-1 bg-[#BDD8E9] rounded-full mx-auto mb-2 opacity-80" />
         
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-          <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+        <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-[#BDD8E9]/50">
+          <h2 className="text-sm sm:text-base font-bold text-[#001D39] flex items-center gap-2">
             <Building2 className="h-5 w-5 text-rose-600" />
             <span>Add Loan, EMI or Udhaari</span>
           </h2>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-[#BDD8E9]/30 transition active:scale-90"
           >
             <X className="h-5 w-5" />
           </button>

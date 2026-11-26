@@ -86,21 +86,24 @@ export const GroupSplitModal: React.FC<GroupSplitModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/40 backdrop-blur-xs">
-      <div className="w-full max-w-lg glass-modal rounded-3xl border border-white/80 p-4 sm:p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#001D39]/40 backdrop-blur-xs">
+      <div className="w-full max-w-lg glass-modal rounded-t-3xl sm:rounded-3xl border border-[#BDD8E9] p-5 sm:p-6 pb-[max(1.5rem,calc(1rem+env(safe-area-inset-bottom,0px)))] space-y-4 sm:space-y-5 shadow-2xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom-4 sm:zoom-in-95 duration-200">
+        
+        {/* Mobile Pull Indicator */}
+        <div className="sm:hidden w-10 h-1 bg-[#BDD8E9] rounded-full mx-auto mb-1 opacity-80" />
         
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div className="flex items-center justify-between pb-3 border-b border-[#BDD8E9]/50">
           <div className="flex items-center gap-2.5">
             <div className="p-2 rounded-xl bg-purple-50 text-purple-700 border border-purple-200">
               <Users className="h-5 w-5" />
             </div>
             <div>
-              <h2 className="text-base font-extrabold text-slate-900">Split Bill & Hisaab-Kitaab</h2>
-              <p className="text-xs text-slate-500">Auto-records your share in Kharcha and friends&apos; share in Udhaari</p>
+              <h2 className="text-sm sm:text-base font-extrabold text-[#001D39]">Split Bill & Hisaab-Kitaab</h2>
+              <p className="text-[11px] sm:text-xs text-[#49769F]">Auto-records your share in Kharcha and friends&apos; share in Udhaari</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600">
+          <button onClick={onClose} className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 active:scale-90">
             <X className="h-5 w-5" />
           </button>
         </div>

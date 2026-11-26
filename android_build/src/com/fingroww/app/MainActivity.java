@@ -41,6 +41,12 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(0xFF001D39);
+            getWindow().setNavigationBarColor(0xFFFFFFFF);
+        }
+
         setContentView(R.layout.activity_main);
 
         prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -69,7 +75,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
         settings.setAllowContentAccess(true);
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
-        settings.setSupportZoom(true);
+        settings.setSupportZoom(false);
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
         settings.setMediaPlaybackRequiresUserGesture(false);

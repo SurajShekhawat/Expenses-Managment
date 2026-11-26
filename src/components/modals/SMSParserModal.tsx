@@ -72,23 +72,26 @@ export const SMSParserModal: React.FC<SMSParserModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
-      <div className="relative w-full max-w-lg rounded-2xl glass-modal p-6 text-slate-800 max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#001D39]/40 backdrop-blur-xs">
+      <div className="relative w-full max-w-lg rounded-t-3xl sm:rounded-2xl glass-modal p-5 sm:p-6 pb-[max(1.5rem,calc(1rem+env(safe-area-inset-bottom,0px)))] text-slate-800 max-h-[92vh] sm:max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom-4 sm:fade-in duration-200">
         
+        {/* Mobile Pull Indicator */}
+        <div className="sm:hidden w-10 h-1 bg-[#BDD8E9] rounded-full mx-auto mb-2 opacity-80" />
+
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-[#BDD8E9]/50">
           <div className="flex items-center gap-2.5">
             <div className="p-2 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
               <Sparkles className="h-5 w-5" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-slate-900">Paste Bank SMS / UPI</h2>
-              <p className="text-xs text-slate-500">Auto-detects Amount, Bank, Category & Merchant in 1 click!</p>
+              <h2 className="text-sm sm:text-base font-bold text-[#001D39]">Paste Bank SMS / UPI</h2>
+              <p className="text-[11px] sm:text-xs text-[#49769F]">Auto-detects Amount, Bank, Category & Merchant</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-[#BDD8E9]/30 transition active:scale-90"
           >
             <X className="h-5 w-5" />
           </button>

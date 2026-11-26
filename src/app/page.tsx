@@ -716,7 +716,7 @@ export default function Home() {
       <MarketTicker />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 pb-28 md:pb-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3.5 sm:px-6 lg:px-8 py-3.5 sm:py-6 pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] md:pb-8">
 
         {/* Due Recurring Bills / Kist Notification Alert */}
         {getDueRecurringItems(data).length > 0 && (
@@ -832,7 +832,7 @@ export default function Home() {
       </footer>
 
       {/* Mobile Floating Action Button (FAB) */}
-      <div className="md:hidden fixed bottom-18 right-4 z-40">
+      <div className="md:hidden fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] right-4 z-40">
         <button
           onClick={() => setShowMobileFabMenu(!showMobileFabMenu)}
           className="h-14 w-14 rounded-full bg-[#0A4174] hover:bg-[#001D39] text-white shadow-xl shadow-[#0A4174]/30 border border-[#BDD8E9]/60 flex items-center justify-center transition-transform active:scale-90"
@@ -842,7 +842,7 @@ export default function Home() {
         </button>
 
         {showMobileFabMenu && (
-          <div className="absolute bottom-16 right-0 w-52 rounded-2xl bg-white/95 backdrop-blur-xl border border-[#BDD8E9]/80 shadow-2xl shadow-[#001D39]/20 p-2 space-y-1 animate-in fade-in slide-in-from-bottom-3 duration-150">
+          <div className="absolute bottom-16 right-0 w-56 rounded-2xl bg-white/98 backdrop-blur-xl border border-[#BDD8E9] shadow-2xl shadow-[#001D39]/20 p-2 space-y-1 animate-in fade-in slide-in-from-bottom-3 duration-150">
             <button
               onClick={() => {
                 setIsVoiceModalOpen(true);

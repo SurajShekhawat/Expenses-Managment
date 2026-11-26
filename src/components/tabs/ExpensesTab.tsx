@@ -20,6 +20,7 @@ import {
 import { FinancialData, Transaction, TransactionType } from '@/types/finance';
 import { formatINR, formatDate } from '@/lib/formatters';
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from 'recharts';
+import { ExpenseCalendar } from '@/components/calendar/ExpenseCalendar';
 
 interface ExpensesTabProps {
   data: FinancialData;
@@ -41,6 +42,9 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
   onDeleteTransaction,
   privacyMode = false,
 }) => {
+  // View mode switcher: List vs Calendar
+  const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list');
+
   // Standard filters
   const [searchTerm, setSearchTerm] = useState('');
   const [typeFilter, setTypeFilter] = useState<'all' | TransactionType>('all');
@@ -207,6 +211,53 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
   return (
     <div className="space-y-6">
       
+      {/* View Switcher: List View vs Calendar View */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-2xl glass-panel border border-[#BDD8E9] shadow-xs">
+        <div className="flex items-center gap-2.5">
+          <div className="p-2.5 rounded-xl bg-[#0A4174] text-[#BDD8E9] shadow-xs">
+            <Receipt className="h-4 w-4" />
+          </div>
+          <div>
+            <h2 className="text-sm font-extrabold text-[#001D39]">Kharcha & Income Command Hub</h2>
+            <p className="text-[11px] text-[#49769F] font-medium">List history ya Tareekh-wise Calendar view chunein</p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-1.5 p-1 bg-white/90 rounded-xl border border-[#BDD8E9] shadow-xs self-start sm:self-auto">
+          <button
+            onClick={() => setViewMode('list')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition active:scale-95 ${
+              viewMode === 'list'
+                ? 'bg-[#0A4174] text-white shadow-xs'
+                : 'text-[#49769F] hover:text-[#001D39]'
+            }`}
+          >
+            <Receipt className="h-3.5 w-3.5" />
+            <span>List View</span>
+          </button>
+          <button
+            onClick={() => setViewMode('calendar')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition active:scale-95 ${
+              viewMode === 'calendar'
+                ? 'bg-[#0A4174] text-white shadow-xs'
+                : 'text-[#49769F] hover:text-[#001D39]'
+            }`}
+          >
+            <Calendar className="h-3.5 w-3.5" />
+            <span>📅 Expense Calendar</span>
+          </button>
+        </div>
+      </div>
+
+      {viewMode === 'calendar' ? (
+        <ExpenseCalendar
+          data={data}
+          onOpenAddModal={onOpenAddModal}
+          onDeleteTransaction={onDeleteTransaction}
+          privacyMode={privacyMode}
+        />
+      ) : (
+        <>
       {/* Top Banner & Budget Progress */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
@@ -707,6 +758,8 @@ export const ExpensesTab: React.FC<ExpensesTabProps> = ({
         )}
 
       </div>
+      </>
+      )}
 
     </div>
   );
