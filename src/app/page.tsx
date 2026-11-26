@@ -23,6 +23,8 @@ import {
   syncFullDataToRemote, 
   apiResetDemo 
 } from '@/lib/apiClient';
+import { exportFinancialDataToExcel } from '@/lib/excelExport';
+import { MarketTicker } from '@/components/MarketTicker';
 import { Navbar, NavTabType } from '@/components/Navbar';
 import { MobileBottomNav } from '@/components/MobileBottomNav';
 import { PWAInstallBanner } from '@/components/PWAInstallBanner';
@@ -42,6 +44,7 @@ import { SMSParserModal } from '@/components/modals/SMSParserModal';
 import { VoiceExpenseModal } from '@/components/modals/VoiceExpenseModal';
 import { CSVImportModal } from '@/components/modals/CSVImportModal';
 import { GroupSplitModal } from '@/components/modals/GroupSplitModal';
+import { FinGuruDrawer } from '@/components/ai/FinGuruDrawer';
 import { getDueRecurringItems } from '@/lib/recurringEngine';
 import { printMonthlyFinancialReport } from '@/lib/reportGenerator';
 import { getTodayDateString } from '@/lib/formatters';
@@ -686,6 +689,7 @@ export default function Home() {
         totalLiquidCash={totalLiquidCash}
         dbSource={dbSource}
         currentUser={currentUser}
+        data={data}
         onLogout={handleLogout}
         onOpenAddModal={(type) => setAddModalType(type)}
         onOpenSmsParser={() => setIsSmsModalOpen(true)}
@@ -696,8 +700,12 @@ export default function Home() {
         isPrivacyMode={isPrivacyMode}
         onTogglePrivacyMode={handleTogglePrivacyMode}
         onExport={exportDataAsJSON}
+        onExportExcel={() => exportFinancialDataToExcel(data, currentUser?.name || 'User')}
         onReset={handleReset}
       />
+
+      {/* Live Gold & Stock Market Ticker Banner */}
+      <MarketTicker />
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 pb-28 md:pb-8">
@@ -962,6 +970,9 @@ export default function Home() {
         accounts={data.accounts}
         onConfirmSplit={handleConfirmGroupSplit}
       />
+
+      {/* AI Financial Advisor - FinGuru Drawer */}
+      <FinGuruDrawer data={data} userName={currentUser?.name} />
 
     </div>
   );

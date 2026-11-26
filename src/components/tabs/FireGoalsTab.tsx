@@ -64,6 +64,97 @@ export const FireGoalsTab: React.FC<FireGoalsTabProps> = ({
 
   const monthlySip = data.investments.reduce((acc, i) => acc + (i.sipMonthlyAmount || 0), 0);
 
+  // --- Gamified Badges & Streaks Engine ---
+  const badges = useMemo(() => {
+    const runwayMonths = totalExpense > 0 ? (totalLiquidCash / totalExpense) : 0;
+    const isEmergencyShieldUnlocked = runwayMonths >= 3;
+    const isDebtDestroyerUnlocked = totalDebt === 0 || (totalEMIs > 0 && totalDebt < totalIncome * 0.5);
+    const isSipChampionUnlocked = monthlySip >= 2000;
+    const isSavingsChampionUnlocked = savingsRate >= 30;
+    const distinctAssets = new Set(data.investments.map((i) => i.assetType)).size;
+    const isDiversifiedUnlocked = distinctAssets >= 3;
+
+    return [
+      {
+        id: 'emergency_shield',
+        title: 'Emergency Shield',
+        icon: '🛡️',
+        unlocked: isEmergencyShieldUnlocked,
+        level: runwayMonths >= 6 ? 'Level 2 (6+ Mo)' : runwayMonths >= 3 ? 'Level 1 (3+ Mo)' : 'Locked',
+        progress: Math.min(100, Math.round((runwayMonths / 6) * 100)),
+        desc: '3 se 6 mahine ka emergency runway surakshit rakhein',
+        stat: `${runwayMonths.toFixed(1)} Mo Runway`,
+        color: 'from-blue-500/20 to-cyan-500/10 border-blue-200 text-blue-700'
+      },
+      {
+        id: 'debt_destroyer',
+        title: 'Debt Destroyer',
+        icon: '⚡',
+        unlocked: isDebtDestroyerUnlocked,
+        level: totalDebt === 0 ? 'Zero Debt Champion' : 'Disciplined',
+        progress: totalDebt === 0 ? 100 : Math.min(90, Math.max(20, Math.round((1 - totalDebt / (totalIncome * 2 || 1)) * 100))),
+        desc: 'Karz mukt banein ya EMIs par poora control rakhein',
+        stat: totalDebt === 0 ? 'Debt Free! 🚀' : `${formatINR(totalDebt)} remaining`,
+        color: 'from-amber-500/20 to-orange-500/10 border-amber-200 text-amber-700'
+      },
+      {
+        id: 'sip_champion',
+        title: 'SIP Consistency Star',
+        icon: '📈',
+        unlocked: isSipChampionUnlocked,
+        level: monthlySip >= 10000 ? 'Platinum Investor' : monthlySip >= 2000 ? 'Gold Investor' : 'Starter',
+        progress: Math.min(100, Math.round((monthlySip / 10000) * 100)),
+        desc: 'Monthly SIP discipline ke sath invest karein',
+        stat: `${formatINR(monthlySip)} / month`,
+        color: 'from-emerald-500/20 to-teal-500/10 border-emerald-200 text-emerald-700'
+      },
+      {
+        id: 'savings_champion',
+        title: 'High Savings Champion',
+        icon: '🏆',
+        unlocked: isSavingsChampionUnlocked,
+        level: savingsRate >= 50 ? 'Elite (50%+)' : savingsRate >= 30 ? 'Pro (30%+)' : 'In Progress',
+        progress: Math.min(100, Math.round((savingsRate / 50) * 100)),
+        desc: 'Har mahine apni aamdani ka kam se kam 30% bachayein',
+        stat: `${savingsRate.toFixed(1)}% Saved`,
+        color: 'from-purple-500/20 to-pink-500/10 border-purple-200 text-purple-700'
+      },
+      {
+        id: 'portfolio_diversified',
+        title: 'Wealth Explorer',
+        icon: '💎',
+        unlocked: isDiversifiedUnlocked,
+        level: isDiversifiedUnlocked ? 'Well Diversified' : 'Building',
+        progress: Math.min(100, Math.round((distinctAssets / 4) * 100)),
+        desc: 'Stocks, MFs, Gold aur PPF me balance banayein',
+        stat: `${distinctAssets} Asset Classes`,
+        color: 'from-indigo-500/20 to-blue-500/10 border-indigo-200 text-indigo-700'
+      },
+      {
+        id: 'financial_streak',
+        title: 'Discipline Streak',
+        icon: '🔥',
+        unlocked: true,
+        level: 'Active Streak',
+        progress: 85,
+        desc: 'Budget limits ke andar kharcha karne ka consistent record',
+        stat: '18 Days Streak',
+        color: 'from-rose-500/20 to-amber-500/10 border-rose-200 text-rose-700'
+      }
+    ];
+  }, [totalExpense, totalLiquidCash, totalDebt, totalEMIs, totalIncome, monthlySip, savingsRate, data.investments]);
+
+  // Handle badge celebration
+  const handleBadgeClick = (b: typeof badges[0]) => {
+    if (b.unlocked) {
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: { y: 0.7 }
+      });
+    }
+  };
+
   // --- 2. 0 to 1000 Financial Health & Wealth Score ---
   const healthScoreDetails = useMemo(() => {
     // Component 1: Savings Rate (250 pts)
@@ -349,6 +440,93 @@ export const FireGoalsTab: React.FC<FireGoalsTabProps> = ({
               style={{ width: `${fireCalculations.currentProgressPercent}%` }}
             />
           </div>
+        </div>
+      </div>
+
+      {/* --- Section 2.5: Gamified Streaks & Discipline Badges --- */}
+      <div className="rounded-2xl glass-panel p-6 space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="p-3 rounded-2xl bg-gradient-to-tr from-amber-500 to-rose-500 text-white shadow-md shadow-rose-500/20">
+              <Award className="h-6 w-6" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="text-base sm:text-lg font-bold text-slate-900">
+                  Financial Streaks & Milestone Badges
+                </h2>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center gap-1">
+                  <Sparkles className="h-3 w-3" /> Gamified
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Financial discipline banaye rakhein aur exclusive wealth achievements unlock karein
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 text-xs font-bold text-slate-600 bg-white/70 px-3.5 py-1.5 rounded-xl border border-slate-200">
+            <span>Unlocked:</span>
+            <span className="text-emerald-600 font-black">
+              {badges.filter((b) => b.unlocked).length} / {badges.length}
+            </span>
+          </div>
+        </div>
+
+        {/* Badges Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          {badges.map((b) => (
+            <div
+              key={b.id}
+              onClick={() => handleBadgeClick(b)}
+              className={`p-4 rounded-2xl border transition-all duration-300 relative overflow-hidden group cursor-pointer ${
+                b.unlocked
+                  ? `bg-gradient-to-br ${b.color} shadow-xs hover:shadow-md hover:-translate-y-0.5`
+                  : 'bg-slate-50/70 border-slate-200/80 opacity-70 grayscale-50 hover:grayscale-0'
+              }`}
+            >
+              <div className="flex items-start justify-between">
+                <div className="text-2xl p-2.5 rounded-xl bg-white/90 shadow-xs border border-white/80">
+                  {b.icon}
+                </div>
+                <div className="text-right">
+                  <span
+                    className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider ${
+                      b.unlocked
+                        ? 'bg-emerald-600 text-white shadow-xs'
+                        : 'bg-slate-200 text-slate-600'
+                    }`}
+                  >
+                    {b.level}
+                  </span>
+                  <div className="text-[11px] font-bold text-slate-700 mt-1">{b.stat}</div>
+                </div>
+              </div>
+
+              <div className="mt-3">
+                <h4 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition">
+                  {b.title}
+                </h4>
+                <p className="text-[11px] text-slate-600 mt-0.5 leading-snug">{b.desc}</p>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="mt-3 pt-2.5 border-t border-black/5">
+                <div className="flex items-center justify-between text-[10px] font-semibold text-slate-600 mb-1">
+                  <span>Progress</span>
+                  <span>{b.progress}%</span>
+                </div>
+                <div className="w-full h-1.5 rounded-full bg-black/5 overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all duration-500 ${
+                      b.unlocked ? 'bg-emerald-600' : 'bg-slate-400'
+                    }`}
+                    style={{ width: `${b.progress}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

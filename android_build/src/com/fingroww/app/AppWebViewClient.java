@@ -14,6 +14,15 @@ public class AppWebViewClient extends WebViewClient {
     }
 
     @Override
+    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+        if (request != null && request.getUrl() != null) {
+            view.loadUrl(request.getUrl().toString());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         view.loadUrl(url);
         return true;

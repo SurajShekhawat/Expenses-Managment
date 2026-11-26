@@ -24,7 +24,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
 
     public static final String PREFS_NAME = "FinGrowwPrefs";
     public static final String KEY_SERVER_URL = "server_url";
-    public static final String DEFAULT_URL = "http://10.186.249.221:3000";
+    public static final String DEFAULT_URL = "https://expenses-managment.vercel.app";
     public static final int FILE_CHOOSER_REQUEST = 1001;
     public static final int PERMISSION_REQUEST_CODE = 2001;
 
@@ -117,6 +117,10 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
 
     private void loadApp() {
         String url = prefs.getString(KEY_SERVER_URL, DEFAULT_URL);
+        if (url == null || url.contains("10.186.") || url.contains("localhost") || url.contains("127.0.0.1") || url.contains(":3000")) {
+            url = DEFAULT_URL;
+            prefs.edit().putString(KEY_SERVER_URL, DEFAULT_URL).apply();
+        }
         webView.loadUrl(url);
     }
 
@@ -126,8 +130,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
         inputDialog.setText(currentUrl);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("FinGroww Server IP / URL");
-        builder.setMessage("Laptop ka current local IP ya Vercel URL enter karein (e.g. http://192.168.1.15:3000):");
+        builder.setTitle("FinGroww Server URL");
+        builder.setMessage("FinGroww Live URL (https://expenses-managment.vercel.app) ya custom server URL enter karein:");
         builder.setView(inputDialog);
         builder.setPositiveButton("Save & Connect", this);
         builder.setNegativeButton("Cancel", null);

@@ -54,18 +54,33 @@ Set-Location "d:\idea"
 Write-Host "--- 7. Aligning APK with zipalign ---"
 & $ZIPALIGN -f -p 4 "$BIN\unaligned.apk" "$BIN\aligned.apk"
 
-Write-Host "--- 8. Generating keystore and signing APK ---"
-$KEYSTORE = "$ROOT\debug.keystore"
+Write-Host "--- 8. Generating production keystore and signing APK ---"
+$KEYSTORE = "$ROOT\fingroww-release.keystore"
+$KEYSTORE_PASS = "FinGroww@Release2026"
+$ALIAS = "fingroww"
+
 if (-not (Test-Path $KEYSTORE)) {
-    & keytool -genkeypair -v -keystore $KEYSTORE -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+    Write-Host "Generating official 10,000-day production release keystore..."
+    & keytool -genkeypair -v `
+        -keystore $KEYSTORE `
+        -storepass $KEYSTORE_PASS `
+        -alias $ALIAS `
+        -keypass $KEYSTORE_PASS `
+        -keyalg RSA `
+        -keysize 2048 `
+        -validity 10000 `
+        -dname "CN=FinGroww Financial, OU=App Engineering, O=FinGroww Technologies, L=Jaipur, ST=Rajasthan, C=IN"
 }
 
 $FINAL_APK = "d:\idea\FinGroww.apk"
 & $APKSIGNER sign `
     --ks $KEYSTORE `
-    --ks-pass pass:android `
-    --ks-key-alias androiddebugkey `
-    --key-pass pass:android `
+    --ks-pass pass:$KEYSTORE_PASS `
+    --ks-key-alias $ALIAS `
+    --key-pass pass:$KEYSTORE_PASS `
+    --v1-signing-enabled true `
+    --v2-signing-enabled true `
+    --v3-signing-enabled true `
     --out $FINAL_APK `
     "$BIN\aligned.apk"
 

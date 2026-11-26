@@ -27,6 +27,8 @@ import {
 import { formatINR } from '@/lib/formatters';
 import { FinGrowwLogo } from './FinGrowwLogo';
 import { User } from '@/types/auth';
+import { FinancialData } from '@/types/finance';
+import { NotificationCenter } from './NotificationCenter';
 
 export type NavTabType = 
   | 'overview' 
@@ -45,6 +47,7 @@ interface NavbarProps {
   totalLiquidCash: number;
   dbSource?: 'mysql' | 'local';
   currentUser?: User | null;
+  data?: FinancialData;
   onLogout?: () => void;
   onOpenAddModal: (type: 'transaction' | 'investment' | 'loan' | 'account') => void;
   onOpenSmsParser: () => void;
@@ -55,6 +58,7 @@ interface NavbarProps {
   isPrivacyMode?: boolean;
   onTogglePrivacyMode?: () => void;
   onExport: () => void;
+  onExportExcel?: () => void;
   onReset: () => void;
 }
 
@@ -65,6 +69,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   totalLiquidCash,
   dbSource = 'mysql',
   currentUser,
+  data,
   onLogout,
   onOpenAddModal,
   onOpenSmsParser,
@@ -75,6 +80,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   isPrivacyMode = false,
   onTogglePrivacyMode,
   onExport,
+  onExportExcel,
   onReset,
 }) => {
   const [showMoreMenu, setShowMoreMenu] = useState(false);
@@ -142,6 +148,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             </div>
 
+            {/* Due Alerts & Push Notifications */}
+            {data && <NotificationCenter data={data} />}
+
             {/* Privacy Mode Toggle */}
             {onTogglePrivacyMode && (
               <button
@@ -172,6 +181,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className="absolute right-0 top-full mt-1.5 w-48 rounded-2xl glass-modal shadow-2xl py-1.5 z-50 animate-fadeIn"
                   onMouseLeave={() => setShowMoreMenu(false)}
                 >
+                  {onExportExcel && (
+                    <button
+                      onClick={() => {
+                        onExportExcel();
+                        setShowMoreMenu(false);
+                      }}
+                      className="w-full text-left px-3.5 py-2 text-xs text-emerald-700 hover:bg-emerald-50 flex items-center gap-2 transition font-semibold"
+                    >
+                      <FileSpreadsheet className="h-3.5 w-3.5 text-emerald-600" />
+                      <span>Download Excel (.xlsx)</span>
+                    </button>
+                  )}
                   <button
                     onClick={() => {
                       onExport();

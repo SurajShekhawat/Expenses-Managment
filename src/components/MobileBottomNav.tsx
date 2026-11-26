@@ -12,7 +12,9 @@ import {
   Calendar,
   ShieldCheck,
   X,
-  LogOut
+  LogOut,
+  Bot,
+  Sparkles
 } from 'lucide-react';
 import { NavTabType } from './Navbar';
 import { FinGrowwLogo } from './FinGrowwLogo';
@@ -101,6 +103,32 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
                 <span className="text-xs font-bold">Insurance/Tax</span>
               </button>
             </div>
+
+            {/* FinGuru AI Advisor Quick Trigger */}
+            <button
+              onClick={() => {
+                setShowMoreMenu(false);
+                if (typeof window !== 'undefined') {
+                  window.dispatchEvent(new CustomEvent('open_finguru'));
+                }
+              }}
+              className="w-full p-3 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 text-white flex items-center justify-between shadow-lg cursor-pointer hover:opacity-95 transition"
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-emerald-500 text-slate-900 shadow-md">
+                  <Bot className="h-5 w-5" />
+                </div>
+                <div className="text-left">
+                  <span className="text-xs font-black block flex items-center gap-1">
+                    FinGuru AI CA Advisor <Sparkles className="h-3 w-3 text-emerald-400 fill-emerald-400" />
+                  </span>
+                  <span className="text-[10px] text-emerald-400">Ask any question on Tax, SIP & Loans</span>
+                </div>
+              </div>
+              <span className="text-[11px] font-bold px-2 py-1 rounded-lg bg-white/10 text-emerald-300">
+                Open ↗
+              </span>
+            </button>
 
             {/* Mobile User Profile & Logout */}
             {currentUser && onLogout && (

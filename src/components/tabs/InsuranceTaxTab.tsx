@@ -85,11 +85,20 @@ export const InsuranceTaxTab: React.FC<InsuranceTaxTabProps> = ({
   const total80DPremium = healthInsurances.reduce((acc, i) => acc + i.annualPremium, 0);
   const total80DUtilized = Math.min(25000, total80DPremium);
 
-  // 3. New vs Old Tax Regime Calculator
-  const standardDeduction = 75000;
+  // 3. New vs Old Tax Regime Calculator (FY 2025-26 / 2026-27 Slabs)
+  const oldStandardDeduction = 50000;
+  const newStandardDeduction = 75000;
+
+  // Home loan interest deduction under Section 24(b) (Old regime up to ₹2,00,000)
+  const homeLoanDeduction = Math.min(
+    200000,
+    data.loans
+      .filter((l) => l.direction === 'i_owe' && (l.title.toLowerCase().includes('home') || l.lenderOrBorrower.toLowerCase().includes('home') || l.notes?.toLowerCase().includes('home')))
+      .reduce((acc, l) => acc + (l.monthlyEmi * 12 * 0.6), 0) // Estimated interest portion
+  );
 
   // Old Regime Tax Calculation
-  const oldTaxableIncome = Math.max(0, grossAnnualIncome - standardDeduction - total80CUtilized - total80DUtilized);
+  const oldTaxableIncome = Math.max(0, grossAnnualIncome - oldStandardDeduction - total80CUtilized - total80DUtilized - homeLoanDeduction);
   let oldTax = 0;
   if (oldTaxableIncome > 1000000) {
     oldTax = 112500 + (oldTaxableIncome - 1000000) * 0.3;
@@ -98,25 +107,27 @@ export const InsuranceTaxTab: React.FC<InsuranceTaxTabProps> = ({
   } else if (oldTaxableIncome > 250000) {
     oldTax = (oldTaxableIncome - 250000) * 0.05;
   }
+  // Section 87A Rebate for Old Regime (up to 5L)
   if (oldTaxableIncome <= 500000) oldTax = 0;
-  oldTax = Math.round(oldTax * 1.04);
+  oldTax = Math.round(oldTax * 1.04); // 4% Health & Education Cess
 
-  // New Regime Tax Calculation
-  const newTaxableIncome = Math.max(0, grossAnnualIncome - standardDeduction);
+  // New Regime Tax Calculation (Updated Slabs with ₹75k Std Deduction & ₹7L Rebate)
+  const newTaxableIncome = Math.max(0, grossAnnualIncome - newStandardDeduction);
   let newTax = 0;
   if (newTaxableIncome > 1500000) {
     newTax = 140000 + (newTaxableIncome - 1500000) * 0.3;
   } else if (newTaxableIncome > 1200000) {
     newTax = 80000 + (newTaxableIncome - 1200000) * 0.2;
-  } else if (newTaxableIncome > 900000) {
-    newTax = 40000 + (newTaxableIncome - 900000) * 0.15;
-  } else if (newTaxableIncome > 600000) {
-    newTax = 15000 + (newTaxableIncome - 600000) * 0.1;
+  } else if (newTaxableIncome > 1000000) {
+    newTax = 50000 + (newTaxableIncome - 1000000) * 0.15;
+  } else if (newTaxableIncome > 700000) {
+    newTax = 20000 + (newTaxableIncome - 700000) * 0.1;
   } else if (newTaxableIncome > 300000) {
     newTax = (newTaxableIncome - 300000) * 0.05;
   }
+  // Section 87A Rebate for New Regime (Tax free up to 7L taxable income, i.e. 7.75L CTC)
   if (newTaxableIncome <= 700000) newTax = 0;
-  newTax = Math.round(newTax * 1.04);
+  newTax = Math.round(newTax * 1.04); // 4% Cess
 
   const taxDifference = Math.abs(oldTax - newTax);
   const isNewBetter = newTax <= oldTax;
@@ -679,7 +690,7 @@ export const InsuranceTaxTab: React.FC<InsuranceTaxTabProps> = ({
             <div className="space-y-1.5 text-xs">
               <div className="flex justify-between text-slate-600">
                 <span>Standard Deduction:</span>
-                <span>{formatINR(standardDeduction)}</span>
+                <span>{formatINR(oldStandardDeduction)}</span>
               </div>
               <div className="flex justify-between text-slate-600">
                 <span>80C Deductions (ELSS/PPF):</span>
@@ -711,7 +722,7 @@ export const InsuranceTaxTab: React.FC<InsuranceTaxTabProps> = ({
             <div className="space-y-1.5 text-xs">
               <div className="flex justify-between text-slate-600">
                 <span>Standard Deduction:</span>
-                <span>{formatINR(standardDeduction)}</span>
+                <span>{formatINR(newStandardDeduction)}</span>
               </div>
               <div className="flex justify-between text-slate-400">
                 <span>80C Deductions:</span>
